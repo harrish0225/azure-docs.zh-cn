@@ -6,15 +6,15 @@ author: swmachan
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
-ms.date: 02/21/2019
+ms.date: 05/26/2020
 ms.author: swmachan
 ms.topic: conceptual
-ms.openlocfilehash: f5e1a21f24fdd2458d4803d6ed1675455fa5037d
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 3361241bf0a330abc18701f93460208b8804a7dc
+ms.sourcegitcommit: fc718cc1078594819e8ed640b6ee4bef39e91f7f
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "68595598"
+ms.lasthandoff: 05/27/2020
+ms.locfileid: "83994253"
 ---
 # <a name="view-system-test-results"></a>查看系统测试结果
 
@@ -68,7 +68,7 @@ ms.locfileid: "68595598"
 
 1.  选择一个项目，并转到“模型”选项卡。
 
-2. 对于成功训练的但尚未部署的模型，将显示“部署”按钮。
+2. 对于已成功训练的模型，如果未部署，它将显示 "部署" 按钮。
 
     ![部署模型](media/how-to/how-to-deploy-model.png)
 
@@ -77,7 +77,7 @@ ms.locfileid: "68595598"
 
     ![部署模型](media/how-to/how-to-deploy-model-regions.png)
 
-5.  可在“状态”列中查看模型的状态。
+5.  您可以在 "状态" 列中查看模型的状态。
 
 >[!Note]
 >自定义转换器在任一时间点在工作区中支持10个已部署的模型。
@@ -92,7 +92,7 @@ ms.locfileid: "68595598"
 
     ![部署模型](media/how-to/how-to-update-undeploy-model.png)
 
-3.  选择“更新”  。
+3.  选择“更新”。
 4.  针对要在其中部署或取消部署模型的区域选择“已部署”或“已取消部署”，然后单击“保存”。************
 
     ![部署模型](media/how-to/how-to-undeploy-model.png)
@@ -102,6 +102,6 @@ ms.locfileid: "68595598"
 
 ## <a name="next-steps"></a>后续步骤
 
-- 通过 [Microsoft 文本翻译 API V3](https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-translate?tabs=curl) 开始使用已部署的自定义翻译模型。
+- 开始通过[转换器 V3](https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-translate?tabs=curl)使用已部署的自定义翻译模型。
 - 了解[如何管理设置](how-to-manage-settings.md)以共享工作区和管理订阅密钥。
 - 了解如何从 [Microsoft Translator Hub](https://hub.microsofttranslator.com)[迁移工作区和项目](how-to-migrate.md)

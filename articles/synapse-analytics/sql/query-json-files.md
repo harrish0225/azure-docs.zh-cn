@@ -9,16 +9,16 @@ ms.subservice: ''
 ms.date: 04/15/2020
 ms.author: v-stazar
 ms.reviewer: jrasnick, carlrab
-ms.openlocfilehash: 645baf9102785d223fd1f23ae52a4609725f795b
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 4c1fe9ac5d3b2470fb70231a83e57f3e08d0dfb1
+ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81770815"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83197584"
 ---
 # <a name="query-json-files-using-sql-on-demand-preview-in-azure-synapse-analytics"></a>使用 Azure Synapse Analytics 中的 SQL 点播（预览版）查询 JSON 文件
 
-本文介绍如何在 Azure Synapse Analytics 中使用 SQL 点播（预览版）编写查询。 查询的目标是读取 JSON 文件。
+本文介绍如何在 Azure Synapse Analytics 中使用 SQL 点播（预览版）编写查询。 查询的目标是读取 JSON 文件。 [OPENROWSET](develop-openrowset.md)中列出了支持的格式。
 
 ## <a name="prerequisites"></a>必备条件
 
@@ -133,7 +133,7 @@ FROM
         ROWTERMINATOR = '0x0b'
     )
     WITH (
-        jsonContent NVARCHAR(4000) --Note that you have to use NVARCHAR(4000) for OPENJSON to work.
+        jsonContent NVARCHAR(max) -- Use appropriate length. Make sure JSON fits. 
     ) AS [r]
 CROSS APPLY OPENJSON(jsonContent) AS j
 WHERE

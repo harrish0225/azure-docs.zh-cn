@@ -1,36 +1,37 @@
 ---
 title: Azure Monitor 日志查询中的 app() 表达式 | Microsoft Docs
-description: 在 Azure Monitor 日志查询中使用 app 表达式从同一资源组、另一个资源组或另一个订阅中的特定 Application Insights 应用检索数据。
+description: app 表达式在 Azure Monitor 日志查询中用于从同一资源组、另一资源组或另一订阅中的特定 Application Insights 应用检索数据。
 ms.subservice: logs
 ms.topic: conceptual
 author: bwren
 ms.author: bwren
-ms.date: 01/25/2019
-ms.openlocfilehash: 5502df1cd119c0f63c65945d73431a17282ebc0c
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
-ms.translationtype: MT
+ms.date: 05/09/2019
+ms.openlocfilehash: 5d31c829487400f8eb239c0b837e53eecafeb900
+ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "77670247"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83201106"
 ---
 # <a name="app-expression-in-azure-monitor-query"></a>Azure Monitor 查询中的 app() 表达式
 
 `app` 表达式用于 Azure Monitor 查询中，可从特定 Application Insights 应用中的同一资源组、另一个资源组或另一个订阅中检索数据。 此表达式适用于在 Azure Monitor 日志查询中包含应用程序数据以及在 Application Insights 查询中跨多个应用程序查询数据。
 
-
+> [!IMPORTANT]
+> 如果使用的是[基于工作区的 Application Insights 资源](../app/create-workspace-resource.md)，则不使用 app() 表达式，因为日志数据存储在 Log Analytics 工作区中。 使用 log() 表达式可编写包括多个工作区中的应用程序的查询。 对于同一工作区中的多个应用程序，无需跨工作区查询。
 
 ## <a name="syntax"></a>语法
 
-`app(`标识符  `)`
+`app(`标识符`)`
 
 
 ## <a name="arguments"></a>参数
 
-- 标识符：使用下表中的某种格式标识应用  。
+- 标识符：使用下表中的某种格式标识应用。
 
 | 标识符 | 说明 | 示例
 |:---|:---|:---|
-| 资源名称 | 人工可读的应用名称（又称“组件名称”） | app("fabrikamapp") |
+| 资源名称 | 人工可读的应用名称（也称为“组件名称”） | app("fabrikamapp") |
 | 限定的名称 | 窗体中应用的完整名称：“subscriptionName/resourceGroup/componentName” | app('AI-Prototype/Fabrikam/fabrikamapp') |
 | ID | 应用的 GUID | app("988ba129-363e-4415-8fe7-8cbab5447518") |
 | Azure 资源 ID | Azure 资源的标识符 |app("/subscriptions/7293b69-db12-44fc-9a66-9c2005c3051d/resourcegroups/Fabrikam/providers/microsoft.insights/components/fabrikamapp") |

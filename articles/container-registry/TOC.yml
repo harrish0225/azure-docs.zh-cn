@@ -17,6 +17,9 @@
           href: container-registry-get-started-portal.md
         - name: 创建容器注册表 - PowerShell
           href: container-registry-get-started-powershell.md
+        - name: 创建容器注册表 - ARM 模板
+          displayName: Resource Manager
+          href: container-registry-get-started-geo-replication-template.md
         - name: 将事件发送到事件网格 - CLI
           href: container-registry-event-grid-quickstart.md
         - name: 生成和推送 Java 映像 - CLI
@@ -32,6 +35,11 @@
               href: container-registry-tutorial-deploy-app.md
             - name: 3 - 更新 Web 应用程序
               href: container-registry-tutorial-deploy-update.md
+    - name: 示例
+      items:
+        - name: Azure Policy 内置策略定义
+          displayName: 'samples, policies, definitions'
+          href: ./policy-samples.md
     - name: 概念
       expanded: false
       items:
@@ -39,7 +47,7 @@
           items:
             - name: 安全基线
               href: security-baseline.md
-        - name: 容器注册表 SKU 和限制
+        - name: 容器注册表层和限制
           href: container-registry-skus.md
         - name: 注册表、存储库和映像
           href: container-registry-concepts.md
@@ -68,6 +76,8 @@
               href: container-registry-repositories.md
             - name: 导入容器映像
               href: container-registry-import-images.md
+            - name: 传输项目（预览版）
+              href: container-registry-transfer-images.md
             - name: 锁定容器映像
               href: container-registry-image-lock.md
             - name: 删除容器映像
@@ -82,10 +92,14 @@
               href: container-registry-webhook.md
         - name: 安全性和身份验证
           items:
-            - name: 使用虚拟网络限制访问（预览版）
-              href: container-registry-vnet.md
-            - name: 与 Azure 专用链接集成（预览版）
+            - name: 使用专用终结点限制访问
               href: container-registry-private-link.md
+            - name: 配置公共注册表访问
+              href: container-registry-access-selected-networks.md
+            - name: 使用服务终结点限制访问（预览版）
+              href: container-registry-vnet.md
+            - name: 使用客户管理的密钥加密
+              href: container-registry-customer-managed-keys.md
             - name: 在防火墙后访问
               href: container-registry-firewall-access-rules.md
             - name: 身份验证
@@ -96,22 +110,22 @@
                   href: container-registry-auth-service-principal.md
                 - name: 使用托管标识进行身份验证
                   href: container-registry-authentication-managed-identity.md
+                - name: 使用令牌进行身份验证（预览版）
+                  href: container-registry-repository-scoped-permissions.md
                 - name: 从 Azure 容器实例进行身份验证
                   href: container-registry-auth-aci.md
                 - name: 使用请求密码从 Kubernetes 进行身份验证
                   href: container-registry-auth-kubernetes.md
                 - name: 从 Azure Kubernetes 服务 (AKS) 进行身份验证
                   href: ../aks/cluster-container-registry-integration.md?toc=/azure/container-registry/toc.json&bc=/azure/container-registry/breadcrumb/toc.json
+                - name: 使用存储库范围内的令牌进行身份验证（预览版）
+                  href: container-registry-repository-scoped-permissions.md
             - name: 基于角色的访问控制
               href: container-registry-roles.md
-            - name: 存储库范围内的权限（预览版）
-              href: container-registry-repository-scoped-permissions.md
             - name: 内容信任
               href: container-registry-content-trust.md
             - name: 通过安全中心扫描映像
               href: ../security-center/azure-container-registry-integration.md?toc=/azure/container-registry/toc.json&bc=/azure/container-registry/breadcrumb/toc.json
-            - name: 加密注册表数据（预览版）
-              href: container-registry-customer-managed-keys.md
         - name: 注册表和其他 Azure 服务
           expanded: false
           items:

@@ -35,7 +35,7 @@ ms.locfileid: "81011221"
 
 
 ## <a name="create-a-resource-group"></a>创建资源组
-Azure 资源组是在其中部署和管理 Azure 资源的逻辑容器。 必须在创建虚拟机规模集前创建资源组。 使用 [New-AzResourceGroup](/powershell/module/az.resources/new-azresourcegroup) 命令创建资源组。 在此示例中，在“EastUS”  区域中创建了名为“myResourceGroup”  的资源组。 
+Azure 资源组是在其中部署和管理 Azure 资源的逻辑容器。 必须在创建虚拟机规模集前创建资源组。 使用 [New-AzResourceGroup](/powershell/module/az.resources/new-azresourcegroup) 命令创建资源组。 在此示例中，在“EastUS”区域中创建了名为“myResourceGroup”的资源组。 
 
 ```azurepowershell-interactive
 New-AzResourceGroup -ResourceGroupName "myResourceGroup" -Location "EastUS"
@@ -132,7 +132,7 @@ IpAddress
 52.168.121.216
 ```
 
-创建连接到第一个 VM 实例所需的远程连接。 指定所需 VM 实例的公共 IP 地址和端口号，如前述命令所示。 出现提示时，输入创建规模集时使用的凭据（在示例命令中，默认为 azureuser 和 P*ssw0rd!）* *\@* 。 如果使用 Azure Cloud Shell，请从本地 PowerShell 命令提示符或远程桌面客户端执行此步骤。 以下示例连接到 VM 实例 *1*：
+创建连接到第一个 VM 实例所需的远程连接。 指定所需 VM 实例的公共 IP 地址和端口号，如前述命令所示。 出现提示时，输入创建规模集时使用的凭据（在示例命令中，默认为 azureuser 和 P\@ssw0rd!） 。 如果使用 Azure Cloud Shell，请从本地 PowerShell 命令提示符或远程桌面客户端执行此步骤。 以下示例连接到 VM 实例 *1*：
 
 ```powershell
 mstsc /v 52.168.121.216:50001

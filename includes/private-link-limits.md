@@ -10,7 +10,7 @@ ms.author: kumud
 ms.custom: include file
 ms.openlocfilehash: 1c790f10a310b6c4dea3aefd6cb02891b5bbcf9a
 ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: zh-CN
 ms.lasthandoff: 04/28/2020
 ms.locfileid: "81768756"

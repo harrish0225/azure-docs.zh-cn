@@ -2,15 +2,15 @@
 title: 教程 - 创建和部署模板
 description: 创建第一个 Azure 资源管理器模板。 本教程将介绍模板文件语法，以及如何部署存储帐户。
 author: mumian
-ms.date: 03/27/2020
+ms.date: 05/20/2020
 ms.topic: tutorial
 ms.author: jgao
-ms.openlocfilehash: 8b05bccf10ef5f273a74ca49e02162fd0408230f
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 2180ca80d87643eb885d814318e516b4b3c53f37
+ms.sourcegitcommit: 958f086136f10903c44c92463845b9f3a6a5275f
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80411724"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83714791"
 ---
 # <a name="tutorial-create-and-deploy-your-first-arm-template"></a>教程：创建和部署第一个 ARM 模板
 
@@ -92,6 +92,24 @@ az login
 ```
 
 ---
+
+如果你有多个 Azure 订阅，请选择要使用的订阅：
+
+# <a name="powershell"></a>[PowerShell](#tab/azure-powershell)
+
+```azurepowershell
+Set-AzContext [SubscriptionID/SubscriptionName]
+```
+
+# <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
+
+```azurecli
+az account set --subscription [SubscriptionID/SubscriptionName]
+```
+
+---
+
+
 ## <a name="create-resource-group"></a>创建资源组
 
 部署模板时，请指定一个包含资源的资源组。 在运行部署命令之前，请使用 Azure CLI 或 Azure PowerShell 创建该资源组。 使用以下代码部分中的选项卡在 Azure PowerShell 与 Azure CLI 之间进行选择。 本文中的 CLI 示例针对 Bash shell 编写。
@@ -125,7 +143,7 @@ $templateFile = "{provide-the-path-to-the-template-file}"
 New-AzResourceGroupDeployment `
   -Name blanktemplate `
   -ResourceGroupName myResourceGroup `
-  -TemplateFile $templateFile 
+  -TemplateFile $templateFile
 ```
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)

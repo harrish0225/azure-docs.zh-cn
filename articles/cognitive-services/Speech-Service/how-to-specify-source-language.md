@@ -8,15 +8,15 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: speech-service
 ms.topic: conceptual
-ms.date: 01/07/2020
+ms.date: 05/19/2020
 ms.author: qiohu
 zone_pivot_groups: programming-languages-set-two
-ms.openlocfilehash: f0723534d9d2187593cb73f058ffea62473b80a9
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 32c08af129172fb1dbebf1679ea01694e8bd3d1a
+ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80235977"
+ms.lasthandoff: 05/19/2020
+ms.locfileid: "83653280"
 ---
 # <a name="specify-source-language-for-speech-to-text"></a>指定语音转文本的源语言
 
@@ -62,14 +62,14 @@ var recognizer = new SpeechRecognizer(speechConfig, sourceLanguageConfig, audioC
 auto recognizer = SpeechRecognizer::FromConfig(speechConfig, "de-DE", audioConfig);
 ```
 
-在此示例中，源语言是使用 `SourceLanguageConfig` 提供的。 然后，在创建 `sourceLanguageConfig` 时，`FromConfig` 会作为参数传递给 `recognizer`。
+在此示例中，源语言是使用 `SourceLanguageConfig` 提供的。 然后，在创建 `recognizer` 时，`sourceLanguageConfig` 会作为参数传递给 `FromConfig`。
 
 ```C++
 auto sourceLanguageConfig = SourceLanguageConfig::FromLanguage("de-DE");
 auto recognizer = SpeechRecognizer::FromConfig(speechConfig, sourceLanguageConfig, audioConfig);
 ```
 
-在此示例中，源语言和自定义终结点是使用 `SourceLanguageConfig` 提供的。 在创建 `sourceLanguageConfig` 时，`FromConfig` 作为参数传递给 `recognizer`。
+在此示例中，源语言和自定义终结点是使用 `SourceLanguageConfig` 提供的。 在创建 `recognizer` 时，`sourceLanguageConfig` 作为参数传递给 `FromConfig`。
 
 ```C++
 auto sourceLanguageConfig = SourceLanguageConfig::FromLanguage("de-DE", "The Endpoint ID for your custom model.");
@@ -91,14 +91,14 @@ auto recognizer = SpeechRecognizer::FromConfig(speechConfig, sourceLanguageConfi
 SpeechRecognizer recognizer = new SpeechRecognizer(speechConfig, "de-DE", audioConfig);
 ```
 
-在此示例中，源语言是使用 `SourceLanguageConfig` 提供的。 然后，在创建新的 `sourceLanguageConfig` 时，`SpeechRecognizer` 会作为参数传递。
+在此示例中，源语言是使用 `SourceLanguageConfig` 提供的。 然后，在创建新的 `SpeechRecognizer` 时，`sourceLanguageConfig` 会作为参数传递。
 
 ```Java
 SourceLanguageConfig sourceLanguageConfig = SourceLanguageConfig.fromLanguage("de-DE");
 SpeechRecognizer recognizer = new SpeechRecognizer(speechConfig, sourceLanguageConfig, audioConfig);
 ```
 
-在此示例中，源语言和自定义终结点是使用 `SourceLanguageConfig` 提供的。 然后，在创建新的 `sourceLanguageConfig` 时，`SpeechRecognizer` 会作为参数传递。
+在此示例中，源语言和自定义终结点是使用 `SourceLanguageConfig` 提供的。 然后，在创建新的 `SpeechRecognizer` 时，`sourceLanguageConfig` 会作为参数传递。
 
 ```Java
 SourceLanguageConfig sourceLanguageConfig = SourceLanguageConfig.fromLanguage("de-DE", "The Endpoint ID for your custom model.");
@@ -138,7 +138,7 @@ speech_recognizer = speechsdk.SpeechRecognizer(
 ```
 
 >[!Note]
-> `speech_recognition_language`在`endpoint_id` Python 中， `SpeechConfig`类不推荐使用和属性。 不建议使用这些属性，构造时不应使用这些属性`SpeechRecognizer`。
+> 在 Python 中，`SpeechConfig` 类中的 `speech_recognition_language` 和 `endpoint_id` 属性已弃用。 建议不要使用这些属性，在构造 `SpeechRecognizer` 时不应使用它们。
 
 ::: zone-end
 
@@ -166,27 +166,39 @@ speechConfig.endpointId = "The Endpoint ID for your custom model.";
 
 ## <a name="how-to-specify-source-language-in-objective-c"></a>如何在 Objective-C 中指定源语言
 
-第一步是创建 `speechConfig`：
+在此示例中，使用 `SPXSpeechRecognizer` 构造将源语言显式作为参数提供。
 
 ```Objective-C
-SPXSpeechConfiguration *speechConfig = [[SPXSpeechConfiguration alloc] initWithSubscription:@"YourSubscriptionkey" region:@"YourRegion"];
+SPXSpeechRecognizer* speechRecognizer = \
+    [[SPXSpeechRecognizer alloc] initWithSpeechConfiguration:speechConfig language:@"de-DE" audioConfiguration:audioConfig];
 ```
 
-接下来，使用 `speechRecognitionLanguage` 指定音频的源语言：
+在此示例中，源语言是使用 `SPXSourceLanguageConfiguration` 提供的。 然后，将 `SPXSourceLanguageConfiguration` 作为参数传递给 `SPXSpeechRecognizer` 构造。
 
 ```Objective-C
-speechConfig.speechRecognitionLanguage = @"de-DE";
+SPXSourceLanguageConfiguration* sourceLanguageConfig = [[SPXSourceLanguageConfiguration alloc]init:@"de-DE"];
+SPXSpeechRecognizer* speechRecognizer = [[SPXSpeechRecognizer alloc] initWithSpeechConfiguration:speechConfig
+                                                                     sourceLanguageConfiguration:sourceLanguageConfig
+                                                                              audioConfiguration:audioConfig];
 ```
 
-如果使用自定义模型进行识别，则可使用 `endpointId` 指定终结点：
+在此示例中，源语言和自定义终结点是使用 `SPXSourceLanguageConfiguration` 提供的。 然后，将 `SPXSourceLanguageConfiguration` 作为参数传递给 `SPXSpeechRecognizer` 构造。
 
 ```Objective-C
-speechConfig.endpointId = @"The Endpoint ID for your custom model.";
+SPXSourceLanguageConfiguration* sourceLanguageConfig = \
+        [[SPXSourceLanguageConfiguration alloc]initWithLanguage:@"de-DE"
+                                                     endpointId:@"The Endpoint ID for your custom model."];
+SPXSpeechRecognizer* speechRecognizer = [[SPXSpeechRecognizer alloc] initWithSpeechConfiguration:speechConfig
+                                                                     sourceLanguageConfiguration:sourceLanguageConfig
+                                                                              audioConfiguration:audioConfig];
 ```
+
+>[!Note]
+> `speechRecognitionLanguage`和 `endpointId` 属性已从 `SPXSpeechConfiguration` 目标为 C 的类中弃用。 建议不要使用这些属性，在构造 `SPXSpeechRecognizer` 时不应使用它们。
 
 ::: zone-end
 
-## <a name="see-also"></a>请参阅
+## <a name="see-also"></a>另请参阅
 
 * 如需语音转文本支持的语言和区域设置的列表，请参阅[语言支持](language-support.md)。
 

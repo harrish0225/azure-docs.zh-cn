@@ -6,7 +6,7 @@ ms.date: 03/09/2020
 ms.author: tamram
 ms.openlocfilehash: 27617da97ced9ac775beae71e4c25202944b2aba
 ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: zh-CN
 ms.lasthandoff: 04/28/2020
 ms.locfileid: "78940921"

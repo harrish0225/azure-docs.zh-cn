@@ -1,19 +1,20 @@
 ---
 title: Azure PowerShell 示例 - 附加并使用数据磁盘
 description: 此脚本使用 PowerShell 创建一个 Azure 虚拟机规模集，并附加和准备数据磁盘。
-author: ju-shim
-tags: azure-resource-manager
-ms.service: virtual-machine-scale-sets
+author: mimckitt
+ms.author: mimckitt
 ms.topic: sample
+ms.service: virtual-machine-scale-sets
+ms.subservice: disks
 ms.date: 03/27/2018
-ms.author: jushiman
-ms.custom: mvc
-ms.openlocfilehash: bff0bb0673862d614aac5bb783bc501516871b29
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.reviewer: jushiman
+ms.custom: mimckitt
+ms.openlocfilehash: 39c1c534a930dae2967d982f7c175fadb3222e83
+ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81010374"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83700904"
 ---
 # <a name="attach-and-use-data-disks-with-a-virtual-machine-scale-set-with-powershell"></a>使用 PowerShell 为虚拟机规模集附加并使用数据磁盘
 此脚本创建虚拟机规模集并附加和准备数据磁盘。
@@ -46,5 +47,3 @@ Remove-AzResourceGroup -Name myResourceGroup
 
 ## <a name="next-steps"></a>后续步骤
 有关 Azure PowerShell 模块的详细信息，请参阅 [Azure PowerShell 文档](/powershell/azure/overview)。
-
-可以在 [Azure 虚拟机规模集文档](../powershell-samples.md)中找到其他虚拟机规模集 PowerShell 脚本示例。

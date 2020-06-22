@@ -10,13 +10,13 @@ metadata:
   ms.collection: collection
   author: DCtheGeek
   ms.author: dacoulte
-  ms.date: 03/24/2020
-  ms.openlocfilehash: 2df970e3aa36f69dc6f2d990ee307db6536a8ac9
-  ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+  ms.date: 05/22/2020
+  ms.openlocfilehash: 2559676a867478b486c70fbb43f176451b91672f
+  ms.sourcegitcommit: 0b80a5802343ea769a91f91a8cdbdf1b67a932d3
   ms.translationtype: HT
   ms.contentlocale: zh-CN
-  ms.lasthandoff: 03/26/2020
-  ms.locfileid: "80282029"
+  ms.lasthandoff: 05/25/2020
+  ms.locfileid: "83836016"
 highlightedContent:
   items:
   - title: 治理概述
@@ -39,6 +39,8 @@ productDirectory:
     links:
     - url: ./management-groups/overview.md
       text: 概述
+    - url: ./management-groups/how-to/protect-resource-hierarchy.md
+      text: 保护资源层次结构
     - url: ./management-groups/index.yml
       text: 查看更多 >
   - title: Azure Policy
@@ -48,8 +50,8 @@ productDirectory:
       text: 概述
     - url: ./policy/how-to/get-compliance-data.md
       text: 评估符合性
-    - url: ./policy/concepts/rego-for-aks.md
-      text: 管理 AKS 配置
+    - url: ./policy/concepts/policy-for-kubernetes.md
+      text: 管理 Kubernetes 配置
     - url: ./policy/concepts/guest-configuration.md
       text: 管理 VM 配置
     - url: ./policy/index.yml
@@ -115,6 +117,8 @@ additionalContent:
         url: /javascript/api/@azure/arm-managementgroups/managementgroups
       - text: REST
         url: /rest/api/resources/managementgroups
+      - text: 资源管理器模板
+        url: /azure/templates/microsoft.management/managementgroups
     - title: Azure Policy
       links:
       - text: Azure CLI
@@ -180,9 +184,6 @@ additionalContent:
         url: /cli/azure/ext/resource-graph/graph
       - text: Azure PowerShell
         url: /powershell/module/az.resourcegraph/
-      - text: Azure PowerShell
-        url: https://www.powershellgallery.com/packages/Az.ResourceGraph
-        note: （PS 库模块）
       - text: 用于 .NET 的 Azure SDK
         url: /dotnet/api/Microsoft.Azure.Management.ResourceGraph
       - text: 用于 .NET 的 Azure SDK
@@ -204,6 +205,8 @@ additionalContent:
         note: (Gem)
       - text: REST
         url: /rest/api/azure-resourcegraph/
+      - text: 资源管理器模板
+        url: /azure/templates/microsoft.resourcegraph/allversions
     - title: 成本管理
       links:
       - text: REST

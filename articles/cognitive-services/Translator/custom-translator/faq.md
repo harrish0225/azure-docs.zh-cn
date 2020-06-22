@@ -6,15 +6,15 @@ author: swmachan
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
-ms.date: 02/21/2019
+ms.date: 05/26/2020
 ms.author: swmachan
 ms.topic: reference
-ms.openlocfilehash: 97d399f4a8ec704fd90eb6c49f0835be7e9e4537
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: fefd3fcd82454d505099f83944b0e251b71410f0
+ms.sourcegitcommit: fc718cc1078594819e8ed640b6ee4bef39e91f7f
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "73836597"
+ms.lasthandoff: 05/27/2020
+ms.locfileid: "83996901"
 ---
 # <a name="custom-translator-frequently-asked-questions"></a>自定义翻译人员常见问题
 
@@ -41,7 +41,7 @@ ms.locfileid: "73836597"
 
 ## <a name="how-do-you-access-a-deployed-system"></a>如何访问已部署的系统？
 
-可以使用 Microsoft 文本翻译 API V3 并指定 CategoryID 来访问已部署的系统。 在 [API 参考](https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-reference)网页中可以找到有关文本翻译 API 的详细信息。
+通过指定类别 Id，可以通过 Microsoft Translator V3 访问已部署的系统。 有关转换器的详细信息，请参阅[API 参考](https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-reference)网页。
 
 ## <a name="how-do-i-skip-alignment-and-sentence-breaking-if-my-data-is-already-sentence-aligned"></a>如果我的数据已进行句子对齐，如何跳过对齐和断句？
 

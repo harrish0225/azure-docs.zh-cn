@@ -33,7 +33,7 @@ ms.locfileid: "81011251"
 
 
 ## <a name="create-a-resource-group"></a>创建资源组
-Azure 资源组是在其中部署和管理 Azure 资源的逻辑容器。 必须在创建虚拟机规模集前创建资源组。 使用“[az group create](/cli/azure/group)”命令创建资源组。 在此示例中，在“eastus”  区域中创建了名为“myResourceGroup”  的资源组。 
+Azure 资源组是在其中部署和管理 Azure 资源的逻辑容器。 必须在创建虚拟机规模集前创建资源组。 使用“[az group create](/cli/azure/group)”命令创建资源组。 在此示例中，在“eastus”区域中创建了名为“myResourceGroup”的资源组。 
 
 ```azurecli-interactive
 az group create --name myResourceGroup --location eastus

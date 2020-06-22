@@ -6,16 +6,16 @@ services: storage
 author: tamram
 ms.service: storage
 ms.topic: how-to
-ms.date: 02/10/2020
+ms.date: 05/05/2020
 ms.author: tamram
 ms.reviewer: artek
 ms.subservice: common
-ms.openlocfilehash: 5c37dbdc34138faab8adae6ad18252c18a75cad4
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 5d047aa3c5c937e3b84b8fa672101bc801221067
+ms.sourcegitcommit: f57297af0ea729ab76081c98da2243d6b1f6fa63
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80337073"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82871363"
 ---
 # <a name="change-how-a-storage-account-is-replicated"></a>更改存储帐户的复制方式
 
@@ -26,7 +26,7 @@ Azure 存储提供以下类型的复制：
 - 本地冗余存储 (LRS)
 - 区域冗余存储 (ZRS)
 - 异地冗余存储（GRS）或读取访问异地冗余存储（RA-GRS）
-- 区域冗余存储（GZRS）或读取访问权限异地冗余存储（GZRS）（预览版）
+- 区域冗余存储（GZRS）或读取访问权限异地冗余存储（RA-GZRS）
 
 有关这些选项的概述，请参阅[Azure 存储冗余](storage-redundancy.md)。
 
@@ -38,15 +38,16 @@ Azure 存储提供以下类型的复制：
 
 | 更换 | ...到 LRS | ...to GRS/RA-GRS | ...到 ZRS | ...to GZRS/RA-GZRS |
 |--------------------|----------------------------------------------------|---------------------------------------------------------------------|----------------------------------------------------|---------------------------------------------------------------------|
-| <b>...from LRS</b> | 空值 | 使用 Azure 门户、PowerShell 或 CLI 更改复制设置<sup>1</sup> | 执行手动迁移 <br /><br />请求实时迁移 | 执行手动迁移 <br /><br /> OR <br /><br /> 先切换到 GRS/RA-GRS，然后请求实时迁移<sup>1</sup> |
-| <b>...from GRS/RA-GRS</b> | 使用 Azure 门户、PowerShell 或 CLI 更改复制设置 | 空值 | 执行手动迁移 <br /><br /> OR <br /><br /> 先切换到 LRS，然后请求实时迁移 | 执行手动迁移 <br /><br /> 请求实时迁移 |
-| <b>...from ZRS</b> | 执行手动迁移 | 执行手动迁移 | 空值 | 使用 Azure 门户、PowerShell 或 CLI 更改复制设置<sup>1</sup> |
-| <b>...from GZRS/RA-GZRS</b> | 执行手动迁移 | 执行手动迁移 | 使用 Azure 门户、PowerShell 或 CLI 更改复制设置 | 空值 |
+| <b>...from LRS</b> | 不可用 | 使用 Azure 门户、PowerShell 或 CLI 更改复制设置<sup>1</sup> | 执行手动迁移 <br /><br />请求实时迁移 | 执行手动迁移 <br /><br /> 或 <br /><br /> 先切换到 GRS/RA-GRS，然后请求实时迁移<sup>1</sup> |
+| <b>...from GRS/RA-GRS</b> | 使用 Azure 门户、PowerShell 或 CLI 更改复制设置 | 不可用 | 执行手动迁移 <br /><br /> 或 <br /><br /> 先切换到 LRS，然后请求实时迁移 | 执行手动迁移 <br /><br /> 请求实时迁移 |
+| <b>...from ZRS</b> | 执行手动迁移 | 执行手动迁移 | 不可用 | 使用 Azure 门户、PowerShell 或 CLI 更改复制设置<sup>1、2</sup> |
+| <b>...from GZRS/RA-GZRS</b> | 执行手动迁移 | 执行手动迁移 | 使用 Azure 门户、PowerShell 或 CLI 更改复制设置 | 不可用 |
 
-<sup>1</sup>会产生一次性的出口费用。
+<sup>1</sup>会产生一次性的出口费用。<br />
+<sup>2</sup>在以下区域中不支持从 ZRS 到 GZRS/RA-GZRS，反之亦然：，反之亦然。
 
 > [!CAUTION]
-> 如果对（RA-） GRS 或（RA-） GZRS 帐户执行[帐户故障转移](https://docs.microsoft.com/azure/storage/common/storage-disaster-recovery-guidance)，则会将其配置为在新的主要区域中进行本地冗余。 不支持实时迁移到 ZRS 或 GZRS。 你将需要执行[手动迁移](https://docs.microsoft.com/azure/storage/common/redundancy-migration#perform-a-manual-migration-to-zrs)。
+> 如果对（RA-） GRS 或（RA-） GZRS 帐户执行[帐户故障转移](storage-disaster-recovery-guidance.md)，则在故障转移后，该帐户在新的主要区域中为本地冗余。 不支持通过故障转移导致的 LRS 帐户的实时迁移到 ZRS 或 GZRS。 你将需要执行[手动迁移](#perform-a-manual-migration-to-zrs)到 ZRS 或 GZRS。
 
 ## <a name="change-the-replication-setting"></a>更改复制设置
 
@@ -54,7 +55,7 @@ Azure 存储提供以下类型的复制：
 
 更改存储帐户的复制方式不会导致应用程序停机。
 
-# <a name="portal"></a>[门户](#tab/portal)
+# <a name="portal"></a>[Portal](#tab/portal)
 
 若要在 Azure 门户中更改存储帐户的冗余选项，请执行以下步骤：
 
@@ -121,14 +122,14 @@ ZRS 仅支持常规用途 v2 帐户，因此请确保在将实时迁移请求提
 
 1. 选择**新的支持请求**
 2. 根据帐户信息填写“基本信息”。**** 在“服务”部分，选择“存储帐户管理”以及要转换为 ZRS 的资源。********
-3. 选择“下一步”  。
+3. 选择“**下一步**”。
 4. 在“问题”部分指定以下值：****
     - **严重性**：保留默认值。
     - **问题类型**：选择“数据迁移”。****
     - **类别**：选择**迁移到 ZRS**。
     - **标题**：键入描述性的标题，例如“ZRS 帐户迁移”。****
     - **详细信息**：在 "**详细**信息" 框中键入其他详细信息，例如，我想要从\_ \_区域中的 [LRS，GRS] 迁移到 ZRS。
-5. 选择“下一步”  。
+5. 选择“**下一步**”。
 6. 检查“联系信息”边栏选项卡中的联系信息是否正确。****
 7. 选择“创建”。 
 
@@ -156,7 +157,7 @@ ZRS 经典版仅适用于常规用途 V1 (GPv1) 存储帐户中的**块 Blob**�
 
 你还可以使用 ZRS 提供的区域中的 Azure 门户、PowerShell 或 Azure CLI 将 ZRS 经典存储帐户升级到 ZRS。
 
-# <a name="portal"></a>[门户](#tab/portal)
+# <a name="portal"></a>[Portal](#tab/portal)
 
 若要升级到 Azure 门户中的 ZRS，请导航到该帐户的**配置**设置，然后选择 "**升级**"：
 
@@ -195,4 +196,4 @@ az storage account update -g <resource_group> -n <storage_account> --set kind=St
 
 - [Azure 存储冗余](storage-redundancy.md)
 - [检查存储帐户的 "上次同步时间" 属性](last-sync-time-get.md)
-- [使用读取访问异地冗余存储设计高度可用的应用程序](storage-designing-ha-apps-with-ragrs.md)
+- [使用异地冗余设计高度可用的应用程序](geo-redundant-design.md)

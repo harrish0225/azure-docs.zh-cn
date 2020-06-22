@@ -186,8 +186,6 @@
               href: wrangling-data-flow-functions.md
     - name: 角色和权限
       href: concepts-roles-permissions.md
-    - name: 了解定价
-      href: pricing-concepts.md
     - name: 命名规则
       href: naming-rules.md
 - name: 操作指南
@@ -236,10 +234,10 @@
           href: connector-azure-database-for-postgresql.md
         - name: Azure 文件存储
           href: connector-azure-file-storage.md
-        - name: Azure SQL Database
+        - name: Azure SQL 数据库
           href: connector-azure-sql-database.md
-        - name: Azure SQL 数据库托管实例
-          href: connector-azure-sql-database-managed-instance.md
+        - name: Azure SQL 托管实例
+          href: connector-azure-sql-managed-instance.md
         - name: Azure Synapse Analytics（以前称为 SQL 数据仓库）
           href: connector-azure-sql-data-warehouse.md
         - name: Azure 表存储
@@ -368,6 +366,8 @@
           href: connector-servicenow.md
         - name: SFTP
           href: connector-sftp.md
+        - name: SharePoint Online 列表
+          href: connector-sharepoint-online-list.md
         - name: Shopify
           href: connector-shopify.md
         - name: Spark
@@ -414,6 +414,8 @@
           href: copy-activity-schema-and-type-mapping.md
         - name: 容错
           href: copy-activity-fault-tolerance.md
+        - name: 数据一致性验证
+          href: copy-activity-data-consistency.md
         - name: 格式和压缩支持（旧版）
           href: supported-file-formats-and-compression-codecs-legacy.md
     - name: 转换数据
@@ -541,6 +543,8 @@
       items:
         - name: 数据移动安全注意事项
           href: data-movement-security-considerations.md
+        - name: 数据访问策略
+          href: data-access-strategies.md
         - name: Azure Integration Runtime IP 地址
           href: azure-integration-runtime-ip-addresses.md
         - name: 在 Azure Key Vault 中存储凭据
@@ -551,8 +555,12 @@
           href: encrypt-credentials-self-hosted-integration-runtime.md
         - name: 数据工厂的托管标识
           href: data-factory-service-identity.md
+        - name: 客户托管密钥加密
+          href: quickstart-enable-customer-managed-key.md
     - name: 监视和管理
       items:
+        - name: 直观地监视
+          href: monitor-visually.md
         - name: 使用 Azure Monitor 进行监视
           href: monitor-using-azure-monitor.md
         - name: 使用 SDK 进行监视
@@ -575,6 +583,8 @@
           href: create-azure-ssis-integration-runtime.md
         - name: 共享的自承载集成运行时
           href: create-shared-self-hosted-integration-runtime-powershell.md
+        - name: 自承载集成运行时的自动化脚本
+          href: self-hosted-integration-runtime-automation-scripts.md
     - name: 在 Azure 中运行 SSIS 包
       items:
         - name: 从 SSDT 运行 Azure 中的 SSIS 包
@@ -595,12 +605,10 @@
           href: self-hosted-integration-runtime-proxy-ssis.md
         - name: 为 Azure-SSIS IR 启用 Azure AD 身份验证
           href: enable-aad-authentication-azure-ssis-ir.md
-        - name: 使用 Windows 身份验证连接到数据
-          href: ssis-azure-connect-with-windows-auth.md
-        - name: 保存文件并连接到文件共享
-          href: ssis-azure-files-file-shares.md
         - name: 预配 Azure-SSIS IR 的企业版
           href: how-to-configure-azure-ssis-ir-enterprise-edition.md
+        - name: Azure-SSIS IR 上的内置和预安装组件
+          href: built-in-preinstalled-components-ssis-integration-runtime.md
         - name: 自定义 Azure-SSIS IR 的设置
           href: how-to-configure-azure-ssis-ir-custom-setup.md
         - name: 安装 Azure-SSIS IR 的许可组件
@@ -611,6 +619,8 @@
           href: configure-bcdr-azure-ssis-integration-runtime.md
         - name: 使用弹性数据库作业清理 SSISDB 日志
           href: how-to-clean-up-ssisdb-logs-with-elastic-jobs.md
+        - name: 将 Azure SQL 托管实例与 Azure-SSIS IR 结合使用
+          href: how-to-use-sql-managed-instance-with-ir.md
         - name: 通过 SSMS 迁移 SSIS 作业
           href: how-to-migrate-ssis-job-ssms.md
     - name: 创建触发器
@@ -643,6 +653,12 @@
           href: solution-template-move-files.md
         - name: 使用 Azure Databricks 进行转换
           href: solution-template-databricks-notebook.md
+    - name: 了解定价
+      items:
+        - name: 计划和管理成本
+          href: plan-manage-costs.md
+        - name: 定价示例
+          href: pricing-concepts.md
     - name: 疑难解答指南
       items:
         - name: 活动
@@ -681,7 +697,7 @@
       items:
         - name: SSIS 迁移概述
           href: scenario-ssis-migration-overview.md
-        - name: 将 SSISDB 迁移到 Azure SQL 数据库托管实例
+        - name: 将 SSISDB 迁移到 Azure SQL 托管实例
           href: scenario-ssis-migration-ssisdb-mi.md
 - name: 参考
   items:
@@ -707,8 +723,8 @@
       href: 'https://azure.microsoft.com/updates/?product=data-factory'
     - name: 博客
       href: 'https://techcommunity.microsoft.com/t5/azure-data-factory/bg-p/AzureDataFactoryBlog#'
-    - name: 提出问题 - MSDN 论坛
-      href: 'https://social.msdn.microsoft.com/Forums/en-US/home?forum=AzureDataFactory&filter=alltypes&sort=lastpostdesc'
+    - name: 提问 - Microsoft Q&A 问题页面
+      href: 'https://docs.microsoft.com/answers/topics/azure-data-factory.html'
     - name: 提出问题 - Stack Overflow
       href: 'https://stackoverflow.com/questions/tagged/azure-data-factory'
     - name: 请求功能

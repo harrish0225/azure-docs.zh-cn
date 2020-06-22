@@ -1,23 +1,24 @@
 ---
 title: 使用 Azure PowerShell 加密 Azure 规模集磁盘
 description: 了解如何使用 Azure PowerShell 来加密 Windows 虚拟机规模集中的 VM 实例和附加的磁盘
-author: msmbaldwin
-manager: rkarlin
-tags: azure-resource-manager
+author: ju-shim
+ms.author: jushiman
+ms.topic: how-to
 ms.service: virtual-machine-scale-sets
-ms.topic: conceptual
+ms.subservice: disks
 ms.date: 10/15/2019
-ms.author: mbaldwin
-ms.openlocfilehash: bd7f92c104e06896f4b3c8bb2adef45983cf5d4d
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
-ms.translationtype: MT
+ms.reviewer: mimckitt
+ms.custom: mimckitt
+ms.openlocfilehash: a20abec6ab9925408dd769c5238186af9b7c3d1c
+ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "76278988"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83195892"
 ---
-# <a name="encrypt-os-and-attached-data-disks-in-a-virtual-machine-scale-set-with-azure-powershell"></a>通过 Azure PowerShell 对虚拟机规模集中的操作系统和附加的数据磁盘进行加密
+# <a name="encrypt-os-and-attached-data-disks-in-a-virtual-machine-scale-set-with-azure-powershell"></a>通过 Azure PowerShell 对虚拟机规模集中的 OS 和附加数据磁盘进行加密
 
-Azure PowerShell 模块用于从 PowerShell 命令行或脚本创建和管理 Azure 资源。  本文介绍如何使用 Azure PowerShell 创建和加密虚拟机规模集。 有关如何将 Azure 磁盘加密应用到虚拟机规模集的详细信息，请参阅[虚拟机规模集的 Azure 磁盘加密](disk-encryption-overview.md)。
+Azure PowerShell 模块用于从 PowerShell 命令行或脚本创建和管理 Azure 资源。  本文介绍如何使用 Azure PowerShell 创建和加密虚拟机规模集。 若要详细了解如何将 Azure 磁盘加密应用于虚拟机规模集，请参阅[适用于虚拟机规模集的 Azure 磁盘加密](disk-encryption-overview.md)。
 
 [!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
 
@@ -90,7 +91,7 @@ Set-AzVmssDiskEncryptionExtension -ResourceGroupName $rgName -VMScaleSetName $vm
 
 ### <a name="enable-encryption-using-kek-to-wrap-the-key"></a>使用 KEK 启用加密以包装密钥
 
-在加密虚拟机规模集时，还可以使用密钥加密密钥来增加安全性。
+加密虚拟机规模集时，还可以使用密钥加密密钥来增强安全性。
 
 ```azurepowershell-interactive
 $diskEncryptionKeyVaultUrl=(Get-AzKeyVault -ResourceGroupName $rgName -Name $vaultName).VaultUri
@@ -106,7 +107,7 @@ Set-AzVmssDiskEncryptionExtension -ResourceGroupName $rgName -VMScaleSetName $vm
 >  disk-encryption-keyvault 参数值的语法是完整的标识符字符串：</br>
 /subscriptions/[subscription-id-guid]/resourceGroups/[resource-group-name]/providers/Microsoft.KeyVault/vaults/[keyvault-name]</br></br>
 > key-encryption-key 参数值的语法是 KEK 的完整 URI，如下所示：</br>
-https：//[keyvault]. kekname/keys/[]/[kek]
+https://[keyvault-name].vault.azure.net/keys/[kekname]/[kek-unique-id]
 
 ## <a name="check-encryption-progress"></a>查看加密进度
 

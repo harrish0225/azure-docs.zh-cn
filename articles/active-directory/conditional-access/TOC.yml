@@ -102,12 +102,14 @@
           href: troubleshoot-conditional-access.md
         - name: 使用 What If 工具排查问题
           href: troubleshoot-conditional-access-what-if.md
+        - name: 常见问题解答
+          href: faqs.md
 - name: 资源
   items:
     - name: Azure 反馈论坛
       href: 'https://feedback.azure.com/forums/169401-azure-active-directory'
-    - name: MSDN 论坛
-      href: 'https://social.msdn.microsoft.com/Forums/azure/home?forum=WindowsAzureAD'
+    - name: Microsoft Q&A 问题页面
+      href: 'https://docs.microsoft.com/answers/topics/azure-active-directory.html'
     - name: 定价
       href: 'https://azure.microsoft.com/pricing/details/active-directory/'
     - name: 服务更新

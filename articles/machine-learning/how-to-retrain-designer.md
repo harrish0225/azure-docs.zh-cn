@@ -9,12 +9,12 @@ ms.topic: how-to
 ms.author: keli19
 author: likebupt
 ms.date: 04/06/2020
-ms.openlocfilehash: 721e5414fc4753cd5d58a17fc7ed51ea99868778
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: fb0122833dabe4030232efb3ca07557ce1826aff
+ms.sourcegitcommit: 999ccaf74347605e32505cbcfd6121163560a4ae
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80810353"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82981895"
 ---
 # <a name="retrain-models-with-azure-machine-learning-designer-preview"></a>使用 Azure 机器学习设计器重新训练模型（预览版）
 [!INCLUDE [applies-to-skus](../../includes/aml-applies-to-enterprise-sku.md)]
@@ -31,20 +31,14 @@ ms.locfileid: "80810353"
 
 ## <a name="prerequisites"></a>先决条件
 
-* 使用企业 SKU 的 Azure 机器学习工作区。
-* 设计器可访问的数据集。 可以是下列选项之一：
-   * Azure 机器学习注册的数据集
-    
-     **或**
-   * 存储在 Azure 机器学习数据存储中的数据文件。
-   
-有关使用设计器进行数据访问的信息，请参阅[如何将数据导入到设计器中](how-to-designer-import-data.md)。
+* 具有企业版 SKU 的 Azure 机器学习工作区。
+* 完成本操作方法系列的第1部分，[在设计器中转换数据](how-to-designer-transform-data.md)。
 
 本文还假定你具有在设计器中生成管道的基本知识。 对于引导式简介，请完成[教程](tutorial-designer-automobile-price-train-score.md)。 
 
 ### <a name="sample-pipeline"></a>示例管道
 
-本文中使用的管道是[示例3：收入预测](samples-designer.md#classification-samples)的更改版本。 管道使用[导入数据](algorithm-module-reference/import-data.md)模块，而不是示例数据集来向您演示如何使用自己的数据训练模型。
+本文中使用的管道是[示例3：收入预测](samples-designer.md#classification)的更改版本。 管道使用[导入数据](algorithm-module-reference/import-data.md)模块，而不是示例数据集来向您演示如何使用自己的数据训练模型。
 
 ![用突出显示导入数据模块的框显示修改后的示例管道的屏幕截图](./media/how-to-retrain-designer/modified-sample-pipeline.png)
 
@@ -92,8 +86,8 @@ ms.locfileid: "80810353"
 
 将管道发布到管道终结点，以便在将来轻松重用管道。 管道终结点创建 REST 终结点，以便在将来调用管道。 在此示例中，您的管道终结点允许您重新使用您的管道重新训练不同数据上的模型。
 
-1. 选择设计器画布上方的“发布”  。
-1. 选择或创建一个管道终结点。
+1. 选择设计器画布上方的“发布”****。
+1. 选择或创建管道终结点。
 
    > [!NOTE]
    > 可将多个管道发布到一个终结点。 给定终结点中的每个管道都提供一个版本号，你可以在调用管道终结点时指定该版本号。
@@ -111,7 +105,7 @@ ms.locfileid: "80810353"
 1. 在工作室工作区中转到 "**终结点**" 页。
 1. 选择 "**管道终结点**" 选项卡。然后，选择管道终结点。
 1. 选择 "**已发布管道**" 选项卡。然后，选择要运行的管道版本。
-1. 选择“提交”。 
+1. 选择“提交”  。
 1. 在 "设置" 对话框中，可以指定运行的参数值。 对于本示例，请更新数据路径以使用非美国数据集来训练模型。
 
 ![显示如何在设计器中设置参数化管道运行的屏幕截图](./media/how-to-retrain-designer/published-pipeline-run.png)

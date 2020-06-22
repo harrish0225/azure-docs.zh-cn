@@ -8,16 +8,22 @@ ms.topic: tutorial
 ms.date: 06/11/2019
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: 2834ba924fa9c29d955c38fbaeb45ab23e5c4e9b
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: ad25ab219cdb83227d39f86109d18b2c8402c38f
+ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79127709"
+ms.lasthandoff: 04/30/2020
+ms.locfileid: "82612344"
 ---
 # <a name="tutorial-set-up-service-alerts"></a>教程：设置服务警报
 
-可以使用 Azure 服务运行状况监视 Windows 虚拟桌面的服务问题和运行状况公告。 Azure 服务运行状况可以通过不同类型的警报（例如，电子邮件或短信）通知你，帮助你了解问题的影响，并在问题解决时保持更新。 此外，Azure 服务运行状况还可以帮助你减少停机时间，并为可能影响资源可用性的计划内维护和更改做好准备。
+>[!IMPORTANT]
+>本教程的内容适用于包含 Azure 资源管理器 Windows 虚拟桌面对象的 2020 春季更新版。 如果你使用的是不包含 Azure 资源管理器对象的 Windows 虚拟桌面 2019 秋季版，请参阅[此文](./virtual-desktop-fall-2019/set-up-service-alerts-2019.md)。
+>
+> Windows 虚拟桌面 2020 春季更新版目前为公共预览版。 此预览版未提供服务级别协议，不建议将其用于生产工作负荷。 某些功能可能不受支持或者受限。 
+> 有关详细信息，请参阅 [Microsoft Azure 预览版补充使用条款](https://azure.microsoft.com/support/legal/preview-supplemental-terms/)。
+
+可以使用 Azure 服务运行状况监视 Windows 虚拟桌面的服务问题和运行状况公告。 Azure 服务运行状况可以通过不同类型的警报（例如，电子邮件或短信）通知你，帮助你了解问题的影响，并在问题解决时保持更新。 此外，Azure 服务运行状况还可以帮助你减少停机时间，并为可能影响资源可用性的计划内维护和更改做准备。
 
 本教程介绍以下操作：
 
@@ -25,12 +31,6 @@ ms.locfileid: "79127709"
 > * 创建和配置服务警报。
 
 若要详细了解 Azure 服务运行状况，请参阅 [Azure 运行状况文档](https://docs.microsoft.com/azure/service-health/)。
-
-## <a name="prerequisites"></a>先决条件
-
-- [教程：在 Windows 虚拟桌面中创建租户](tenant-setup-azure-active-directory.md)
-- [教程：使用 PowerShell 创建服务主体和角色分配](create-service-principal-role-powershell.md)
-- [教程：通过 Azure 市场创建主机池](create-host-pools-azure-marketplace.md)
 
 ## <a name="create-service-alerts"></a>创建服务警报
 

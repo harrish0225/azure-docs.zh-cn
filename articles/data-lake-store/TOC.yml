@@ -22,6 +22,11 @@
       href: data-lake-store-get-started-powershell.md
     - name: 使用 Azure CLI
       href: data-lake-store-get-started-cli-2.0.md
+- name: 示例
+  items:
+    - name: Azure Policy 内置策略定义
+      displayName: 'samples, policies, definitions'
+      href: ./policy-samples.md
 - name: 如何
   items:
     - name: 加载和移动数据
@@ -163,7 +168,7 @@
     - name: Node.js
       href: 'https://www.npmjs.com/package/azure-arm-datalake-store'
     - name: Python（帐户管理）
-      href: 'https://docs.microsoft.com/python/api/azure.mgmt.datalake.store?view=azure-python'
+      href: 'https://docs.microsoft.com/python/api/azure-mgmt-datalake-store/azure.mgmt.datalake.store?view=azure-python'
     - name: Python（文件系统管理）
       href: 'https://azure-datalake-store.readthedocs.io/en/latest'
     - name: REST
@@ -180,8 +185,8 @@
       href: 'https://blogs.msdn.microsoft.com/azuredatalake/'
     - name: 在 UserVoice 上提供反馈
       href: 'https://feedback.azure.com/forums/327234-data-lake'
-    - name: MSDN 论坛
-      href: 'https://social.msdn.microsoft.com/Forums/en-US/home?forum=AzureDataLake'
+    - name: Microsoft Q&A 问题页面
+      href: 'https://docs.microsoft.com/answers/topics/azure-data-lake-storage.html'
     - name: 定价
       href: 'https://azure.microsoft.com/pricing/details/data-lake-store/'
     - name: 定价计算器

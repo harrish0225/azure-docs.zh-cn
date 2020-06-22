@@ -1,7 +1,7 @@
 ---
-title: 在虚拟网络中保护试验和推理
+title: 网络隔离 & 隐私
 titleSuffix: Azure Machine Learning
-description: 了解如何在 Azure 虚拟网络中保护 Azure 机器学习中的试验/训练作业和推理/评分作业。
+description: 将独立的 Azure 虚拟网络与 Azure 机器学习配合使用来保护试验/培训以及推理/评分作业。
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
@@ -9,128 +9,77 @@ ms.topic: conceptual
 ms.reviewer: larryfr
 ms.author: aashishb
 author: aashishb
-ms.date: 04/17/2020
-ms.openlocfilehash: 6cf89790ee125d8d09d9bdead2f6e34dcb73e8f8
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 05/11/2020
+ms.custom: contperfq4
+ms.openlocfilehash: 5099cc2ce2228bcdbf49d3484e488e7373883ec0
+ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82188117"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83119042"
 ---
-# <a name="secure-azure-ml-experimentation-and-inference-jobs-within-an-azure-virtual-network"></a>在 Azure 虚拟网络中保护 Azure ML 试验和推理作业
+# <a name="secure-your-machine-learning-lifecycles-with-private-virtual-networks"></a>通过专用虚拟网络保护机器学习生命周期
 [!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
 
-本文介绍如何在 Azure 虚拟网络 (VNet) 中保护 Azure 机器学习中的试验/训练作业和推理/评分作业。
-
-**虚拟网络**充当安全边界，可将 Azure 资源与公共 Internet 相隔离。 你也可以将 Azure 虚拟网络加入本地网络。 加入网络后，可以安全训练模型，以及访问用于推理的已部署模型。
-
-Azure 机器学习依赖于其他 Azure 服务提供计算资源。 计算资源或[计算目标](concept-compute-target.md)用于训练和部署模型。 可以在虚拟网络中创建目标。 例如，可以使用 Microsoft Data Science Virtual Machine 来训练模型，然后将该模型部署到 Azure Kubernetes 服务 (AKS)。 有关虚拟网络的详细信息，请参阅 [Azure 虚拟网络概述](https://docs.microsoft.com/azure/virtual-network/virtual-networks-overview)。
-
-本文还将提供有关高级安全设置的详细信息（在基本或试验用例中不需要这些信息）。  本文的某些部分提供各种方案的配置信息。 无需按顺序遵循本文中的说明，也不需要遵循所有的说明。
-
-> [!TIP]
-> 除非有专门的说明，否则可以在机器学习管道和非管道工作流（例如脚本运行）中使用虚拟网络中的存储帐户或计算目标等资源。
+在本文中，你将了解如何在 Azure 虚拟网络（vnet）中 Azure 机器学习隔离试验/培训作业和推理/评分作业。 你还将了解一些*高级安全设置*，即基本或实验用例所不需要的信息。
 
 > [!WARNING]
-> 如果基础存储已启用虚拟网络，Microsoft 不支持使用 Azure 机器学习工作室功能，如自动 ML、数据集、Datalabeling、设计器和笔记本。
+> 如果基础存储位于虚拟网络中，则用户将无法使用 Azure 机器学习的 studio web 体验，包括：
+> - 拖放设计器
+> - 自动机器学习的 UI
+> - 用于数据标记的 UI
+> - 数据集的 UI
+> - 笔记本
+> 
+> 如果尝试，将收到类似于以下错误的消息：`__Error: Unable to profile this dataset. This might be because your data is stored behind a virtual network or your data does not support profile.__`
 
-## <a name="prerequisites"></a>先决条件
+## <a name="what-is-a-vnet"></a>什么是 VNET？
 
-+ 一个 Azure 机器学习[工作区](how-to-manage-workspace.md)。
+**虚拟网络**充当安全边界，将 Azure 资源与公共 internet 隔离开来。 你也可以将 Azure 虚拟网络加入本地网络。 加入网络后，可以安全训练模型，以及访问用于推理的已部署模型。
+
+Azure 机器学习依赖于其他 Azure 服务（也称为[计算目标](concept-compute-target.md)）来定型和部署模型。 可以在虚拟网络中创建目标。 例如，可以使用 Azure 机器学习计算来训练模型，然后将模型部署到 Azure Kubernetes 服务（AKS）。 
+
+
+## <a name="prerequisites"></a>必备条件
+
++ Azure 机器学习[工作区](how-to-manage-workspace.md)。
 
 + 对 [Azure 虚拟网络服务](https://docs.microsoft.com/azure/virtual-network/virtual-networks-overview)和 [IP 网络](https://docs.microsoft.com/azure/virtual-network/virtual-network-ip-addresses-overview-arm)具备一般性的实践知识。
 
 + 预先存在一个要与计算资源配合使用的虚拟网络和子网。
 
-## <a name="use-a-storage-account-for-your-workspace"></a>对工作区使用存储帐户
+## <a name="private-endpoints"></a>专用终结点
+
+还可以使用专用终结点[启用 Azure 专用链接](how-to-configure-private-link.md)，以连接到工作区。 专用终结点是虚拟网络中的一组专用 IP 地址。 [了解如何设置此专用终结点。](how-to-configure-private-link.md)
+
+
+
+> [!TIP]
+> 你可以将虚拟网络和专用链接组合在一起，以保护你的工作区和其他 Azure 资源之间的通信。 但是，某些组合需要 Enterprise edition 工作区。 使用下表了解需要 Enterprise edition 的方案：
+>
+> | 方案 | Enterprise</br>edition | 基本</br>edition |
+> | ----- |:-----:|:-----:| 
+> | 无虚拟网络或专用链接 | ✔ | ✔ |
+> | 无专用链接的工作区。 虚拟网络中的其他资源（Azure 容器注册表除外） | ✔ | ✔ |
+> | 无专用链接的工作区。 具有专用链接的其他资源 | ✔ | |
+> | 具有专用链接的工作区。 虚拟网络中的其他资源（Azure 容器注册表除外） | ✔ | ✔ |
+> | 工作区和具有专用链接的任何其他资源 | ✔ | |
+> | 具有专用链接的工作区。 没有专用链接或虚拟网络的其他资源 | ✔ | ✔ |
+> | 虚拟网络中的 Azure 容器注册表 | ✔ | |
+> | 工作区的客户托管密钥 | ✔ | |
+> 
 
 > [!WARNING]
-> 如果你的数据科学家使用 Azure 机器学习设计器，则在从虚拟网络中的存储帐户可视化数据时，他们将收到错误消息。 以下文本是他们收到的错误：
->
-> __错误：无法分析此数据集。这可能是因为你的数据存储在虚拟网络后，或者你的数据不支持配置文件。__
+> 在启用了 "专用" 链接的工作区中不支持 Azure 机器学习计算实例预览。
+> 
+> Azure 机器学习不支持使用启用了专用链接的 Azure Kubernetes 服务。 相反，你可以在虚拟网络中使用 Azure Kubernetes 服务。 有关详细信息，请参阅[在 Azure 虚拟网络中保护 AZURE ML 试验和推理作业](how-to-enable-virtual-network.md)。
 
-若要在虚拟网络中使用工作区的 Azure 存储帐户，请使用以下步骤：
-
-1. 在虚拟网络的后面创建一个计算资源（例如机器学习计算实例或群集），或者将某个计算资源（例如 HDInsight 群集、虚拟机或 Azure Kubernetes 服务群集）附加到工作区。 该计算资源可用于试验或模型部署。
-
-   有关详细信息，请参阅本文的[使用机器学习计算](#amlcompute)、[使用虚拟机或 HDInsight 群集](#vmorhdi)和[使用 Azure Kubernetes 服务](#aksvnet)部分。
-
-1. 在 Azure 门户中，转到已附加到工作区的存储。
-
-   [![附加到 Azure 机器学习工作区的存储](./media/how-to-enable-virtual-network/workspace-storage.png)](./media/how-to-enable-virtual-network/workspace-storage.png#lightbox)
-
-1. 在“Azure 存储”页上，选择“防火墙和虚拟网络”。****____
-
-   ![Azure 门户中“Azure 存储”页上的“防火墙和虚拟网络”区域](./media/how-to-enable-virtual-network/storage-firewalls-and-virtual-networks.png)
-
-1. 在 "__防火墙和虚拟网络__" 页上，执行以下操作：
-    - 选择“所选网络”。____
-    - 在“虚拟网络”下，选择“添加现有的虚拟网络”链接。________ 此操作将添加计算资源所在的虚拟网络（参阅步骤 1）。
-
-        > [!IMPORTANT]
-        > 存储帐户必须与用于定型或推理的计算实例或群集位于同一个虚拟网络和子网中。
-
-    - 选中“允许受信任的 Microsoft 服务访问此存储帐户”复选框。____
-
-    > [!IMPORTANT]
-    > 使用 Azure 机器学习 SDK 时，开发环境必须能够连接到 Azure 存储帐户。 当存储帐户位于虚拟网络中时，防火墙必须允许从开发环境的 IP 地址进行访问。
-    >
-    > 若要启用对存储帐户的访问，请从开发客户端上的 Web 浏览器访问存储帐户的“防火墙和虚拟网络”。____** 然后选中“添加客户端 IP 地址”复选框，将客户端的 IP 地址添加到“地址范围”。________ 也可以使用“地址范围”字段手动输入开发环境的 IP 地址。____ 添加客户端的 IP 地址后，该客户端可以使用 SDK 访问存储帐户。
-
-   [![Azure 门户中的 "防火墙和虚拟网络" 窗格](./media/how-to-enable-virtual-network/storage-firewalls-and-virtual-networks-page.png)](./media/how-to-enable-virtual-network/storage-firewalls-and-virtual-networks-page.png#lightbox)
-
-> [!IMPORTANT]
-> 可将 Azure 机器学习的默认存储帐户或者将非默认存储帐户放在虚拟网络中。____
->
-> 创建工作区时，会自动预配默认存储帐户。
->
-> 对于非默认存储帐户，此`storage_account` [ `Workspace.create()`函数](https://docs.microsoft.com/python/api/azureml-core/azureml.core.workspace(class)?view=azure-ml-py#create-name--auth-none--subscription-id-none--resource-group-none--location-none--create-resource-group-true--sku--basic---friendly-name-none--storage-account-none--key-vault-none--app-insights-none--container-registry-none--cmk-keyvault-none--resource-cmk-uri-none--hbi-workspace-false--default-cpu-compute-target-none--default-gpu-compute-target-none--exist-ok-false--show-output-true-)中的参数允许你按 Azure 资源 ID 指定自定义存储帐户。
-
-## <a name="use-azure-data-lake-storage-gen-2"></a>使用 Azure Data Lake Storage 第2代
-
-Azure Data Lake Storage 第2代是一组功能，用于在 Azure Blob 存储基础上构建大数据分析。 它可用于存储用于为模型定型 Azure 机器学习的数据。 
-
-若要在 Azure 机器学习工作区的虚拟网络中使用 Data Lake Storage 第2代，请使用以下步骤：
-
-1. 创建 Azure Data Lake Storage 第2代帐户。 有关详细信息，请参阅[创建 Azure Data Lake Storage Gen2 的存储帐户](../storage/blobs/data-lake-storage-quickstart-create-account.md)。
-
-1. 使用上一节中的步骤2-4，为[你的工作区使用存储帐户](#use-a-storage-account-for-your-workspace)，将该帐户放在虚拟网络中。
-
-在虚拟网络中将 Azure 机器学习与 Data Lake Storage Gen 2 一起使用时，请使用以下指南：
-
-* 如果使用__SDK 创建数据集__，并且运行代码的系统__不在虚拟网络中__，请使用`validate=False`参数。 此参数跳过验证，如果系统与存储帐户不在同一虚拟网络中，则会失败。 有关详细信息，请参阅[from_files （）](https://docs.microsoft.com/python/api/azureml-core/azureml.data.dataset_factory.filedatasetfactory?view=azure-ml-py#from-files-path--validate-true-)方法。
-
-* 使用 Azure 机器学习计算实例或计算群集来使用数据集来训练模型时，该数据集必须与存储帐户位于同一虚拟网络中。
-
-## <a name="use-a-key-vault-instance-with-your-workspace"></a>将 Key Vault 实例与工作区配合使用
-
-Azure 机器学习使用与工作区关联的 Key Vault 实例来存储以下凭据：
-* 关联的存储帐户连接字符串
-* Azure 容器存储库实例的密码
-* 数据存储的连接字符串
-
-若要在虚拟网络后使用 Azure Key Vault Azure 机器学习试验功能，请执行以下步骤：
-
-1. 转到与工作区关联的 Key Vault。
-
-   [![与 Azure 机器学习工作区关联的密钥保管库](./media/how-to-enable-virtual-network/workspace-key-vault.png)](./media/how-to-enable-virtual-network/workspace-key-vault.png#lightbox)
-
-1. 在“Key Vault”页上的左侧窗格中，选择“防火墙和虚拟网络”。****____
-
-   ![“Key Vault”窗格中的“防火墙和虚拟网络”部分](./media/how-to-enable-virtual-network/key-vault-firewalls-and-virtual-networks.png)
-
-1. 在 "__防火墙和虚拟网络__" 页上，执行以下操作：
-    - 在“允许的访问来源”  下，选择“所选网络”  。
-    - 在“虚拟网络”下，选择“添加现有的虚拟网络”，以添加试验计算资源所在的虚拟网络。________
-    - 在“允许受信任的 Microsoft 服务跳过此防火墙”下选择“是”。________
-
-   [!["Key Vault" 窗格中的 "防火墙和虚拟网络" 部分](./media/how-to-enable-virtual-network/key-vault-firewalls-and-virtual-networks-page.png)](./media/how-to-enable-virtual-network/key-vault-firewalls-and-virtual-networks-page.png#lightbox)
 
 <a id="amlcompute"></a>
 
-## <a name="use-a-machine-learning-compute"></a><a name="compute-instance"></a>使用机器学习计算
+## <a name="compute-clusters--instances"></a><a name="compute-instance"></a>计算群集 & 实例
 
-若要在虚拟网络中使用 Azure 机器学习计算实例或计算群集，必须满足以下网络要求：
+若要在虚拟网络中使用[托管 Azure 机器学习**计算目标**](concept-compute-target.md#azure-machine-learning-compute-managed)或[Azure 机器学习计算**实例**](concept-compute-instance.md) ，必须满足以下网络要求：
 
 > [!div class="checklist"]
 > * 该虚拟网络必须与 Azure 机器学习工作区位于同一订阅和区域。
@@ -150,7 +99,7 @@ Azure 机器学习使用与工作区关联的 Key Vault 实例来存储以下凭
 > 这些资源受订阅的[资源配额](https://docs.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits)限制。
 
 
-### <a name="required-ports"></a><a id="mlcports"></a>所需的端口
+### <a name="required-ports"></a><a id="mlcports"></a>必需的端口
 
 机器学习计算目前使用 Azure Batch 服务在指定的虚拟网络中预配 VM。 子网必须允许来自 Batch 服务的入站通信。 可以使用这种通信在机器学习计算节点上计划运行，以及与 Azure 存储和其他资源进行通信。 Batch 服务在附加到 VM 的网络接口 (NIC) 级别添加网络安全组 (NSG)。 这些 NSG 自动配置允许以下流量的入站和出站规则：
 
@@ -185,8 +134,8 @@ Azure 机器学习使用与工作区关联的 Key Vault 实例来存储以下凭
 - 使用 NSG 规则拒绝出站 Internet 连接。
 
 - 对于__计算实例__或__计算群集__，请将出站流量限制为以下各项：
-   - Azure 存储，使用__RegionName__的__服务标记__。 其中`{RegionName}`是 Azure 区域的名称。
-   - Azure 容器注册表，使用__AzureContainerRegistry. RegionName__的__服务标记__。 其中`{RegionName}`是 Azure 区域的名称。
+   - Azure 存储，使用__RegionName__的__服务标记__。 其中 `{RegionName}` 是 Azure 区域的名称。
+   - Azure 容器注册表，使用__AzureContainerRegistry. RegionName__的__服务标记__。 其中 `{RegionName}` 是 Azure 区域的名称。
    - Azure 机器学习 - 使用 __AzureMachineLearning__ 的服务标记____
    - Azure 资源管理器，使用__AzureResourceManager__ __服务标记__
    - Azure Active Directory，使用__AzureActiveDirectory__的__服务标记__
@@ -228,7 +177,7 @@ Azure 机器学习使用与工作区关联的 Key Vault 实例来存储以下凭
 
 * 为资源所在区域中的 Azure Batch 服务使用的每个 IP 地址建立一个 UDR。 这些 UDR 使 Batch 服务能够与计算节点通信，以计划任务。 另外，请添加资源存在的 Azure 机器学习服务的 IP 地址，因为访问计算实例时需要此地址。 若要获取 Batch 服务和 Azure 机器学习服务的 IP 地址列表，请使用以下方法之一：
 
-    * 下载[AZURE IP 范围和服务标记](https://www.microsoft.com/download/details.aspx?id=56519)，并在文件中搜索`BatchNodeManagement.<region>`和`AzureMachineLearning.<region>`，其中`<region>`是你的 Azure 区域。
+    * 下载[AZURE IP 范围和服务标记](https://www.microsoft.com/download/details.aspx?id=56519)，并在文件中搜索 `BatchNodeManagement.<region>` 和 `AzureMachineLearning.<region>` ，其中 `<region>` 是你的 Azure 区域。
 
     * 使用 [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest) 下载信息。 以下示例下载 IP 地址信息，并筛选出“美国东部 2”区域的信息：
 
@@ -253,7 +202,7 @@ Azure 机器学习使用与工作区关联的 Key Vault 实例来存储以下凭
 
 1. 选择左侧的“计算”  。
 
-1. 从中心选择 "__训练群集__"，然后选择__+__。
+1. 从中心选择 "__训练群集__"，然后选择 __+__ 。
 
 1. 在 "__新建定型群集__" 对话框中，展开 "__高级设置__" 部分。
 
@@ -303,63 +252,54 @@ except ComputeTargetException:
 
 创建过程完成后，请在试验中使用该群集训练模型。 有关详细信息，请参阅[选择并使用用于训练的计算目标](how-to-set-up-training-targets.md)。
 
-## <a name="use-azure-databricks"></a>使用 Azure Databricks
+## <a name="use-a-storage-account-for-your-workspace"></a>对工作区使用存储帐户
 
-若要将虚拟网络中的 Azure Databricks 与工作区配合使用，必须满足以下要求：
+若要在虚拟网络中使用工作区的 Azure 存储帐户，请使用以下步骤：
 
-> [!div class="checklist"]
-> * 该虚拟网络必须与 Azure 机器学习工作区位于同一订阅和区域。
-> * 如果工作区的 Azure 存储帐户也在虚拟网络中受保护，则它们必须与 Azure Databricks 群集位于同一虚拟网络中。
-> * 除了 Azure Databricks 使用的 __databricks-private__ 和 __databricks-public__ 子网以外，还需要为虚拟网络创建 __default__ 子网。
+1. 在虚拟网络的后面创建一个计算资源（例如机器学习计算实例或群集），或者将某个计算资源（例如 HDInsight 群集、虚拟机或 Azure Kubernetes 服务群集）附加到工作区。 该计算资源可用于试验或模型部署。
 
-有关在虚拟网络中使用 Azure Databricks 的具体信息，请参阅[在 Azure 虚拟网络中部署 Azure Databricks](https://docs.azuredatabricks.net/administration-guide/cloud-configurations/azure/vnet-inject.html)。
+   有关详细信息，请参阅本文的[使用机器学习计算](#amlcompute)、[使用虚拟机或 HDInsight 群集](#vmorhdi)和[使用 Azure Kubernetes 服务](#aksvnet)部分。
 
-<a id="vmorhdi"></a>
+1. 在 Azure 门户中，转到已附加到工作区的存储。
 
-## <a name="use-a-virtual-machine-or-hdinsight-cluster"></a>使用虚拟机或 HDInsight 群集
+   [![附加到 Azure 机器学习工作区的存储](./media/how-to-enable-virtual-network/workspace-storage.png)](./media/how-to-enable-virtual-network/workspace-storage.png#lightbox)
+
+1. 在“Azure 存储”页上，选择“防火墙和虚拟网络”。****____
+
+   ![Azure 门户中“Azure 存储”页上的“防火墙和虚拟网络”区域](./media/how-to-enable-virtual-network/storage-firewalls-and-virtual-networks.png)
+
+1. 在 "__防火墙和虚拟网络__" 页上，执行以下操作：
+    - 选择“所选网络”。____
+    - 在“虚拟网络”下，选择“添加现有的虚拟网络”链接。________ 此操作将添加计算资源所在的虚拟网络（参阅步骤 1）。
+
+        > [!IMPORTANT]
+        > 存储帐户必须与用于定型或推理的计算实例或群集位于同一个虚拟网络和子网中。
+
+    - 选中“允许受信任的 Microsoft 服务访问此存储帐户”复选框。____
+
+    > [!IMPORTANT]
+    > 使用 Azure 机器学习 SDK 时，开发环境必须能够连接到 Azure 存储帐户。 当存储帐户位于虚拟网络中时，防火墙必须允许从开发环境的 IP 地址进行访问。
+    >
+    > 若要启用对存储帐户的访问，请从开发客户端上的 Web 浏览器访问存储帐户的“防火墙和虚拟网络”。____** 然后选中“添加客户端 IP 地址”复选框，将客户端的 IP 地址添加到“地址范围”。________ 也可以使用“地址范围”字段手动输入开发环境的 IP 地址。____ 添加客户端的 IP 地址后，该客户端可以使用 SDK 访问存储帐户。
+
+   [![Azure 门户中的 "防火墙和虚拟网络" 窗格](./media/how-to-enable-virtual-network/storage-firewalls-and-virtual-networks-page.png)](./media/how-to-enable-virtual-network/storage-firewalls-and-virtual-networks-page.png#lightbox)
 
 > [!IMPORTANT]
-> Azure 机器学习仅支持运行 Ubuntu 的虚拟机。
+> 可将 Azure 机器学习的默认存储帐户或者将非默认存储帐户放在虚拟网络中。____
+>
+> 创建工作区时，会自动预配默认存储帐户。
+>
+> 对于非默认存储帐户，此 `storage_account` [ `Workspace.create()` 函数](https://docs.microsoft.com/python/api/azureml-core/azureml.core.workspace(class)?view=azure-ml-py#create-name--auth-none--subscription-id-none--resource-group-none--location-none--create-resource-group-true--sku--basic---friendly-name-none--storage-account-none--key-vault-none--app-insights-none--container-registry-none--cmk-keyvault-none--resource-cmk-uri-none--hbi-workspace-false--default-cpu-compute-target-none--default-gpu-compute-target-none--exist-ok-false--show-output-true-)中的参数允许你按 Azure 资源 ID 指定自定义存储帐户。
 
-若要在工作区中使用虚拟网络中的虚拟机或 Azure HDInsight 群集，请执行以下步骤：
-
-1. 使用 Azure 门户或 Azure CLI 创建 VM 或 HDInsight 群集，并将群集放入 Azure 虚拟网络。 有关详细信息，请参阅下列文章：
-    * [创建和管理适用于 Linux Vm 的 Azure 虚拟网络](https://docs.microsoft.com/azure/virtual-machines/linux/tutorial-virtual-network)
-
-    * [使用 Azure 虚拟网络扩展 HDInsight](https://docs.microsoft.com/azure/hdinsight/hdinsight-extend-hadoop-virtual-network)
-
-1. 若要允许 Azure 机器学习与 VM 或群集上的 SSH 端口通信，请为网络安全组配置一个源条目。 SSH 端口通常是端口 22。 若要允许来自此源的流量，请执行以下操作：
-
-    * 在“源”下拉列表中，选择“服务标记”。________
-
-    * 在“源服务标记”下拉列表中，选择“AzureMachineLearning”。________
-
-    * 在“源端口范围”下拉列表中，选择 __*__。____
-
-    * 在“目标”下拉列表中，选择“任何”。________
-
-    * 在“目标端口范围”下拉列表中，选择“22”。________
-
-    * 在“协议”下，选择“任何”。________
-
-    * 在“操作”下，选择“允许”。________
-
-   ![用于在虚拟网络中的 VM 或 HDInsight 群集上执行试验的入站规则](./media/how-to-enable-virtual-network/experimentation-virtual-network-inbound.png)
-
-    保留网络安全组的默认出站规则。 有关详细信息，请参阅[安全组](https://docs.microsoft.com/azure/virtual-network/security-overview#default-security-rules)中的“默认安全规则”。
-
-    如果你不想要使用默认出站规则，同时想要限制虚拟网络的出站访问，请参阅[限制来自虚拟网络的出站连接](#limiting-outbound-from-vnet)部分。
-
-1. 将 VM 或 HDInsight 群集附加到 Azure 机器学习工作区。 有关详细信息，请参阅[设置模型训练的计算目标](how-to-set-up-training-targets.md)。
 
 <a id="aksvnet"></a>
 
-## <a name="use-azure-kubernetes-service-aks"></a>使用 Azure Kubernetes 服务 (AKS)
+## <a name="azure-kubernetes-service"></a>Azure Kubernetes 服务
 
-若要将虚拟网络中的 AKS 添加到工作区，请执行以下步骤：
+若要将虚拟网络中的 Azure Kubernetes 服务（AKS）添加到工作区，请执行以下步骤：
 
 > [!IMPORTANT]
-> 在开始执行以下过程之前，请满足[在 Azure Kubernetes 服务 (AKS) 中配置高级网络](https://docs.microsoft.com/azure/aks/configure-advanced-networking#prerequisites)操作指南中的先决条件，并规划好群集的 IP 地址。
+> 在开始执行以下过程之前，请满足[在 Azure Kubernetes 服务 (AKS) 中配置高级网络](https://docs.microsoft.com/azure/aks/configure-azure-cni#prerequisites)操作指南中的先决条件，并规划好群集的 IP 地址。
 >
 > AKS 实例和 Azure 虚拟网络必须位于同一区域。 如果在虚拟网络中保护工作区使用的 Azure 存储帐户，这些帐户必须与 AKS 实例位于同一虚拟网络中。
 
@@ -370,7 +310,7 @@ except ComputeTargetException:
 
 1. 选择左侧的“计算”  。
 
-1. 从中心选择 "__推理群集__"，然后选择__+__。
+1. 从中心选择 "__推理群集__"，然后选择 __+__ 。
 
 1. 在 "__新建推理群集__" 对话框中，选择 "__网络配置__" 下的 "__高级__"。
 
@@ -467,7 +407,7 @@ __Azure CLI__
 az rest --method put --uri https://management.azure.com"/subscriptions/<subscription-id>/resourcegroups/<resource-group>/providers/Microsoft.ContainerService/managedClusters/<aks-resource-id>?api-version=2018-11-19 --body @body.json
 ```
 
-命令引用的`body.json`文件的内容类似于以下 JSON 文档：
+`body.json`命令引用的文件的内容类似于以下 JSON 文档：
 
 ```json
 { 
@@ -500,17 +440,15 @@ az rest --method put --uri https://management.azure.com"/subscriptions/<subscrip
 1. 若要在虚拟网络上启用子网委托，请使用 "[添加或删除子网委派" 一](../virtual-network/manage-subnet-delegation.md)文中的信息。 可以在创建虚拟网络时启用委派，或将其添加到现有网络。
 
     > [!IMPORTANT]
-    > 启用委派时，请`Microsoft.ContainerInstance/containerGroups`使用作为 "__委托子网到服务__" 值。
+    > 启用委派时，请使用 `Microsoft.ContainerInstance/containerGroups` 作为 "__委托子网到服务__" 值。
 
-2. 使用[Deploy_configuration AciWebservice （）](https://docs.microsoft.com/python/api/azureml-core/azureml.core.webservice.aci.aciwebservice?view=azure-ml-py#deploy-configuration-cpu-cores-none--memory-gb-none--tags-none--properties-none--description-none--location-none--auth-enabled-none--ssl-enabled-none--enable-app-insights-none--ssl-cert-pem-file-none--ssl-key-pem-file-none--ssl-cname-none--dns-name-label-none--primary-key-none--secondary-key-none--collect-model-data-none--cmk-vault-base-url-none--cmk-key-name-none--cmk-key-version-none--vnet-name-none--subnet-name-none-)部署模型，使用`vnet_name`和`subnet_name`参数。 将这些参数设置为启用了委派的虚拟网络名称和子网。
+2. 使用[Deploy_configuration AciWebservice （）](https://docs.microsoft.com/python/api/azureml-core/azureml.core.webservice.aci.aciwebservice?view=azure-ml-py#deploy-configuration-cpu-cores-none--memory-gb-none--tags-none--properties-none--description-none--location-none--auth-enabled-none--ssl-enabled-none--enable-app-insights-none--ssl-cert-pem-file-none--ssl-key-pem-file-none--ssl-cname-none--dns-name-label-none--primary-key-none--secondary-key-none--collect-model-data-none--cmk-vault-base-url-none--cmk-key-name-none--cmk-key-version-none--vnet-name-none--subnet-name-none-)部署模型，使用 `vnet_name` 和 `subnet_name` 参数。 将这些参数设置为启用了委派的虚拟网络名称和子网。
 
-
-
-## <a name="use-azure-firewall"></a>使用 Azure 防火墙
+## <a name="azure-firewall"></a>Azure 防火墙
 
 有关将 Azure 机器学习与 Azure 防火墙一起使用的信息，请参阅在[Azure 防火墙后面使用 Azure 机器学习工作区](how-to-access-azureml-behind-firewall.md)。
 
-## <a name="use-azure-container-registry"></a>使用 Azure 容器注册表
+## <a name="azure-container-registry"></a>Azure 容器注册表
 
 > [!IMPORTANT]
 > Azure 容器注册表（ACR）可以放在虚拟网络中，但必须满足以下先决条件：
@@ -532,7 +470,7 @@ az rest --method put --uri https://management.azure.com"/subscriptions/<subscrip
 
     __Azure CLI__
 
-    如果已[为 Azure CLI 安装机器学习扩展](reference-azure-machine-learning-cli.md)，则可以使用`az ml workspace show`命令来显示工作区信息。
+    如果已[为 Azure CLI 安装机器学习扩展](reference-azure-machine-learning-cli.md)，则可以使用 `az ml workspace show` 命令来显示工作区信息。
 
     ```azurecli-interactive
     az ml workspace show -w yourworkspacename -g resourcegroupname --query 'containerRegistry'
@@ -557,7 +495,7 @@ az rest --method put --uri https://management.azure.com"/subscriptions/<subscrip
     
     有关详细信息，请参阅[update （）](https://docs.microsoft.com/python/api/azureml-core/azureml.core.workspace.workspace?view=azure-ml-py#update-friendly-name-none--description-none--tags-none--image-build-compute-none--enable-data-actions-none-)方法参考。
 
-1. 如果为 Azure 机器学习工作区使用专用链接，并在虚拟网络中放置工作区的 Azure 容器注册表，则还必须应用以下 Azure 资源管理器模板。 此模板允许你的工作区通过专用链接与 ACR 通信。
+1. 必须应用以下 Azure 资源管理器模板。 此模板允许你的工作区与 ACR 通信。
 
     ```json
     {
@@ -608,9 +546,101 @@ az rest --method put --uri https://management.azure.com"/subscriptions/<subscrip
     ]
     }
     ```
+    
+## <a name="azure-data-lake-storage"></a>Azure Data Lake Storage
+
+Azure Data Lake Storage 第2代是一组功能，用于在 Azure Blob 存储基础上构建大数据分析。 它可用于存储用于为模型定型 Azure 机器学习的数据。 
+
+若要在 Azure 机器学习工作区的虚拟网络中使用 Data Lake Storage 第2代，请使用以下步骤：
+
+1. 创建 Azure Data Lake Storage 第2代帐户。 有关详细信息，请参阅[创建 Azure Data Lake Storage Gen2 的存储帐户](../storage/blobs/data-lake-storage-quickstart-create-account.md)。
+
+1. 使用上一节中的步骤2-4，为[你的工作区使用存储帐户](#use-a-storage-account-for-your-workspace)，将该帐户放在虚拟网络中。
+
+在虚拟网络中将 Azure 机器学习与 Data Lake Storage Gen 2 一起使用时，请使用以下指南：
+
+* 如果使用__SDK 创建数据集__，并且运行代码的系统__不在虚拟网络中__，请使用 `validate=False` 参数。 此参数跳过验证，如果系统与存储帐户不在同一虚拟网络中，则会失败。 有关详细信息，请参阅[from_files （）](https://docs.microsoft.com/python/api/azureml-core/azureml.data.dataset_factory.filedatasetfactory?view=azure-ml-py#from-files-path--validate-true-)方法。
+
+* 使用 Azure 机器学习计算实例或计算群集来使用数据集来训练模型时，该数据集必须与存储帐户位于同一虚拟网络中。
+
+## <a name="key-vault-instance"></a>Key vault 实例 
+
+Azure 机器学习使用与工作区关联的 Key Vault 实例来存储以下凭据：
+* 关联的存储帐户连接字符串
+* Azure 容器存储库实例的密码
+* 数据存储的连接字符串
+
+若要在虚拟网络后使用 Azure Key Vault Azure 机器学习试验功能，请执行以下步骤：
+
+1. 转到与工作区关联的 Key Vault。
+
+   [![与 Azure 机器学习工作区关联的密钥保管库](./media/how-to-enable-virtual-network/workspace-key-vault.png)](./media/how-to-enable-virtual-network/workspace-key-vault.png#lightbox)
+
+1. 在“Key Vault”页上的左侧窗格中，选择“防火墙和虚拟网络”。****____
+
+   ![“Key Vault”窗格中的“防火墙和虚拟网络”部分](./media/how-to-enable-virtual-network/key-vault-firewalls-and-virtual-networks.png)
+
+1. 在 "__防火墙和虚拟网络__" 页上，执行以下操作：
+    - 在“允许的访问来源”  下，选择“所选网络”  。
+    - 在“虚拟网络”下，选择“添加现有的虚拟网络”，以添加试验计算资源所在的虚拟网络。________
+    - 在“允许受信任的 Microsoft 服务跳过此防火墙”下选择“是”。________
+
+   [!["Key Vault" 窗格中的 "防火墙和虚拟网络" 部分](./media/how-to-enable-virtual-network/key-vault-firewalls-and-virtual-networks-page.png)](./media/how-to-enable-virtual-network/key-vault-firewalls-and-virtual-networks-page.png#lightbox)
+
+
+## <a name="azure-databricks"></a>Azure Databricks
+
+若要将虚拟网络中的 Azure Databricks 与工作区配合使用，必须满足以下要求：
+
+> [!div class="checklist"]
+> * 该虚拟网络必须与 Azure 机器学习工作区位于同一订阅和区域。
+> * 如果工作区的 Azure 存储帐户也在虚拟网络中受保护，则它们必须与 Azure Databricks 群集位于同一虚拟网络中。
+> * 除了 Azure Databricks 使用的 __databricks-private__ 和 __databricks-public__ 子网以外，还需要为虚拟网络创建 __default__ 子网。
+
+有关在虚拟网络中使用 Azure Databricks 的具体信息，请参阅[在 Azure 虚拟网络中部署 Azure Databricks](https://docs.azuredatabricks.net/administration-guide/cloud-configurations/azure/vnet-inject.html)。
+
+<a id="vmorhdi"></a>
+
+## <a name="virtual-machine-or-hdinsight-cluster"></a>虚拟机或 HDInsight 群集
+
+> [!IMPORTANT]
+> Azure 机器学习仅支持运行 Ubuntu 的虚拟机。
+
+若要在工作区中使用虚拟网络中的虚拟机或 Azure HDInsight 群集，请执行以下步骤：
+
+1. 使用 Azure 门户或 Azure CLI 创建 VM 或 HDInsight 群集，并将群集放入 Azure 虚拟网络。 有关详细信息，请参阅下列文章：
+    * [创建和管理适用于 Linux Vm 的 Azure 虚拟网络](https://docs.microsoft.com/azure/virtual-machines/linux/tutorial-virtual-network)
+
+    * [使用 Azure 虚拟网络扩展 HDInsight](https://docs.microsoft.com/azure/hdinsight/hdinsight-extend-hadoop-virtual-network)
+
+1. 若要允许 Azure 机器学习与 VM 或群集上的 SSH 端口通信，请为网络安全组配置一个源条目。 SSH 端口通常是端口 22。 若要允许来自此源的流量，请执行以下操作：
+
+    * 在“源”下拉列表中，选择“服务标记”。________
+
+    * 在“源服务标记”下拉列表中，选择“AzureMachineLearning”。________
+
+    * 在“源端口范围”下拉列表中，选择 __*__。____
+
+    * 在“目标”下拉列表中，选择“任何”。________
+
+    * 在“目标端口范围”下拉列表中，选择“22”。________
+
+    * 在“协议”下，选择“任何”。________
+
+    * 在“操作”下，选择“允许”。________
+
+   ![用于在虚拟网络中的 VM 或 HDInsight 群集上执行试验的入站规则](./media/how-to-enable-virtual-network/experimentation-virtual-network-inbound.png)
+
+    保留网络安全组的默认出站规则。 有关详细信息，请参阅[安全组](https://docs.microsoft.com/azure/virtual-network/security-overview#default-security-rules)中的“默认安全规则”。
+
+    如果你不想要使用默认出站规则，同时想要限制虚拟网络的出站访问，请参阅[限制来自虚拟网络的出站连接](#limiting-outbound-from-vnet)部分。
+
+1. 将 VM 或 HDInsight 群集附加到 Azure 机器学习工作区。 有关详细信息，请参阅[设置模型训练的计算目标](how-to-set-up-training-targets.md)。
+
 
 ## <a name="next-steps"></a>后续步骤
 
 * [设置训练环境](how-to-set-up-training-targets.md)
+* [设置专用终结点](how-to-configure-private-link.md)
 * [模型部署位置](how-to-deploy-and-where.md)
 * [使用 TLS 通过 Azure 机器学习来保护 web 服务](how-to-secure-web-service.md)

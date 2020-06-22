@@ -43,7 +43,7 @@
       href: network-watcher-security-group-view-overview.md
     - name: 基于角色的访问控制权限
       href: required-rbac-permissions.md
-- name: 操作方法指南
+- name: 操作指南
   items:
     - name: 配置网络观察程序
       href: network-watcher-create.md
@@ -140,7 +140,7 @@
           href: network-watcher-nsg-auditing-powershell.md
     - name: 诊断 VPN 网关和连接
       items:
-        - name: 故障排除
+        - name: 疑难解答
           items:
             - name: Azure PowerShell
               href: network-watcher-troubleshoot-manage-powershell.md
@@ -173,7 +173,7 @@
     - name: .NET
       href: /dotnet/api/overview/azure/virtual-network
     - name: Node.js
-      href: /javascript/api/azure-arm-network
+      href: /javascript/api/@azure/arm-network
     - name: REST
       href: /rest/api/network-watcher/
 - name: 资源
@@ -182,13 +182,13 @@
       href: frequently-asked-questions.md
     - name: Azure 路线图
       href: 'https://azure.microsoft.com/roadmap/'
-    - name: MSDN 论坛
-      href: 'https://social.msdn.microsoft.com/Forums/home?forum=WAVirtualMachinesVirtualNetwork'
+    - name: Microsoft Q&A 问题页面
+      href: 'https://docs.microsoft.com/answers/topics/azure-virtual-network.html'
     - name: 定价
       href: 'https://azure.microsoft.com/pricing/details/network-watcher/'
     - name: 服务更新
       href: 'https://azure.microsoft.com/updates/?product=network-watcher'
     - name: SLA
       href: 'https://azure.microsoft.com/support/legal/sla/'
-    - name: 堆栈溢出
+    - name: Stack Overflow
       href: 'http://stackoverflow.com/questions/tagged/network-watcher'

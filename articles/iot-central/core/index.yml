@@ -10,12 +10,12 @@ metadata:
   author: philmea
   ms.author: philmea
   ms.date: 02/18/2020
-  ms.openlocfilehash: 277cc5b2427dd422e49247cb52aff3c25c7fce81
-  ms.sourcegitcommit: 75089113827229663afed75b8364ab5212d67323
+  ms.openlocfilehash: 53988177d28de184b5fcc494284185fac619b170
+  ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
   ms.translationtype: HT
   ms.contentlocale: zh-CN
-  ms.lasthandoff: 04/22/2020
-  ms.locfileid: "82024789"
+  ms.lasthandoff: 05/19/2020
+  ms.locfileid: "83660287"
 landingContent:
 - title: 关于 Azure IoT Central
   linkLists:
@@ -25,6 +25,10 @@ landingContent:
       url: overview-iot-central.md
     - text: 浏览 UI
       url: overview-iot-central-tour.md
+    - text: 设备开发
+      url: overview-iot-central-developer.md
+    - text: 最新更新
+      url: https://azure.microsoft.com/updates/?status=nowavailable&updateType=features&category=iot&query=azure%20iot%20central
   - linkListType: architecture
     links:
     - text: Azure IoT Central 体系结构

@@ -2,14 +2,14 @@
 title: 常见问题解答 (FAQ) - LUIS
 description: 本文包含有关语言理解 (LUIS) 的常见问题的解答。
 ms.topic: conceptual
-ms.date: 04/14/2020
+ms.date: 05/06/2020
 ms.author: diberry
-ms.openlocfilehash: 3c7e191ab64d30ddb64f1c3ff4e31b9c20c87b5c
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 79cee94a0f04cb89aa65f65cde63e48b6f078d2c
+ms.sourcegitcommit: 0b80a5802343ea769a91f91a8cdbdf1b67a932d3
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82101104"
+ms.lasthandoff: 05/25/2020
+ms.locfileid: "83834996"
 ---
 # <a name="language-understanding-frequently-asked-questions-faq"></a>语言理解常见问题解答 (FAQ)
 
@@ -66,7 +66,7 @@ Cortana 预构建应用已于 2017 年弃用。 它们不再受支持。
 
 ### <a name="a-prebuilt-entity-is-tagged-in-an-example-utterance-instead-of-my-custom-entity-how-do-i-fix-this"></a>预生成实体在示例话语中标记，而不是在我的自定义实体中标记。 如何修复此问题？
 
-在 LUIS 门户中，可以为要提取的确切实体标记文本。 如果 LUIS 门户未显示正确的实体预测，则您可能需要添加更多最谈话并在文本中添加实体的标签，或者添加一个描述符（如功能）。
+在 LUIS 门户中，可以为要提取的确切实体标记文本。 如果 LUIS 门户未显示正确的实体预测，则您可能需要添加更多最谈话并在文本中添加实体或添加功能。
 
 ### <a name="i-tried-to-import-an-app-or-version-file-but-i-got-an-error-what-happened"></a>我尝试导入应用或版本文件，但收到了错误，发生了什么情况？
 
@@ -82,7 +82,7 @@ Cortana 预构建应用已于 2017 年弃用。 它们不再受支持。
 
 <a name="luis-endpoint"></a>
 
-## <a name="endpoint"></a>终结点
+## <a name="endpoint"></a>端点
 
 ### <a name="i-received-an-http-403-error-status-code-how-do-i-fix-it"></a>我收到了一个 HTTP 403 错误状态代码。 如何解决问题？
 
@@ -319,7 +319,7 @@ Get-AzCognitiveServicesAccountUsage -ResourceGroupName <your-resource-group> -Na
 
 以下功能是在 Build 2019 大会上发布的：
 
-* [V3 API 预览版迁移指南](luis-migration-api-v3.md)
+* [V3 API 迁移指南预览版](luis-migration-api-v3.md)
 * [改进的分析仪表板](luis-how-to-use-dashboard.md)
 * [改进的预生成域](luis-reference-prebuilt-domains.md)
 * [动态列表实体](schema-change-prediction-runtime.md#dynamic-lists-passed-in-at-prediction-time)
@@ -327,10 +327,10 @@ Get-AzCognitiveServicesAccountUsage -ResourceGroupName <your-resource-group> -Na
 
 视频：
 
-* [如何使用 Azure 对话 AI 为下一代扩展业务](https://www.youtube.com/watch?v=_k97jd-csuk&feature=youtu.be)
+* [如何使用 Azure 对话 AI 来扩展下一代业务](https://www.youtube.com/watch?v=_k97jd-csuk&feature=youtu.be)
 
 ## <a name="next-steps"></a>后续步骤
 
 若要了解有关 LUIS 的详细信息，请参阅以下资源：
 * [标记了 LUIS 的 Stack Overflow 问题](https://stackoverflow.com/questions/tagged/luis)
-* [MSDN 语言理解智能服务 (LUIS) 论坛](https://social.msdn.microsoft.com/forums/azure/home?forum=LUIS)
+* [Microsoft Q&MSDN 语言理解智能服务（LUIS）的问题页](https://docs.microsoft.com/answers/topics/azure-language-understanding.html)

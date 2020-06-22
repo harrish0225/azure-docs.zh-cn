@@ -10,13 +10,13 @@ ms.subservice: speech-service
 ms.topic: quickstart
 ms.date: 02/10/2020
 ms.author: trbye
-zone_pivot_groups: programming-languages-set-two
-ms.openlocfilehash: e624c6c291dcd3ac17571cd93d67ac909d04f3d4
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+zone_pivot_groups: programming-languages-set-two-with-js-spx
+ms.openlocfilehash: 03d564242748fa52c176aaaa5341ede4449477fb
+ms.sourcegitcommit: 958f086136f10903c44c92463845b9f3a6a5275f
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81400407"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83715220"
 ---
 # <a name="quickstart-synthesize-speech-to-a-speaker"></a>快速入门：将语音合成到扬声器
 
@@ -42,6 +42,19 @@ ms.locfileid: "81400407"
 [!INCLUDE [Header](../includes/quickstarts/tts/header.md)]
 [!INCLUDE [Header](../includes/quickstarts/tts/python/header.md)]
 [!INCLUDE [python](../includes/quickstarts/tts/python/python.md)]
+::: zone-end
+
+::: zone pivot="programming-language-javascript"
+[!INCLUDE [Header](../includes/quickstarts/tts/header.md)]
+[!INCLUDE [Header](../includes/quickstarts/tts/javascript/header.md)]
+[!INCLUDE [javascript](../includes/quickstarts/tts/javascript/javascript.md)]
+::: zone-end
+
+::: zone pivot="programmer-tool-spx"
+[!INCLUDE [Header](../includes/quickstarts/tts/spx/header.md)]
+[!INCLUDE [SPX Setup](../includes/spx-setup.md)]
+[!INCLUDE [spx](../includes/quickstarts/tts/spx/spx.md)]
+[!INCLUDE [next steps to spx basics](../includes/quickstarts/spx-next-steps.md)]
 ::: zone-end
 
 ::: zone pivot="programming-language-more"

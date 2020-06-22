@@ -16,10 +16,10 @@ ms.date: 04/09/2018
 ms.author: markvi
 ms.collection: M365-identity-device-management
 ms.openlocfilehash: f15a269656f205b0acb6a49740dd4c625c0bdd41
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 03/24/2020
+ms.lasthandoff: 04/29/2020
 ms.locfileid: "78248284"
 ---
 # <a name="tutorial-use-a-linux-vm-system-assigned-managed-identity-to-access-azure-cosmos-db"></a>教程：使用 Linux VM 系统分配托管标识访问 Azure Cosmos DB 
@@ -88,7 +88,7 @@ az resource show --id /subscriptions/<SUBSCRIPTION ID>/resourceGroups/<RESOURCE 
 
 Cosmos DB 原本不支持 Azure AD 身份验证。 但是，可以使用托管标识从资源管理器检索 Cosmos DB 访问密钥，然后使用该密钥访问 Cosmos DB。 在此步骤中，将向系统分配托管标识授予对 Cosmos DB 帐户密钥的访问权限。
 
-若要向系统分配托管标识授予在 Azure 资源管理器中使用 Azure CLI 访问 Cosmos DB 帐户的权限，请更新环境的 `<SUBSCRIPTION ID>`、`<RESOURCE GROUP>` 和 `<COSMOS DB ACCOUNT NAME>` 的值。 将 `<MI PRINCIPALID>` 替换为在“检索 Linux VM 的 MI 的 principalID”中由 `principalId` 命令返回的 `az resource show` 属性。  Cosmos DB 在使用访问密钥时支持两种级别的粒度：对帐户的读/写访问权限，以及对帐户的只读访问权限。  如果需要获取帐户的读/写密钥，请分配 `DocumentDB Account Contributor` 角色；如果需要获取帐户的只读密钥，请分配 `Cosmos DB Account Reader Role` 角色：
+若要向系统分配托管标识授予在 Azure 资源管理器中使用 Azure CLI 访问 Cosmos DB 帐户的权限，请更新环境的 `<SUBSCRIPTION ID>`、`<RESOURCE GROUP>` 和 `<COSMOS DB ACCOUNT NAME>` 的值。 将 `<MI PRINCIPALID>` 替换为在“检索 Linux VM 的 MI 的 principalID”中由 `az resource show` 命令返回的 `principalId` 属性。  Cosmos DB 在使用访问密钥时支持两种级别的粒度：对帐户的读/写访问权限，以及对帐户的只读访问权限。  如果需要获取帐户的读/写密钥，请分配 `DocumentDB Account Contributor` 角色；如果需要获取帐户的只读密钥，请分配 `Cosmos DB Account Reader Role` 角色：
 
 ```azurecli-interactive
 az role assignment create --assignee <MI PRINCIPALID> --role '<ROLE NAME>' --scope "/subscriptions/<SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP>/providers/Microsoft.DocumentDB/databaseAccounts/<COSMODS DB ACCOUNT NAME>"
@@ -118,7 +118,7 @@ az role assignment create --assignee <MI PRINCIPALID> --role '<ROLE NAME>' --sco
 
 1. 在 Azure 门户中，导航到“虚拟机”  ，转到 Linux 虚拟机，然后在“概述”  页中单击顶部的“连接”  。 复制用于连接到 VM 的字符串。 
 2. 使用 SSH 客户端连接到 VM。  
-3. 接下来，系统会提示你输入创建“Linux VM”  时添加的“密码”  。 然后应可以成功登录。  
+3. 接下来，系统会提示你输入创建“Linux VM”时添加的“密码”。 然后应可以成功登录。  
 4. 使用 CURL 获取 Azure 资源管理器的访问令牌： 
      
     ```bash

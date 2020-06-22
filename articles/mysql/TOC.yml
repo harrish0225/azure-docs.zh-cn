@@ -68,6 +68,9 @@
       href: sample-scripts-azure-cli.md
     - name: Java 连接池
       href: sample-scripts-java-connection-pooling.md
+    - name: Azure Policy 内置策略定义
+      displayName: 'samples, policies, definitions'
+      href: ./policy-samples.md
 - name: 概念
   items:
     - name: 数据库和服务器
@@ -273,6 +276,8 @@
       items:
         - name: 配置 Azure AD 集成
           href: howto-configure-sign-in-azure-ad-authentication.md
+        - name: 与托管标识连接
+          href: howto-connect-with-managed-identity.md
     - name: 拒绝公用网络访问
       items:
         - name: Azure 门户
@@ -303,8 +308,8 @@
       href: 'https://azure.microsoft.com/roadmap/?category=databases'
     - name: 定价
       href: 'https://azure.microsoft.com/pricing/details/mysql/'
-    - name: MSDN 论坛
-      href: 'https://social.msdn.microsoft.com/Forums/en-US/home?forum=AzureDatabaseforMySQL'
+    - name: Microsoft Q&A 问题页面
+      href: 'https://docs.microsoft.com/answers/topics/azure-database-mysql.html'
     - name: Stack Overflow
       href: 'https://stackoverflow.com/questions/tagged/azure-database-mysql'
     - name: 视频

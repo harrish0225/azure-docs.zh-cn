@@ -10,6 +10,8 @@
 - name: 快速入门
   expaned: true
   items:
+    - name: 使用客户端库
+      href: quickstarts/client-library.md
     - name: 使用示例标记工具
       items:
         - name: 使用标签训练自定义模型
@@ -36,12 +38,12 @@
           items:
             - name: Python
               href: quickstarts/python-layout.md
-    - name: 使用 .NET SDK
-      href: quickstarts/dotnet-sdk.md
 - name: 教程
   items:
     - name: 将表单识别器与逻辑应用搭配使用
       href: tutorial-form-recognizer-with-logic-apps.md
+    - name: 将表单识别器与认知搜索搭配使用
+      href: 'https://docs.microsoft.com/azure/search/cognitive-search-custom-skill-form'
 - name: 操作指南
   items:
     - name: 生成训练数据集
@@ -67,14 +69,20 @@
     - name: SDK
       items:
         - name: .NET
-          href: 'https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/formrecognizer?view=azure-dotnet-preview'
+          href: 'https://docs.microsoft.com/dotnet/api/overview/azure/formrecognizer?view=azure-dotnet-preview'
+        - name: Python
+          href: 'https://docs.microsoft.com/python/api/overview/azure/formrecognizer?view=azure-python-preview'
+        - name: Java
+          href: 'https://docs.microsoft.com/java/api/overview/azure/formrecognizer?view=azure-java-preview'
+        - name: JavaScript
+          href: 'https://docs.microsoft.com/javascript/api/overview/azure/formrecognizer?view=azure-node-preview'
 - name: 资源
   items:
     - name: 定价和限制
       href: 'https://go.microsoft.com/fwlink/?linkid=2087258'
     - name: UserVoice
       href: 'https://go.microsoft.com/fwlink/?linkid=2090535'
-    - name: 堆栈溢出
+    - name: Stack Overflow
       href: 'https://go.microsoft.com/fwlink/?linkid=2087186'
     - name: Azure 路线图
       href: 'https://azure.microsoft.com/updates/?product=cognitive-services'
@@ -84,3 +92,5 @@
       href: language-support.md
     - name: 合规性
       href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'
+    - name: 加密
+      href: form-recognizer-encryption-of-data-at-rest.md

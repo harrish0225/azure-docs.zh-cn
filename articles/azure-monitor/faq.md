@@ -6,13 +6,13 @@ ms.subservice: ''
 ms.topic: conceptual
 author: bwren
 ms.author: bwren
-ms.date: 03/26/2020
-ms.openlocfilehash: db63ce2d56eb78bf6b361d530511b6902c1cb6d5
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 05/11/2020
+ms.openlocfilehash: 471ccddd31fd6c9f332bdaa8ea76b7bda25ac191
+ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80637772"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83117778"
 ---
 # <a name="azure-monitor-frequently-asked-questions"></a>Azure Monitor 常见问题
 
@@ -36,7 +36,7 @@ ms.locfileid: "80637772"
 从 Azure 门户中的 "**监视**" 菜单访问所有 Azure Monitor 功能和数据。 对于不同的 Azure 服务，菜单的 "**监视**" 部分提供对相同工具的访问权限，并将数据筛选到特定资源。 使用 CLI、PowerShell 和 REST API 的各种情况下，也可以访问 Azure Monitor 数据。
 
 ### <a name="is-there-an-on-premises-version-of-azure-monitor"></a>是否有 Azure Monitor 的本地版本？
-不能。 Azure Monitor 是一种可缩放的云服务，可处理和存储大量数据，不过 Azure Monitor 可以监视本地和其他云中的资源。
+不是。 Azure Monitor 是一种可缩放的云服务，可处理和存储大量数据，不过 Azure Monitor 可以监视本地和其他云中的资源。
 
 ### <a name="can-azure-monitor-monitor-on-premises-resources"></a>能否 Azure Monitor 监视本地资源？
 是的，除了收集 Azure 资源的监视数据以外，Azure Monitor 还可以从其他云和本地的虚拟机和应用程序中收集数据。 请参阅[Azure Monitor 的监视数据源](platform/data-sources.md)。
@@ -196,11 +196,15 @@ WireData
 * [Azure 诊断](platform/diagnostics-extension-to-application-insights.md)
 * [Java web 应用](app/java-troubleshoot.md)
 
-*我无法从服务器获取任何数据*
+*我从服务器中获取了没有数据：*
 
 * [设置防火墙异常](app/ip-addresses.md)
 * [设置 ASP.NET 服务器](app/monitor-performance-live-website-now.md)
 * [设置 Java 服务器](app/java-agent.md)
+
+*应该部署多少个 Application Insights？：*
+
+* [如何设计 Application Insights 部署：一个与多个 Application Insights 资源？](app/separate-resources.md)
 
 ### <a name="can-i-use-application-insights-with-"></a>是否可以将 Application Insights 用于...？
 
@@ -226,7 +230,7 @@ WireData
 
 [阅读定价计划](https://azure.microsoft.com/pricing/details/application-insights/)。
 
-### <a name="how-much-does-it-cost"></a>定价是多少？
+### <a name="how-much-does-it-cost"></a>费用是多少？
 
 * 在 Application Insights 资源中打开“使用情况和估算成本”页面。**** 此处提供了一个最近使用情况的图表。 如果愿意，可以设置数据上限。
 * 打开 [Azure 计费边栏选项卡](https://portal.azure.com/#blade/Microsoft_Azure_Billing/BillingBlade/Overview)查看所有资源的帐单。
@@ -247,13 +251,17 @@ WireData
 * 将项目插入：
   * Web.config
   * packages.config
-* （仅限新项目-如果[将 Application Insights 添加到现有项目][start]，则必须手动执行此操作。）将代码片段插入客户端和服务器代码中，以将其初始化为 Application Insights 资源 ID。 例如，在 MVC 应用程序中，代码将插入到母版页视图/共享/\_布局中。 cshtml
+* （仅限新项目-如果[将 Application Insights 添加到现有项目][start]，则必须手动执行此操作。）将代码片段插入客户端和服务器代码中，以将其初始化为 Application Insights 资源 ID。 例如，在 MVC 应用程序中，代码将插入到母版页视图/共享/布局中 \_ 。 cshtml
 
 ### <a name="how-do-i-upgrade-from-older-sdk-versions"></a>如何从较早的 SDK 版本升级？
 请参阅[发行说明](app/release-notes.md)了解对应于应用程序类型的 SDK。
 
 ### <a name="how-can-i-change-which-azure-resource-my-project-sends-data-to"></a><a name="update"></a>如何更改项目要将数据发送到的 Azure 资源？
 在解决方案资源管理器中，右键单击 `ApplicationInsights.config` 并选择“更新 Application Insights”****。 可在 Azure 中将数据发送到现有或新资源。 更新向导更改 ApplicationInsights.config 中的检测密钥，该密钥确定服务器 SDK 将数据发送到何处。 除非取消选中“更新全部”，否则它还将在网页中出现密钥的位置更改密钥。
+
+### <a name="can-i-use-providersmicrosoftinsights-componentsapiversions0-in-my-azure-resource-manager-deployments"></a>能否 `providers('Microsoft.Insights', 'components').apiVersions[0]` 在 Azure 资源管理器部署中使用？
+
+不建议使用此方法来填充 API 版本。 最新版本可以表示可能包含重大更改的预览版本。 即使使用较新的非预览版本，API 版本也并不总是向后兼容现有的模板，或者在某些情况下，API 版本可能不适用于所有订阅。
 
 ### <a name="what-is-status-monitor"></a>什么是状态监视器？
 
@@ -412,7 +420,7 @@ Azure 警报仅出现在指标上。 创建一个每当事件发生时都跨越�
 
 ### <a name="can-i-send-telemetry-to-the-application-insights-portal"></a>是否可以将遥测数据发送到 Application Insights 门户？
 
-建议使用我们的 SDK 并使用 [SDK API](app/api-custom-events-metrics.md)。 为各种[平台](app/platforms.md)提供了相应的 SDK 变体。 这些 SDK 可处理缓冲、压缩、限制以及重试等。 但是，[引入架构](https://github.com/Microsoft/ApplicationInsights-dotnet/tree/develop/Schema/PublicSchema)和[终结点协议](https://github.com/Microsoft/ApplicationInsights-Home/blob/master/EndpointSpecs/ENDPOINT-PROTOCOL.md)是公共的。
+建议使用我们的 SDK 并使用 [SDK API](app/api-custom-events-metrics.md)。 为各种[平台](app/platforms.md)提供了相应的 SDK 变体。 这些 SDK 可处理缓冲、压缩、限制以及重试等。 但是，[引入架构](https://github.com/microsoft/ApplicationInsights-dotnet/tree/master/BASE/Schema/PublicSchema)和[终结点协议](https://github.com/Microsoft/ApplicationInsights-Home/blob/master/EndpointSpecs/ENDPOINT-PROTOCOL.md)是公共的。
 
 ### <a name="can-i-monitor-an-intranet-web-server"></a>是否可以监视 Intranet Web 服务器？
 
@@ -511,7 +519,7 @@ Azure 警报仅出现在指标上。 创建一个每当事件发生时都跨越�
 
 如何计算这一点？
 
-**其他处理** = 来自容器化过程*的 CAdvisor* - *使用*情况的总使用量
+**其他进程**  = CAdvisor 中的*总使用量*  - *容器化过程中的用法*
 
 **其他过程**包括：
 
@@ -624,7 +632,7 @@ LogEntry : ({"Hello": "This example has multiple lines:","Docker/Moby": "will no
 
 ### <a name="how-do-i-resolve-azure-ad-errors-when-i-enable-live-logs"></a>如何解决启用实时日志时遇到的 Azure AD 错误？ 
 
-你可能会看到以下错误：**请求中指定的回复 url 与为应用程序配置的回复 url "<应用程序 ID\>" 不匹配**。 解决方法的解决方案可以在[如何与 Azure Monitor 容器的实时查看容器数据](insights/container-insights-livedata-setup.md#configure-ad-integrated-authentication)一文中找到。 
+你可能会看到以下错误：**请求中指定的回复 url 与为应用程序配置的回复 url "<应用程序 ID \> " 不匹配**。 解决方法的解决方案可以在[如何与 Azure Monitor 容器的实时查看容器数据](insights/container-insights-livedata-setup.md#configure-ad-integrated-authentication)一文中找到。 
 
 ### <a name="why-cant-i-upgrade-cluster-after-onboarding"></a>为何在载入后不能升级群集？
 

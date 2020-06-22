@@ -1,10 +1,12 @@
 - name: Azure Red Hat OpenShift
   href: index.yml
 - name: 概述
+  expanded: true
   items:
     - name: 关于 Azure Red Hat OpenShift
       href: intro-openshift.md
 - name: 教程
+  expanded: true
   items:
     - name: 1 - 创建 Azure Red Hat OpenShift 4 群集
       href: tutorial-create-cluster.md
@@ -13,10 +15,9 @@
     - name: 3 - 删除 Azure Red Hat OpenShift 4 群集
       href: tutorial-delete-cluster.md
 - name: 操作指南
-  expanded: true
   items:
     - name: 创建专用 Azure Red Hat OpenShift 4 群集
-      href: create-private-cluster.md
+      href: howto-create-private-cluster-4x.md
     - name: 为 Azure Red Hat OpenShift 4 群集配置 DNS 转发
       href: dns-forwarding.md
     - name: 为 Azure Red Hat OpenShift 4 群集配置 Azure Active Directory 身份验证
@@ -37,7 +38,6 @@
       items:
         - name: 为 Azure Red Hat OpenShift 3.11 设置 Azure Red Hat OpenShift 开发环境
           href: howto-setup-environment.md
-          expanded: true
           items:
             - name: 创建 Azure AD 租户
               href: howto-create-tenant.md
@@ -48,7 +48,7 @@
         - name: 在 Azure Red Hat OpenShift 3.11 群集中管理项目
           href: howto-manage-projects.md
         - name: 创建专用 Azure Red Hat OpenShift 3.11 群集
-          href: howto-create-private-cluster.md
+          href: howto-create-private-cluster-3x.md
         - name: 为 Azure Red Hat OpenShift 3.11 执行监视和日志记录
           items:
             - name: Azure Red Hat OpenShift 3.11 中适用于容器的 Azure Monitor（预览版）
@@ -85,7 +85,9 @@
       href: support-policies-v4.md
     - name: 区域可用性
       href: 'https://azure.microsoft.com/regions/services/'
-    - name: Red Hat OpenShift 文档
-      href: 'https://docs.openshift.com/aro/welcome/index.html'
+    - name: Azure Red Hat OpenShift 4.3 文档
+      href: 'https://docs.openshift.com/aro/4/welcome/index.html'
+    - name: Azure Red Hat OpenShift 3.11 文档
+      href: 'https://docs.openshift.com/aro/3/welcome/index.html'
     - name: Azure 路线图
       href: 'https://azure.microsoft.com/roadmap/'

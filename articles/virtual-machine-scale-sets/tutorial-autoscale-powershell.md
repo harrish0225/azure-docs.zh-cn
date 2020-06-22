@@ -2,18 +2,19 @@
 title: 教程 - 使用 Azure PowerShell 自动缩放规模集
 description: 了解如何使用 Azure PowerShell 随 CPU 需求的增减自动缩放虚拟机规模集
 author: ju-shim
-tags: azure-resource-manager
-ms.service: virtual-machine-scale-sets
-ms.topic: tutorial
-ms.date: 03/27/2018
 ms.author: jushiman
-ms.custom: mvc
-ms.openlocfilehash: b2451779119ab8fb6c1446631797ce32fd376146
-ms.sourcegitcommit: ae3d707f1fe68ba5d7d206be1ca82958f12751e8
+ms.topic: tutorial
+ms.service: virtual-machine-scale-sets
+ms.subservice: autoscale
+ms.date: 03/27/2018
+ms.reviewer: avverma
+ms.custom: avverma
+ms.openlocfilehash: d2e10c2a02bf14f7a01ce03bc70f6e3f43b96385
+ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/10/2020
-ms.locfileid: "81008992"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83700830"
 ---
 # <a name="tutorial-automatically-scale-a-virtual-machine-scale-set-with-azure-powershell"></a>教程：使用 Azure PowerShell 自动缩放虚拟机规模集
 
@@ -254,8 +255,3 @@ Remove-AzureRmResourceGroup -Name "myResourceGroup" -Force -AsJob
 > * 创建和使用自动缩放规则
 > * 对 VM 实例进行压力测试并触发自动缩放规则
 > * 在需求下降时自动横向缩减
-
-如需更多的虚拟机规模集操作示例，请参阅下面的 Azure PowerShell 示例脚本：
-
-> [!div class="nextstepaction"]
-> [适用于 Azure PowerShell 的规模集脚本示例](powershell-samples.md)

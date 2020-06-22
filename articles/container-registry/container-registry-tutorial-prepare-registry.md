@@ -5,10 +5,10 @@ ms.topic: tutorial
 ms.date: 04/30/2017
 ms.custom: seodec18, mvc
 ms.openlocfilehash: 70dc664d27fde3b7cf9fe4e5e3a99c041236ac16
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 03/24/2020
+ms.lasthandoff: 04/29/2020
 ms.locfileid: "79222144"
 ---
 # <a name="tutorial-prepare-a-geo-replicated-azure-container-registry"></a>教程：准备异地复制的 Azure 容器注册表
@@ -39,7 +39,7 @@ Azure Cloud Shell 不包含完成本教程每个步骤所需的 Docker 组件。
 
 登录 [Azure 门户](https://portal.azure.com)。
 
-选择“创建资源” **“容器”** “Azure 容器注册表”。 >    >  
+选择“创建资源” > “容器” > “Azure 容器注册表”。
 
 ![在 Azure 门户中创建容器注册表][tut-portal-01]
 
@@ -205,7 +205,7 @@ uniqueregistryname.azurecr.io/acr-helloworld    v1     01ac48d5c8cf    About a m
 docker push <acrName>.azurecr.io/acr-helloworld:v1
 ```
 
-由于已经为异地复制配置了注册表，因此，使用这一条  *命令，即可将映像自动复制到“美国西部”和“美国东部”区域。*  `docker push`
+由于已经为异地复制配置了注册表，因此，使用这一条 `docker push` 命令，即可将映像自动复制到“美国西部”和“美国东部”区域。
 
 ```console
 $ docker push uniqueregistryname.azurecr.io/acr-helloworld:v1

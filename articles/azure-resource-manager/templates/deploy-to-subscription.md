@@ -2,13 +2,13 @@
 title: 将资源部署到订阅
 description: 介绍了如何在 Azure 资源管理器模板中创建资源组。 它还展示了如何在 Azure 订阅范围内部署资源。
 ms.topic: conceptual
-ms.date: 03/23/2020
-ms.openlocfilehash: 6bec29a07653ff5ad7d1e2f8317246049e127c8c
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 05/07/2020
+ms.openlocfilehash: a48bc2fd4efb383b42fd0889df079c9a6f700dda
+ms.sourcegitcommit: a6d477eb3cb9faebb15ed1bf7334ed0611c72053
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81605005"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82929054"
 ---
 # <a name="create-resource-groups-and-resources-at-the-subscription-level"></a>在订阅级别创建资源组和资源
 
@@ -20,6 +20,7 @@ ms.locfileid: "81605005"
 
 可以在订阅级别部署以下资源类型：
 
+* [蓝图](/azure/templates/microsoft.blueprint/blueprints)
 * [预算](/azure/templates/microsoft.consumption/budgets)
 * [部署](/azure/templates/microsoft.resources/deployments)-适用于部署到资源组的嵌套模板。
 * [eventSubscriptions](/azure/templates/microsoft.eventgrid/eventsubscriptions)
@@ -34,6 +35,7 @@ ms.locfileid: "81605005"
 * [scopeAssignments](/azure/templates/microsoft.managednetwork/scopeassignments)
 * [supportPlanTypes](/azure/templates/microsoft.addons/supportproviders/supportplantypes)
 * [tags](/azure/templates/microsoft.resources/tags)
+* [workspacesettings](/azure/templates/microsoft.security/workspacesettings)
 
 ### <a name="schema"></a>架构
 
@@ -95,11 +97,11 @@ New-AzSubscriptionDeployment `
 * 使用[subscriptionResourceId （）](template-functions-resource.md#subscriptionresourceid)函数获取在订阅级别部署的资源的资源 ID。
 
   例如，若要获取策略定义的资源 ID，请使用：
-  
+
   ```json
   subscriptionResourceId('Microsoft.Authorization/roleDefinitions/', parameters('roleDefinition'))
   ```
-  
+
   返回的资源 ID 具有以下格式：
 
   ```json
@@ -244,11 +246,11 @@ New-AzSubscriptionDeployment `
 }
 ```
 
-## <a name="create-policies"></a>创建策略
+## <a name="azure-policy"></a>Azure Policy
 
-### <a name="assign-policy"></a>分配策略
+### <a name="assign-policy-definition"></a>分配策略定义
 
-以下示例将现有的策略定义分配到订阅。 如果策略使用参数，请将参数作为对象提供。 如果策略不使用参数，请使用默认的空对象。
+以下示例将现有的策略定义分配到订阅。 如果策略定义采用参数，请将它们作为对象提供。 如果策略定义未采用参数，请使用默认的空对象。
 
 ```json
 {
@@ -285,7 +287,7 @@ New-AzSubscriptionDeployment `
 若要使用 Azure CLI 部署此模板，请使用：
 
 ```azurecli-interactive
-# Built-in policy that accepts parameters
+# Built-in policy definition that accepts parameters
 definition=$(az policy definition list --query "[?displayName=='Allowed locations'].id" --output tsv)
 
 az deployment sub create \
@@ -312,9 +314,9 @@ New-AzSubscriptionDeployment `
   -policyParameters $policyParams
 ```
 
-### <a name="define-and-assign-policy"></a>定义和分配策略
+### <a name="create-and-assign-policy-definitions"></a>创建和分配策略定义
 
-可以在同一模板中[定义](../../governance/policy/concepts/definition-structure.md)和分配策略。
+可以在同一个模板中[定义](../../governance/policy/concepts/definition-structure.md)并分配策略定义。
 
 ```json
 {
@@ -357,7 +359,7 @@ New-AzSubscriptionDeployment `
 }
 ```
 
-若要在订阅中创建策略定义，然后将其应用到订阅，请使用以下 CLI 命令：
+若要在订阅中创建策略定义并将其分配给订阅，请使用以下 CLI 命令：
 
 ```azurecli
 az deployment sub create \
@@ -373,6 +375,32 @@ New-AzSubscriptionDeployment `
   -Name definePolicy `
   -Location centralus `
   -TemplateUri "https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/policydefineandassign.json"
+```
+
+## <a name="azure-blueprints"></a>Azure 蓝图
+
+### <a name="create-blueprint-definition"></a>创建蓝图定义
+
+可以从模板[创建](../../governance/blueprints/tutorials/create-from-sample.md)蓝图定义。
+
+:::code language="json" source="~/quickstart-templates/subscription-level-deployments/blueprints-new-blueprint/azuredeploy.json":::
+
+若要在订阅中创建蓝图定义，请使用以下 CLI 命令：
+
+```azurecli
+az deployment sub create \
+  --name demoDeployment \
+  --location centralus \
+  --template-uri "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/subscription-level-deployments/blueprints-new-blueprint/azuredeploy.json"
+```
+
+若要使用 PowerShell 部署此模板，请使用：
+
+```azurepowershell
+New-AzSubscriptionDeployment `
+  -Name demoDeployment `
+  -Location centralus `
+  -TemplateUri "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/subscription-level-deployments/blueprints-new-blueprint/azuredeploy.json"
 ```
 
 ## <a name="template-samples"></a>模板示例

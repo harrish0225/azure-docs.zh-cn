@@ -5,22 +5,22 @@ services: container-service
 ms.topic: article
 ms.date: 06/26/2019
 ms.reviewer: nieberts, jomore
-ms.openlocfilehash: 01b2f3baefc2320ec11f9cb7f29392ebb0841289
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
-ms.translationtype: HT
+ms.openlocfilehash: 060e98f2617da503068911ec1e687241d909dabc
+ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82207473"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83120906"
 ---
 # <a name="use-kubenet-networking-with-your-own-ip-address-ranges-in-azure-kubernetes-service-aks"></a>在 Azure Kubernetes 服务 (AKS) 中结合自己的 IP 地址范围使用 kubenet 网络
 
 默认情况下，AKS 群集使用 [kubenet][kubenet]，系统会为你创建 Azure 虚拟网络和子网。 节点使用 *kubenet* 从 Azure 虚拟网络子网获取 IP 地址。 Pod 接收从逻辑上不同的地址空间到节点的 Azure 虚拟网络子网的 IP 地址。 然后配置网络地址转换 (NAT)，以便 Pod 可以访问 Azure 虚拟网络上的资源。 流量的源 IP 地址通过 NAT 转换为节点的主 IP 地址。 这种方法大大减少了需要在网络空间中保留供 Pod 使用的 IP 地址数量。
 
-借助 [Azure 容器网络接口 (CNI)][cni-networking]，每个 Pod 都可以从子网获得 IP 地址，并且可供直接访问。 这些 IP 地址在网络空间中必须唯一，并且必须事先计划。 每个节点都有一个配置参数来表示它支持的最大 Pod 数。 这样，就会为每个节点预留相应的 IP 地址数。 使用此方法需要经过更详细的规划，并且经常会耗尽 IP 地址，或者在应用程序需求增长时需要在更大的子网中重建群集。
+借助 [Azure 容器网络接口 (CNI)][cni-networking]，每个 Pod 都可以从子网获得 IP 地址，并且可供直接访问。 这些 IP 地址在网络空间中必须唯一，并且必须事先计划。 每个节点都有一个配置参数来表示它支持的最大 Pod 数。 这样，就会为每个节点预留相应的 IP 地址数。 使用此方法需要经过更详细的规划，并且经常会耗尽 IP 地址，或者在应用程序需求增长时需要在更大的子网中重建群集。 你可以在创建群集时或创建新节点池时，配置可部署到节点的最大 pod。 如果在创建新节点池时没有指定 maxPods，则会收到 kubenet 的默认值110。
 
 本文介绍如何使用 *kubenet* 网络来创建和使用 AKS 群集的虚拟网络子网。 有关网络选项和注意事项的详细信息，请参阅 [Kubernetes 和 AKS 的网络概念][aks-network-concepts]。
 
-## <a name="prerequisites"></a>先决条件
+## <a name="prerequisites"></a>必备条件
 
 * AKS 群集的虚拟网络必须允许出站 Internet 连接。
 * 不要在同一子网中创建多个 AKS 群集。
@@ -32,7 +32,7 @@ ms.locfileid: "82207473"
 > [!WARNING]
 > 若要使用 Windows Server 节点池，必须使用 Azure CNI。 使用 kubenet 作为网络模型不适用于 Windows Server 容器。
 
-## <a name="before-you-begin"></a>在开始之前
+## <a name="before-you-begin"></a>开始之前
 
 需要安装并配置 Azure CLI 2.0.65 或更高版本。 运行  `az --version` 即可查找版本。 如果需要进行安装或升级，请参阅 [安装 Azure CLI][install-azure-cli]。
 
@@ -139,7 +139,7 @@ VNET_ID=$(az network vnet show --resource-group myResourceGroup --name myAKSVnet
 SUBNET_ID=$(az network vnet subnet show --resource-group myResourceGroup --vnet-name myAKSVnet --name myAKSSubnet --query id -o tsv)
 ```
 
-现在，使用 [az role assignment create][az-role-assignment-create] 命令为 AKS 群集的服务主体分配虚拟网络中的“参与者”权限。** 提供自己* \<的 appId>* ，如上一个命令的输出中所示，创建服务主体：
+现在，使用 [az role assignment create][az-role-assignment-create] 命令为 AKS 群集的服务主体分配虚拟网络中的“参与者”权限。** 提供自己的* \< appId>* ，如上一个命令的输出中所示，创建服务主体：
 
 ```azurecli-interactive
 az role assignment create --assignee <appId> --scope $VNET_ID --role Contributor
@@ -147,7 +147,7 @@ az role assignment create --assignee <appId> --scope $VNET_ID --role Contributor
 
 ## <a name="create-an-aks-cluster-in-the-virtual-network"></a>在虚拟网络中创建 AKS 群集
 
-现已创建虚拟网络和子网、已创建服务主体并为其分配了这些网络资源的使用权限。 现在，请使用 [az aks create][az-aks-create] 命令在虚拟网络和子网中创建 AKS 群集。 定义自己的服务主体* \<appId>* 和* \<密码>*，如上一个命令的输出中所示，以创建服务主体。
+现已创建虚拟网络和子网、已创建服务主体并为其分配了这些网络资源的使用权限。 现在，请使用 [az aks create][az-aks-create] 命令在虚拟网络和子网中创建 AKS 群集。 定义自己的服务主体* \< appId>* 和* \< 密码>*，如上一个命令的输出中所示，以创建服务主体。
 
 在创建群集的过程中还定义了以下 IP 地址范围：
 
@@ -199,7 +199,7 @@ az aks create \
 
 ## <a name="next-steps"></a>后续步骤
 
-在现有虚拟网络子网中部署 AKS 群集后，现在可以像平时一样使用该群集。 开始[使用 Azure Dev Spaces 生成应用][dev-spaces]或[使用 Draft 生成应用][use-draft]，或者[使用 Helm 部署应用][use-helm]。
+在现有虚拟网络子网中部署 AKS 群集后，现在可以像平时一样使用该群集。 开始使用[Azure Dev Spaces 生成应用][dev-spaces]、[使用 Helm 部署现有应用][use-helm]或[使用 Helm 创建新应用][develop-helm]。
 
 <!-- LINKS - External -->
 [dev-spaces]: https://docs.microsoft.com/azure/dev-spaces/
@@ -217,8 +217,8 @@ az aks create \
 [az-network-vnet-subnet-show]: /cli/azure/network/vnet/subnet#az-network-vnet-subnet-show
 [az-role-assignment-create]: /cli/azure/role/assignment#az-role-assignment-create
 [az-aks-create]: /cli/azure/aks#az-aks-create
+[develop-helm]: quickstart-helm.md
 [use-helm]: kubernetes-helm.md
-[use-draft]: kubernetes-draft.md
 [virtual-nodes]: virtual-nodes-cli.md
 [vnet-peering]: ../virtual-network/virtual-network-peering-overview.md
 [express-route]: ../expressroute/expressroute-introduction.md

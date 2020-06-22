@@ -8,12 +8,12 @@ ms.service: hdinsight
 ms.topic: conceptual
 ms.custom: hdinsightactive
 ms.date: 12/06/2019
-ms.openlocfilehash: d7ee8ae121e3cbb9760a87c95d12109a9b05e0c5
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 8407aafdb9b9dadcbc8e220ac42e5d7856116959
+ms.sourcegitcommit: 309a9d26f94ab775673fd4c9a0ffc6caa571f598
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "74951507"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "82996779"
 ---
 # <a name="migrate-on-premises-apache-hadoop-clusters-to-azure-hdinsight---infrastructure-best-practices"></a>将本地 Apache Hadoop 群集迁移到 Azure HDInsight - 基础结构最佳做法
 
@@ -76,7 +76,7 @@ Azure 区域确定群集的物理预配位置。 为了将读写延迟最小化�
 |Palantir|IaaS 
 |Sailpoint|Iaas 
 
-有关详细信息，请参阅[随不同 HDInsight 版本提供的 Apache Hadoop 组件](../hdinsight-component-versioning.md#apache-hadoop-components-available-with-different-hdinsight-versions)一文
+有关详细信息，请参阅[随不同 HDInsight 版本提供的 Apache Hadoop 组件](../hdinsight-component-versioning.md#apache-components-available-with-different-hdinsight-versions)一文
 
 ## <a name="customize-hdinsight-clusters-using-script-actions"></a>使用脚本操作自定义 HDInsight 群集
 
@@ -109,7 +109,7 @@ HDInsight 提供预先编写的脚本用于在 HDInsight 群集上安装以下�
 
 ## <a name="customize-hdinsight-configs-using-bootstrap"></a>使用 Bootstrap 自定义 HDInsight 配置
 
-可以使用 Bootstrap 对 `core-site.xml`、`hive-site.xml` 和 `oozie-env.xml` 等配置文件中的配置进行更改。 以下脚本是使用 Powershell [AZ module](https://docs.microsoft.com/powershell/azure/new-azureps-module-az) cmdlet [New-AzHDInsightClusterConfig](https://docs.microsoft.com/powershell/module/az.hdinsight/new-azhdinsightcluster) 的示例：
+可以使用 Bootstrap 对 `core-site.xml`、`hive-site.xml` 和 `oozie-env.xml` 等配置文件中的配置进行更改。 以下脚本是使用 PowerShell [AZ module](https://docs.microsoft.com/powershell/azure/new-azureps-module-az) cmdlet [AzHDInsightClusterConfig](https://docs.microsoft.com/powershell/module/az.hdinsight/new-azhdinsightcluster)的示例：
 
 ```powershell
 # hive-site.xml configuration
@@ -152,7 +152,7 @@ New—AzHDInsightCluster `
 
 ## <a name="use-scale-up-and-scale-down-feature-of-clusters"></a>使用群集的纵向扩展和缩减功能
 
-HDInsight 提供弹性，可让你选择扩展和缩减群集中的工作节点数。 使用此功能可在若干小时后或者在周末收缩群集，或者在业务高峰期扩展群集。 有关详细信息，请参见:
+HDInsight 提供弹性，可让你选择扩展和缩减群集中的工作节点数。 使用此功能可在若干小时后或者在周末收缩群集，或者在业务高峰期扩展群集。    有关详细信息，请参阅：
 
 * [缩放 HDInsight 群集](../hdinsight-scaling-best-practices.md)。
 * [缩放群集](../hdinsight-administer-use-portal-linux.md#scale-clusters)。
@@ -167,12 +167,12 @@ Azure 虚拟网络可以筛选和路由网络流量，使 Azure 资源（例如 
 - 将 HDInsight 连接到 Azure 虚拟网络中的数据存储。
 - 直接访问无法通过 Internet 公开访问的 Hadoop 服务。 例如，Kafka API 或 HBase Java API。
 
-可将 HDInsight 添加到新的或现有的 Azure 虚拟网络。 如果将 HDInsight 添加到现有的虚拟网络，则需要更新现有的网络安全组和用户定义的路由，以便能够不受限制地访问 Azure 数据中心内的[多个 IP 地址](../hdinsight-management-ip-addresses.md)。 此外，请确保不要阻止对 HDInsight 服务使用的[端口](../hdinsight-plan-virtual-network-deployment.md#hdinsight-ports)的流量。
+可将 HDInsight 添加到新的或现有的 Azure 虚拟网络。 如果将 HDInsight 添加到现有的虚拟网络，则需要更新现有的网络安全组和用户定义的路由，以便能够不受限制地访问 Azure 数据中心内的[多个 IP 地址](../hdinsight-management-ip-addresses.md)。 此外，请确保不要阻止对 HDInsight 服务使用的[端口](../control-network-traffic.md#required-ports)的流量。
 
 > [!Note]  
 > HDInsight 目前不支持强制隧道。 强制隧道是一种子网设置，将出站 Internet 流量强制定向到设备以进行检查和记录。 在将 HDInsight 安装到子网之前删除强制隧道，或者为 HDInsight 创建新的子网。 此外，HDInsight 不支持限制出站网络连接。
 
-有关详细信息，请参阅下列文章：
+有关详细信息，请参阅以下文章：
 
 - [Azure 虚拟网络概述](../../virtual-network/virtual-networks-overview.md)
 - [使用 Azure 虚拟网络扩展 Azure HDInsight](../hdinsight-plan-virtual-network-deployment.md)
@@ -181,7 +181,7 @@ Azure 虚拟网络可以筛选和路由网络流量，使 Azure 资源（例如 
 
 HDInsight 支持[虚拟网络服务终结点](../../virtual-network/virtual-network-service-endpoints-overview.md)，使你能够安全地连接到 Azure Blob 存储、Azure Data Lake Storage Gen2、COSMOS DB 和 SQL 数据库。 为 Azure HDInsight 启用服务终结点后，流量将通过 Azure 数据中心内部的受保护路由传送。 在网络层实施这种增强的安全级别后，可将大数据存储帐户锁定到其指定的虚拟网络 (VNET)，同时仍可以顺畅地使用 HDInsight 群集来访问和处理这些数据。
 
-有关详细信息，请参阅下列文章：
+有关详细信息，请参阅以下文章：
 
 - [虚拟网络服务终结点](../../virtual-network/virtual-network-service-endpoints-overview.md)
 - [使用服务终结点增强 HDInsight 安全性](https://azure.microsoft.com/blog/enhance-hdinsight-security-with-service-endpoints/)

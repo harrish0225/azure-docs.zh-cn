@@ -9,14 +9,18 @@
 - name: 快速入门
   expanded: true
   items:
-    - name: 创建作业 - Azure 门户
-      href: stream-analytics-quick-create-portal.md
-    - name: 创建作业 - PowerShell
-      href: stream-analytics-quick-create-powershell.md
-    - name: 创建作业 - Visual Studio
-      href: stream-analytics-quick-create-vs.md
-    - name: 创建作业 - Visual Studio Code
-      href: quick-create-vs-code.md
+    - name: 创建作业
+      items:
+        - name: Azure 门户
+          href: stream-analytics-quick-create-portal.md
+        - name: ARM 模板
+          href: quick-create-azure-resource-manager.md
+        - name: PowerShell
+          href: stream-analytics-quick-create-powershell.md
+        - name: Visual Studio
+          href: stream-analytics-quick-create-vs.md
+        - name: Visual Studio Code
+          href: quick-create-vs-code.md
 - name: 教程
   items:
     - name: 1 - 创建/管理作业
@@ -33,6 +37,9 @@
   items:
     - name: 代码示例
       href: 'https://azure.microsoft.com/resources/samples/?service=stream-analytics'
+    - name: Azure Policy 内置策略定义
+      displayName: 'samples, policies, definitions'
+      href: ./policy-samples.md
 - name: 概念
   items:
     - name: 选择流分析技术
@@ -55,6 +62,7 @@
       items:
         - name: 输出概述
           href: stream-analytics-define-outputs.md
+          displayName: 'adls, sql, blob, event hubs, power bi, table, service bus, cosmos, functions'
         - name: 输出到 Cosmos DB
           href: stream-analytics-documentdb-output.md
         - name: 输出到 Azure SQL DB
@@ -124,14 +132,22 @@
           href: copy-job.md
         - name: 进行作业配对以确保可靠性
           href: stream-analytics-job-reliability.md
-        - name: 使用托管标识进行身份验证 - ADLS Gen 1 输出
-          href: stream-analytics-managed-identities-adls.md
         - name: 使用 SQL 参考数据
           href: sql-reference-data.md
-        - name: 使用托管标识进行身份验证 - Blob 输出
-          href: blob-output-managed-identity.md
-        - name: 使用托管标识进行身份验证 - Power BI
-          href: powerbi-output-managed-identity.md
+        - name: 使用托管标识进行身份验证
+          items:
+            - name: ADLS Gen 1
+              href: stream-analytics-managed-identities-adls.md
+              displayName: 'managed identity, identities, authenticate'
+            - name: Blob 存储
+              href: blob-output-managed-identity.md
+              displayName: 'managed identity, identities, authenticate'
+            - name: Power BI
+              href: powerbi-output-managed-identity.md
+              displayName: 'managed identity, identities, authenticate'
+            - name: Azure SQL DB
+              href: sql-database-output-managed-identity.md
+              displayName: 'managed identity, identities, authenticate'
         - name: 加密数据
           href: data-protection.md
     - name: 构建解决方案
@@ -223,6 +239,18 @@
           href: stream-analytics-job-diagnostic-logs.md
         - name: 数据错误
           href: data-errors.md
+        - name: 错误代码
+          items:
+            - name: 配置错误
+              href: configuration-error-codes.md
+            - name: 数据错误
+              href: data-error-codes.md
+            - name: 外部可用性错误
+              href: external-availability-error-codes.md
+            - name: 外部错误
+              href: external-error-codes.md
+            - name: 内部错误
+              href: internal-error-codes.md
     - name: 与机器学习集成
       items:
         - name: 使用 ML 模型进行情绪分析
@@ -424,7 +452,7 @@
               href: /stream-analytics-query/power-azure-stream-analytics
               maintainContext: true
             - name: ROUND
-              href: /stream-analytics-query/round-azure-stream-analytics.md
+              href: /stream-analytics-query/round-azure-stream-analytics
               maintainContext: true
             - name: SIGN
               href: /stream-analytics-query/sign-azure-stream-analytics
@@ -470,7 +498,7 @@
               href: /stream-analytics-query/regexmatch-azure-stream-analytics
               maintainContext: true
             - name: REPLACE
-              href: /stream-analytics-query/replace-azure-stream-analytics.md
+              href: /stream-analytics-query/replace-azure-stream-analytics
               maintainContext: true
             - name: SUBSTRING
               href: /stream-analytics-query/substring-azure-stream-analytics
@@ -518,7 +546,7 @@
           href: /stream-analytics-query/case-azure-stream-analytics
           maintainContext: true
         - name: COALESCE
-          href: /stream-analytics-query/coalesce-azure-stream-analytics.md
+          href: /stream-analytics-query/coalesce-azure-stream-analytics
           maintainContext: true
         - name: CREATE TABLE
           href: /stream-analytics-query/create-table-stream-analytics
@@ -593,8 +621,8 @@
       href: 'https://azure.microsoft.com/blog/tag/azure-stream-analytics/'
     - name: 反馈论坛
       href: 'https://feedback.azure.com/forums/270577-azure-stream-analytics'
-    - name: 论坛
-      href: 'https://social.msdn.microsoft.com/Forums/azure/home?forum=AzureStreamAnalytics'
+    - name: Microsoft Q&A 问题页面
+      href: 'https://docs.microsoft.com/answers/topics/azure-stream-analytics.html'
     - name: 定价
       href: 'https://azure.microsoft.com/pricing/details/stream-analytics/'
     - name: 定价计算器

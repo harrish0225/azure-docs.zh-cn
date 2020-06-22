@@ -2,17 +2,17 @@
 title: 良好的示例话语 - LUIS
 description: 话语是应用需要解释的用户输入。 收集你认为用户会输入的短语。 包括意思相同但在单词长度和单词位置上以不同方式构造的陈述。
 ms.topic: conceptual
-ms.date: 04/14/2020
-ms.openlocfilehash: d851082a4ec4a003619826eeffd4f4b856a67824
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.date: 05/19/2020
+ms.openlocfilehash: 6a17416183762893432841c27124ec6a0f8a289d
+ms.sourcegitcommit: 50673ecc5bf8b443491b763b5f287dde046fdd31
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81382290"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83685270"
 ---
 # <a name="understand-what-good-utterances-are-for-your-luis-app"></a>了解哪些良好的话语适用于你的 LUIS 应用
 
-**陈述**是应用需要解释的用户输入。 若要训练 LUIS 从其中提取意向和实体，请务必为每个意向捕获各种不同的示例话语。 主动学习或继续针对新陈述训练的过程对于 LUIS 提供的机器学习智能至关重要。
+**陈述**是应用需要解释的用户输入。 若要训练 LUIS 从其中提取意向和实体，请务必为每个意向捕获各种不同的示例话语。 主动学习或继续培训新最谈话的过程对 LUIS 提供的机器学习情报至关重要。
 
 收集你认为用户会输入的话语。 请提供含义相同但以各种不同的方式构造的话语：
 
@@ -68,11 +68,27 @@ LUIS 使用由 LUIS 模型作者精心挑选的话语构建有效的模型。 �
 
 ## <a name="utterance-normalization"></a>话语规范化
 
-话语规范化是指在训练和预测期间忽略标点和音调符号的影响这一过程。 使用[应用程序设置](luis-reference-application-settings.md)来控制查询文本规范化对查询文本预测的影响。
+查询文本规范化是在训练和预测期间忽略文本类型（如标点符号和音调符号）的影响的过程。
 
-## <a name="utterance-normalization-for-diacritics-and-punctuation"></a>音调符号和标点的话语规范化
+话语规范化设置默认关闭。 这些设置包括：
 
-话语规范化是在你创建或导入应用时定义的，因为它是应用 JSON 文件中的设置。 话语规范化设置默认关闭。
+* Word 窗体
+* 语音
+* 标点
+
+如果启用规范化设置，则 "**测试**" 窗格中的 "分数"、"批处理测试" 和 "终结点" 查询将针对该规范化设置的所有最谈话更改。
+
+当你在 LUIS 门户中克隆版本时，版本设置将继续到新的克隆版本。
+
+在 "**管理**" 部分、"**应用程序设置**" 页或[更新版本设置 API](https://westus.dev.cognitive.microsoft.com/docs/services/5890b47c39e2bb17b84a55ff/operations/versions-update-application-version-settings)上，通过 LUIS 门户设置版本设置。 详细了解[引用](luis-reference-application-settings.md)中的这些标准化更改。
+
+### <a name="word-forms"></a>Word 窗体
+
+规范化**word 窗体**将忽略扩展到根以外的单词之间的差异。
+
+<a name="utterance-normalization-for-diacritics-and-punctuation"></a>
+
+### <a name="diacritics"></a>语音
 
 音调符号是文本中的标记或符号，例如：
 
@@ -80,24 +96,8 @@ LUIS 使用由 LUIS 模型作者精心挑选的话语构建有效的模型。 �
 İ ı Ş Ğ ş ğ ö ü
 ```
 
-如果应用打开规范化，则对于使用音调符号或标点的所有话语来说，“测试”窗格、批量测试和终结点查询中的分数会变化。****
-
-在 `settings` 参数中针对 LUIS JSON 应用文件的音调符号或标点打开话语规范化。
-
-```JSON
-"settings": [
-    {"name": "NormalizePunctuation", "value": "true"},
-    {"name": "NormalizeDiacritics", "value": "true"}
-]
-```
-
-规范化**标点**是指在训练模型和预测终结点查询之前，从话语中删除标点。
-
-规范化**音调符号**是指将话语中带音调符号的字符替换为常规字符。 例如：`Je parle français` 变成了 `Je parle francais`。
-
-规范化并不意味着在示例最谈话或预测响应中看不到标点符号和音调符号，只是在训练和预测期间将忽略它们。
-
 ### <a name="punctuation-marks"></a>标点符号
+规范化**标点**是指在训练模型和预测终结点查询之前，从话语中删除标点。
 
 标点是 LUIS 中单独的标记。 在末尾包含句号的话语与末尾不包含句号的话语是两个单独话语并可能得到两种不同预测。
 
@@ -111,7 +111,9 @@ LUIS 使用由 LUIS 模型作者精心挑选的话语构建有效的模型。 �
 
 若要忽略模式中的特定单词或标点，请将 [pattern](luis-concept-patterns.md#pattern-syntax) 与方括号 `[]` 的 _ignore_ 语法配合使用。
 
-## <a name="training-utterances"></a>训练陈述
+<a name="training-utterances"></a>
+
+## <a name="training-with-all-utterances"></a>所有最谈话的培训
 
 训练通常是非确定性的：在不同版本或应用中，陈述预测可能略有不同。
 可以通过使用 `UseAllTrainingData` 名称/值对更新[版本设置](https://westus.dev.cognitive.microsoft.com/docs/services/5890b47c39e2bb17b84a55ff/operations/versions-update-application-version-settings) API 来使用所有训练数据。
@@ -124,7 +126,7 @@ LUIS 使用由 LUIS 模型作者精心挑选的话语构建有效的模型。 �
 
 在模型经过训练、发布并接收[终结点](luis-glossary.md#endpoint)查询后，请[审查 LUIS 建议的陈述](luis-how-to-review-endpoint-utterances.md)。 LUIS 会选择意向或实体得分较低的终结点陈述。
 
-## <a name="best-practices"></a>最佳做法
+## <a name="best-practices"></a>最佳实践
 
 查看[最佳做法](luis-concept-best-practices.md)并将其应用为常规创作周期的一部分。
 

@@ -1,15 +1,15 @@
 ---
 title: 教程 - 部署本地 Azure 资源管理器模板
 description: 了解如何从本地计算机部署 Azure 资源管理器模板
-ms.date: 03/13/2020
+ms.date: 05/20/2020
 ms.topic: tutorial
 ms.author: jgao
-ms.openlocfilehash: c8e3eb62fa52caeaa63808b6b9ea199bdff5c4da
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 01f04d18ae54c3c512010dd005e9d820b914e536
+ms.sourcegitcommit: 958f086136f10903c44c92463845b9f3a6a5275f
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80081816"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83714060"
 ---
 # <a name="tutorial-deploy-a-local-azure-resource-manager-template"></a>教程：部署本地 Azure 资源管理器模板
 
@@ -37,9 +37,7 @@ ms.locfileid: "80081816"
 
 ## <a name="review-template"></a>审阅模板
 
-本教程中使用的模板与[有关快速入门模板的教程](template-tutorial-quickstart-template.md)中使用的模板类似。 如果你对创建模板感兴趣，则可以完成该教程。 但这不是完成本教程所必需的。
-
-模板部署一个存储帐户、应用服务计划和 Web 应用。
+模板部署一个存储帐户、应用服务计划和 Web 应用。 如果对创建模板感兴趣，则可完成[关于快速入门模板的教程](template-tutorial-quickstart-template.md)。 但这不是完成本教程所必需的。
 
 :::code language="json" source="~/resourcemanager-templates/get-started-deployment/local-template/azuredeploy.json":::
 
@@ -71,7 +69,7 @@ az login
 # <a name="powershell"></a>[PowerShell](#tab/azure-powershell)
 
 ```azurepowershell
-Select-AzSubscription [SubscriptionID/SubscriptionName]
+Set-AzContext [SubscriptionID/SubscriptionName]
 ```
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
@@ -157,10 +155,10 @@ az deployment group create \
 
 通过删除资源组来清理你部署的资源。
 
-1. 在 Azure 门户上的左侧菜单中选择“资源组”  。
-2. 在“按名称筛选”字段中输入资源组名称。 
+1. 在 Azure 门户上的左侧菜单中选择“资源组”。
+2. 在“按名称筛选”字段中输入资源组名称。
 3. 选择资源组名称。
-4. 在顶部菜单中选择“删除资源组”。 
+4. 在顶部菜单中选择“删除资源组”。
 
 ## <a name="next-steps"></a>后续步骤
 

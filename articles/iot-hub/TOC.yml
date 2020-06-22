@@ -81,6 +81,11 @@
       href: tutorial-firmware-update.md
     - name: 测试设备连接性
       href: tutorial-connectivity.md
+- name: 示例
+  items:
+    - name: Azure Policy 内置策略定义
+      displayName: 'samples, policies, definitions'
+      href: ./policy-samples.md
 - name: 概念
   items:
     - name: TLS 支持
@@ -498,15 +503,15 @@
       href: 'https://github.com/Azure/azure-iot-explorer'
     - name: iothub-diagnostics 工具
       href: 'https://github.com/Azure/iothub-diagnostics'
-    - name: MSDN 论坛
-      href: 'https://social.msdn.microsoft.com/Forums/azure/home?forum=azureiothub'
+    - name: Microsoft Q&A 问题页面
+      href: 'https://docs.microsoft.com/answers/topics/azure-iot-hub.html'
     - name: 定价
       href: 'https://azure.microsoft.com/pricing/details/iot-hub/'
     - name: 定价计算器
       href: 'https://azure.microsoft.com/pricing/calculator/'
     - name: 服务更新
       href: 'https://azure.microsoft.com/updates/?product=iot-hub'
-    - name: 堆栈溢出
+    - name: Stack Overflow
       href: 'https://stackoverflow.com/questions/tagged/azure-iot-hub'
     - name: 技术案例研究
       href: 'https://microsoft.github.io/techcasestudies/#technology=IoT&sortBy=featured'

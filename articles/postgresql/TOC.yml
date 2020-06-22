@@ -15,6 +15,9 @@
           href: quickstart-create-server-database-azure-cli.md
         - name: 创建 DB - Azure CLI up 命令
           href: quickstart-create-server-up-azure-cli.md
+        - name: 创建 DB - ARM 模板
+          href: quickstart-create-postgresql-server-database-using-arm-template.md
+          displayName: deploy azure resource manager template
         - name: 连接和查询
           items:
             - name: Python
@@ -60,6 +63,9 @@
   items:
     - name: Azure CLI
       href: sample-scripts-azure-cli.md
+    - name: Azure Policy 内置策略定义
+      displayName: 'samples, policies, definitions'
+      href: ./policy-samples.md
 - name: 概念
   items:
     - name: 单个服务器
@@ -197,6 +203,8 @@
               href: howto-create-users.md
             - name: 配置 Azure AD 集成
               href: howto-configure-sign-in-aad-authentication.md
+            - name: 与托管标识连接
+              href: howto-connect-with-managed-identity.md
         - name: 优化
           items:
             - name: 批量插入
@@ -333,8 +341,8 @@
       href: 'https://azure.microsoft.com/roadmap/?category=databases'
     - name: 定价
       href: 'https://azure.microsoft.com/pricing/details/postgresql/'
-    - name: MSDN 论坛
-      href: 'https://social.msdn.microsoft.com/forums/azure/en-US/home?forum=AzureDatabaseforPostgreSQL'
+    - name: Microsoft Q&A 问题页面
+      href: 'https://docs.microsoft.com/answers/topics/azure-database-postgresql.html'
     - name: Stack Overflow
       href: 'https://stackoverflow.com/questions/tagged/azure-database-postgresql'
     - name: 视频

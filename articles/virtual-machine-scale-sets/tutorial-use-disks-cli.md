@@ -76,7 +76,7 @@ Azure 提供两种类型的磁盘。
 可以在创建规模集时创建和附加磁盘，也可以对现有的规模集创建和附加磁盘。
 
 ### <a name="attach-disks-at-scale-set-creation"></a>创建规模集时附加磁盘
-首先，使用 [az group create](/cli/azure/group) 命令创建资源组。 在此示例中，在“eastus”  区域中创建了名为“myResourceGroup”  的资源组。
+首先，使用 [az group create](/cli/azure/group) 命令创建资源组。 在此示例中，在“eastus”区域中创建了名为“myResourceGroup”的资源组。
 
 ```azurecli-interactive
 az group create --name myResourceGroup --location eastus

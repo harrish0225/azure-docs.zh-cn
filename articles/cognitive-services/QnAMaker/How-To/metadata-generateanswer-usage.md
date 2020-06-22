@@ -1,7 +1,7 @@
 ---
 title: 将元数据与 GenerateAnswer API 配合使用 - QnA Maker
 titleSuffix: Azure Cognitive Services
-description: 通过 QnA Maker，可将键值对形式的元数据添加到问/答集。 你可以将结果筛选为用户查询，并存储可在后续对话中使用的其他信息。
+description: QnA Maker 使你可以将元数据以键/值对的形式添加到问题/答案对。 你可以将结果筛选为用户查询，并存储可在后续对话中使用的其他信息。
 services: cognitive-services
 author: diberry
 manager: nitinme
@@ -10,18 +10,18 @@ ms.subservice: qna-maker
 ms.topic: conceptual
 ms.date: 03/31/2020
 ms.author: diberry
-ms.openlocfilehash: 9beb6dbbba1c5855b8bfa97fc02f50aa59225d78
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 171efd0e5750555130588f783c4a858def11afec
+ms.sourcegitcommit: fc718cc1078594819e8ed640b6ee4bef39e91f7f
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80474854"
+ms.lasthandoff: 05/27/2020
+ms.locfileid: "83993501"
 ---
 # <a name="get-an-answer-with-the-generateanswer-api-and-metadata"></a>使用 GenerateAnswer API 和元数据获取答案
 
 若要获取用户问题的预测答案，请使用 GenerateAnswer API。 发布知识库时，可以在 "**发布**" 页上查看有关如何使用此 API 的信息。 你还可以配置 API 来基于元数据标记筛选答案，并通过测试查询字符串参数来测试终结点中的知识库。
 
-QnA Maker 使你能够以键和值对的形式向问题和答案集添加元数据。 然后，你可以使用此信息对用户查询的结果进行筛选，以及存储可在后续对话中使用的其他信息。 有关详细信息，请参阅[知识库](../Concepts/knowledge-base.md)。
+QnA Maker 使你能够以键和值对的形式向你的问题和答案对添加元数据。 然后，你可以使用此信息对用户查询的结果进行筛选，以及存储可在后续对话中使用的其他信息。 有关详细信息，请参阅[知识库](../Concepts/knowledge-base.md)。
 
 <a name="qna-entity"></a>
 
@@ -37,7 +37,7 @@ QnA Maker 使你能够以键和值对的形式向问题和答案集添加元数�
 
 ## <a name="get-answer-predictions-with-the-generateanswer-api"></a>通过 GenerateAnswer API 获取答案预测
 
-在机器人或应用程序中使用[GENERATEANSWER API](https://docs.microsoft.com/rest/api/cognitiveservices/qnamakerruntime/runtime/generateanswer)可以通过用户问题查询知识库，以便从问题和答案集中获取最佳匹配项。
+在机器人或应用程序中使用[GENERATEANSWER API](https://docs.microsoft.com/rest/api/cognitiveservices/qnamakerruntime/runtime/generateanswer)可以通过用户问题查询知识库，以便从问题和答案对中获得最佳匹配。
 
 <a name="generateanswer-endpoint"></a>
 
@@ -64,7 +64,7 @@ QnA Maker 使你能够以键和值对的形式向问题和答案集添加元数�
 POST 请求使用：
 
 * 必需的[URI 参数](https://docs.microsoft.com/rest/api/cognitiveservices/qnamakerruntime/runtime/train#uri-parameters)
-* 必需的标头`Authorization`属性，用于安全性
+* 必需的标头属性， `Authorization` 用于安全性
 * 必需的[正文属性](https://docs.microsoft.com/rest/api/cognitiveservices/qnamakerruntime/runtime/train#feedbackrecorddto)。
 
 GenerateAnswer URL 具有以下格式：
@@ -73,7 +73,7 @@ GenerateAnswer URL 具有以下格式：
 https://{QnA-Maker-endpoint}/knowledgebases/{knowledge-base-ID}/generateAnswer
 ```
 
-请记住， `Authorization`使用带有尾随空格的字符串`EndpointKey`的值设置的 HTTP 标头属性，然后在 "**设置**" 页上找到终结点键。
+请记住，使用带有尾随空格的字符串的值设置的 HTTP 标头属性， `Authorization` `EndpointKey` 然后在 "**设置**" 页上找到终结点键。
 
 示例 JSON 正文如下所示：
 
@@ -168,7 +168,7 @@ var qnaResults = await this.qnaMaker.getAnswers(stepContext.context, qnaMakerOpt
 
 ## <a name="use-metadata-to-filter-answers-by-custom-metadata-tags"></a>使用元数据筛选自定义元数据标记的答案
 
-通过添加元数据，可以按这些元数据标记筛选答案。 从 "**视图选项**" 菜单添加 "元数据" 列。 通过选择元**+** 数据图标来添加元数据对，将元数据添加到知识库中。 此对包含一个键和一个值。
+通过添加元数据，可以按这些元数据标记筛选答案。 从 "**视图选项**" 菜单添加 "元数据" 列。 通过选择元数据图标来添加元数据对，将元数据添加到知识库中 **+** 。 此对包含一个键和一个值。
 
 ![添加元数据的屏幕截图](../media/qnamaker-how-to-metadata-usage/add-metadata.png)
 
@@ -196,7 +196,7 @@ var qnaResults = await this.qnaMaker.getAnswers(stepContext.context, qnaMakerOpt
 
 ## <a name="use-question-and-answer-results-to-keep-conversation-context"></a>使用问题和答案结果来保留会话上下文
 
-对 GenerateAnswer 的响应包含匹配的问题和答案集的相应元数据信息。 你可以在客户端应用程序中使用此信息来存储以前会话的上下文，以便在以后的会话中使用。
+对 GenerateAnswer 的响应包含匹配的问题和答案对的相应元数据信息。 你可以在客户端应用程序中使用此信息来存储以前会话的上下文，以便在以后的会话中使用。
 
 ```json
 {
@@ -226,9 +226,9 @@ var qnaResults = await this.qnaMaker.getAnswers(stepContext.context, qnaMakerOpt
 
 ## <a name="match-questions-only-by-text"></a>仅匹配问题，按文本
 
-默认情况下，QnA Maker 搜索问题和答案。 如果只想要搜索问题，若要生成答案，请`RankerType=QuestionOnly`在 GenerateAnswer 请求的 POST 正文中使用。
+默认情况下，QnA Maker 搜索问题和答案。 如果只想要搜索问题，若要生成答案，请 `RankerType=QuestionOnly` 在 GenerateAnswer 请求的 POST 正文中使用。
 
-可以使用`isTest=true`在测试 kb 中搜索已发布`isTest=false`的 kb、使用或。
+可以 `isTest=false` 使用在测试 kb 中搜索已发布的 kb、使用或 `isTest=true` 。
 
 ```json
 {
@@ -256,4 +256,4 @@ var qnaResults = await this.qnaMaker.getAnswers(stepContext.context, qnaMakerOpt
 "**发布**" 页还提供了使用 Postman 或卷曲[生成答案](../Quickstarts/get-answer-from-knowledge-base-using-url-tool.md)的信息。
 
 > [!div class="nextstepaction"]
-> [创建知识库机器人](../tutorials/integrate-qnamaker-luis.md)
+> [获取有关知识库的分析](../how-to/get-analytics-knowledge-base.md)

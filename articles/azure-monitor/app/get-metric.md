@@ -7,12 +7,12 @@ ms.topic: conceptual
 author: mrbullwinkle
 ms.author: mbullwin
 ms.date: 04/28/2020
-ms.openlocfilehash: 6d0d05f13f592fc981d3df52d107b385bdbbb21e
-ms.sourcegitcommit: eaec2e7482fc05f0cac8597665bfceb94f7e390f
+ms.openlocfilehash: 94525ce901a89935c4ee7800ada44a9dff84b27a
+ms.sourcegitcommit: a6d477eb3cb9faebb15ed1bf7334ed0611c72053
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82515282"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82927898"
 ---
 # <a name="custom-metric-collection-in-net-and-net-core"></a>.NET 和 .NET Core 中的自定义指标集合
 
@@ -20,7 +20,7 @@ ms.locfileid: "82515282"
 
 ## <a name="trackmetric-versus-getmetric"></a>TrackMetric 与 GetMetric
 
-`TrackMetric()`发送用于表示指标的原始遥测数据。 为每个值发送单个遥测项是低效的。 `TrackMetric()`发送用于表示指标的原始遥测数据。 为每个值发送单个遥测项是低效的。 `TrackMetric()`在性能方面也是低效的，因为`TrackMetric(item)`每个都要经历遥测初始值设定项和处理器的完整 SDK 管道。 与`TrackMetric()`不同`GetMetric()`的是，为您处理本地预聚合，然后仅提交一分钟固定时间间隔内的聚合汇总指标。 因此，如果你需要在第二个或每个毫秒级别密切监视一些自定义指标，则可以这样做，同时仅每分钟仅产生一次监视的存储和网络流量成本。 这还极大地降低了由于需要为聚合指标发送的遥测项总数大大降低，导致限制的风险。
+`TrackMetric()`发送用于表示指标的原始遥测数据。 为每个值发送单个遥测项是低效的。 `TrackMetric()`在性能方面也是低效的，因为`TrackMetric(item)`每个都要经历遥测初始值设定项和处理器的完整 SDK 管道。 与`TrackMetric()`不同`GetMetric()`的是，为您处理本地预聚合，然后仅提交一分钟固定时间间隔内的聚合汇总指标。 因此，如果你需要在第二个或每个毫秒级别密切监视一些自定义指标，则可以这样做，同时仅每分钟仅产生一次监视的存储和网络流量成本。 这还极大地降低了由于需要为聚合指标发送的遥测项总数大大降低，导致限制的风险。
 
 在 Application Insights 中，通过`TrackMetric()`和`GetMetric()`收集的自定义度量值不受[采样](https://docs.microsoft.com/azure/azure-monitor/app/sampling)的限制。 采样重要指标可能会导致出现这样的情况：你可能围绕这些指标构建的警报可能会变得不可靠。 如果从不采样自定义指标，通常可以确信当警报阈值违例时，会触发警报。  但由于不会对自定义度量值进行采样，因此可能会出现一些问题。
 
@@ -186,23 +186,11 @@ Application Insights Telemetry: {"name":"Microsoft.ApplicationInsights.Dev.00000
 
 ![拆分支持](./media/get-metric/splitting-support.png)
 
-默认情况下，指标资源管理器体验中的多维度量值未在 Application Insights 资源中打开。 若要启用此行为，请转到 "使用情况和估计成本" 选项卡，方法是选中["对自定义指标维度启用警报"](pre-aggregated-metrics-log-metrics.md#custom-metrics-dimensions-and-pre-aggregation)。
-
-### <a name="how-to-use-metricidentifier-when-there-are-more-than-three-dimensions"></a>当维度超过三个时如何使用 metricIdentifier
-
-目前支持10个维度，超过三个维度需要用户`metricIdentifier`：
-
-```csharp
-// Add "using Microsoft.ApplicationInsights.Metrics;" to use MetricIdentifier
-// MetricIdentifier id = new MetricIdentifier("[metricNamespace]","[metricId],"[dim1]","[dim2]","[dim3]","[dim4]","[dim5]");
-MetricIdentifier id = new MetricIdentifier("CustomMetricNamespace","ComputerSold", "FormFactor", "GraphicsCard", "MemorySpeed", "BatteryCapacity", "StorageCapacity");
-Metric computersSold  = _telemetryClient.GetMetric(id);
-computersSold.TrackValue(110,"Laptop", "Nvidia", "DDR4", "39Wh", "1TB");
-```
+默认情况下，指标资源管理器体验中的多维度量值未在 Application Insights 资源中打开。
 
 ### <a name="enable-multi-dimensional-metrics"></a>启用多维度量值
 
-若要为 Application Insights 资源启用多维度量值，请选择 "**使用情况和估计成本** > **"** 自定义**指标** > **在自定义指标维度** > 下启用警报。
+若要为 Application Insights 资源启用多维度量值，请选择 "**使用情况和估计成本** > **"** 自定义**指标** > **在自定义指标维度** > 下启用警报。 可在[此处](pre-aggregated-metrics-log-metrics.md#custom-metrics-dimensions-and-pre-aggregation)找到有关此内容的更多详细信息。
 
 完成更改并发送新的多维遥测后，您将能够**应用拆分**。
 
@@ -214,6 +202,18 @@ computersSold.TrackValue(110,"Laptop", "Nvidia", "DDR4", "39Wh", "1TB");
 并查看每个_FormFactor_维度的指标聚合：
 
 ![外形规格](./media/get-metric/formfactor.png)
+
+### <a name="how-to-use-metricidentifier-when-there-are-more-than-three-dimensions"></a>当维度超过三个时如何使用 MetricIdentifier
+
+目前支持10个维度，但大于三个维度需要使用`MetricIdentifier`：
+
+```csharp
+// Add "using Microsoft.ApplicationInsights.Metrics;" to use MetricIdentifier
+// MetricIdentifier id = new MetricIdentifier("[metricNamespace]","[metricId],"[dim1]","[dim2]","[dim3]","[dim4]","[dim5]");
+MetricIdentifier id = new MetricIdentifier("CustomMetricNamespace","ComputerSold", "FormFactor", "GraphicsCard", "MemorySpeed", "BatteryCapacity", "StorageCapacity");
+Metric computersSold  = _telemetryClient.GetMetric(id);
+computersSold.TrackValue(110,"Laptop", "Nvidia", "DDR4", "39Wh", "1TB");
+```
 
 ## <a name="custom-metric-configuration"></a>自定义指标配置
 

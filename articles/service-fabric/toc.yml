@@ -116,6 +116,9 @@
       href: service-fabric-powershell-samples.md
     - name: Service Fabric CLI
       href: samples-cli.md
+    - name: Azure Policy 内置策略定义
+      displayName: 'samples, policies, definitions'
+      href: ./policy-samples.md
 - name: 概念
   items:
     - name: 了解微服务
@@ -655,7 +658,7 @@
             - name: 缩放
               items:
                 - name: 手动横向扩展
-                  href: service-fabric-cluster-scale-up-down.md
+                  href: service-fabric-cluster-scale-in-out.md
                 - name: 以编程方式横向扩展
                   href: service-fabric-cluster-programmatic-scaling.md
                 - name: 纵向扩展主节点类型
@@ -889,8 +892,8 @@
       href: 'https://azure.microsoft.com/roadmap/'
     - name: 常见问题
       href: service-fabric-common-questions.md
-    - name: MSDN 论坛
-      href: 'https://social.msdn.microsoft.com/Forums/home?forum=AzureServiceFabric'
+    - name: Microsoft Q&A 问题页面
+      href: 'https://docs.microsoft.com/answers/topics/azure-service-fabric.html'
     - name: Azure 资源管理器部署准则
       href: service-fabric-azure-resource-manager-guardrails.md
     - name: 定价

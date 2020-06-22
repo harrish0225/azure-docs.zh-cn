@@ -4,18 +4,17 @@ summary: Azure Batch 在云中高效运行大规模应用程序。 为你的解�
 metadata:
   title: Azure Batch 文档
   description: Azure Batch 在云中高效运行大规模应用程序。 为你的解决方案计划计算密集型任务并动态调整资源，而无需管理基础结构。
-  services: batch
   ms.service: batch
   ms.topic: landing-page
-  author: LauraBrenner
-  ms.author: labrenne
+  author: JnHs
+  ms.author: jenhayes
   ms.date: 09/23/2019
-  ms.openlocfilehash: d44ef419ec93e890ac1f8696d3ee45aadd3cd26f
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.openlocfilehash: b07770c030c7265fb0dc95aa07e02cccaad41729
+  ms.sourcegitcommit: a9784a3fd208f19c8814fe22da9e70fcf1da9c93
   ms.translationtype: HT
   ms.contentlocale: zh-CN
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "77026058"
+  ms.lasthandoff: 05/22/2020
+  ms.locfileid: "83779012"
 landingContent:
 - title: 关于 Azure Batch
   linkLists:
@@ -41,8 +40,8 @@ landingContent:
       url: quick-run-python.md
   - linkListType: concept
     links:
-    - text: 开发人员功能
-      url: batch-api-basics.md
+    - text: 面向开发人员的工作流和功能概述
+      url: batch-service-workflow-features.md
 - title: 分步指南
   linkLists:
   - linkListType: tutorial

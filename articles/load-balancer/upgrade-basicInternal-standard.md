@@ -7,15 +7,15 @@ ms.service: load-balancer
 ms.topic: article
 ms.date: 02/23/2020
 ms.author: irenehua
-ms.openlocfilehash: 239dc0f3133a5adf59a23d333131c91d3a655597
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 960897abca67bf2a43c4c056b8dfa8cce0119faa
+ms.sourcegitcommit: f57297af0ea729ab76081c98da2243d6b1f6fa63
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81770390"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82871586"
 ---
 # <a name="upgrade-azure-internal-load-balancer--no-outbound-connection-required"></a>升级 Azure 内部负载均衡器 - 不需出站连接
-[Azure 标准负载均衡器](load-balancer-overview.md)通过区域冗余提供丰富的功能和高可用性。 有关负载均衡器 SKU 的详细信息，请参阅[比较表](https://docs.microsoft.com/azure/load-balancer/concepts-limitations#skus)。
+[Azure 标准负载均衡器](load-balancer-overview.md)通过区域冗余提供丰富的功能和高可用性。 有关负载均衡器 SKU 的详细信息，请参阅[比较表](https://docs.microsoft.com/azure/load-balancer/skus#skus)。
 
 本文介绍了一个 PowerShell 脚本，该脚本使用与基本负载均衡器相同的配置来创建标准负载均衡器，并将流量从基本负载均衡器迁移到标准负载均衡器。
 
@@ -31,12 +31,24 @@ ms.locfileid: "81770390"
 ### <a name="caveatslimitations"></a>注意事项/限制
 
 * 脚本仅支持内部负载均衡器升级，无需任何出站连接。 如果需要某些 Vm 的[出站连接](https://docs.microsoft.com/azure/load-balancer/load-balancer-outbound-connections)，请参阅此[页面](upgrade-InternalBasic-To-PublicStandard.md)了解相关说明。 
+* 基本负载均衡器需要与后端 Vm 和 Nic 位于同一资源组中。
 * 如果在不同的区域中创建标准负载均衡器，则无法将旧区域中的 Vm 关联到新创建的标准负载均衡器。 若要解决此限制，请确保在新区域中创建新的 VM。
 * 如果你的负载均衡器没有任何前端 IP 配置或后端池，你可能会遇到运行脚本时遇到的错误。 请确保它们不为空。
 
+## <a name="change-ip-allocation-method-to-static-for-frontend-ip-configuration-ignore-this-step-if-its-already-static"></a>将 IP 分配方法更改为静态前端 IP 配置（如果此步骤已为静态，则忽略此步骤）
+
+1. 选择左侧菜单中的 "**所有服务**"，选择 "**所有资源**"，然后从 "资源" 列表中选择你的基本负载均衡器。
+
+2. 在 "**设置**" 下，选择 "**前端 ip 配置**"，然后选择第一个前端 ip 配置。 
+
+3. 对于**分配**，选择 "**静态**"
+
+4. 对于基本负载均衡器的所有前端 IP 配置，重复步骤3。
+
+
 ## <a name="download-the-script"></a>下载脚本
 
-从 [PowerShell 库](https://www.powershellgallery.com/packages/AzureILBUpgrade/2.0)下载迁移脚本。
+从 [PowerShell 库](https://www.powershellgallery.com/packages/AzureILBUpgrade/3.0)下载迁移脚本。
 ## <a name="use-the-script"></a>使用脚本
 
 根据本地 PowerShell 环境的设置和首选项，可以使用两个选项：
@@ -58,7 +70,7 @@ ms.locfileid: "81770390"
 
 ### <a name="install-using-the-script-directly"></a>直接使用脚本安装
 
-如果已安装某些 Azure Az 模块并且无法卸载它们（或者不想卸载），可以使用脚本下载链接中的“手动下载”选项卡手动下载该脚本。**** 此脚本将作为原始 nupkg 文件下载。 若要安装此 nupkg 文件中的脚本，请参阅[手动下载包](/powershell/scripting/gallery/how-to/working-with-packages/manual-download)。
+如果已安装某些 Azure Az 模块并且无法卸载它们（或者不想卸载），可以使用脚本下载链接中的“手动下载”选项卡手动下载该脚本。  此脚本将作为原始 nupkg 文件下载。 若要安装此 nupkg 文件中的脚本，请参阅[手动下载包](/powershell/scripting/gallery/how-to/working-with-packages/manual-download)。
 
 若要运行该脚本，请执行以下操作：
 

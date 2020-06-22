@@ -63,6 +63,9 @@
       href: samples-powershell.md
     - name: 资源管理器模板
       href: samples-resource-manager-templates.md
+    - name: Azure Policy 内置策略定义
+      displayName: 'samples, policies, definitions'
+      href: ./policy-samples.md
 - name: 概念
   items:
     - name: 应用服务计划
@@ -197,6 +200,8 @@
           href: web-sites-monitor.md
         - name: 启用日志
           href: troubleshoot-diagnostic-logs.md
+        - name: 获取资源事件
+          href: get-resource-events.md
     - name: 管理应用
       items:
         - name: 管理托管计划

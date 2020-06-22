@@ -6,8 +6,14 @@
       href: overview-iot-central.md
     - name: UI 教程
       href: overview-iot-central-tour.md
+    - name: 开发设备
+      href: overview-iot-central-developer.md
     - name: 最新更新
       items:
+        - name: 2020 年 4 月新功能
+          href: 'https://azure.microsoft.com/updates/azure-iot-central-april-2020-new-features/'
+        - name: 2020 年 4 月更新
+          href: 'https://azure.microsoft.com/updates/azure-iot-central-april-2020-updates/'
         - name: 2020 年 3 月
           href: 'https://azure.microsoft.com/updates/azure-iot-central-march-2020-updates/'
 - name: 快速入门
@@ -63,6 +69,8 @@
           href: howto-set-up-template.md
         - name: 准备和连接 MXChip IoT DevKit
           href: howto-connect-devkit.md
+        - name: 准备和连接 Azure Sphere DevKit
+          href: howto-connect-sphere.md
         - name: 准备和连接 RuuviTag 设备
           href: howto-connect-ruuvi.md
         - name: 准备和连接 Rigado Cascade 500
@@ -79,6 +87,8 @@
           href: howto-manage-devices.md
         - name: 配置规则
           href: howto-configure-rules.md
+        - name: 使用工作流与其他服务集成
+          href: howto-configure-rules-advanced.md
         - name: 分析设备数据
           href: howto-create-analytics.md
         - name: 向仪表板添加磁贴
@@ -121,6 +131,8 @@
               href: howto-manage-iot-central-from-cli.md
             - name: 从 Azure PowerShell 进行管理
               href: howto-manage-iot-central-from-powershell.md
+            - name: 以编程方式管理
+              href: howto-manage-iot-central-programmatically.md
             - name: 从云解决方案提供商门户进行管理
               href: howto-create-and-manage-applications-csp.md
         - name: 个性化应用程序

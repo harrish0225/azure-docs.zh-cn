@@ -3,12 +3,12 @@ title: 常见问题的解答
 description: '针对以下常见问题的解答：包括恢复服务保管库在内的 Azure 备份功能、能够备份的内容、原理、加密和限制。 '
 ms.topic: conceptual
 ms.date: 07/07/2019
-ms.openlocfilehash: 039666c4b54da6ac5444f5aa5acda5f1bb438782
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: c82942c17d330eb5f632ef3ce43f00b338ba85f8
+ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80156049"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83196263"
 ---
 # <a name="azure-backup---frequently-asked-questions"></a>Azure 备份 - 常见问题
 
@@ -75,7 +75,7 @@ ms.locfileid: "80156049"
 
 Azure 备份支持操作系统对文件和文件夹以及使用 Azure 备份服务器和 DPM 保护的工作负载应用程序进行备份。
 
-操作系统  | **SKU** | **详细信息**
+**OS** | **SKU** | **详细信息**
 --- | --- | ---
 工作站 | |
 Windows 10 64 位 | Enterprise、Pro、Home | 计算机应运行最新服务包和更新。
@@ -107,7 +107,7 @@ Windows 8 或更高版本 | 54,400 GB
 Windows 7 |1700 GB
 Windows Server 2012 或更高版本 | 54,400 GB
 Windows Server 2008、Windows Server 2008 R2 | 1700 GB
-Azure VM | 16 个数据磁盘<br/> 若要注册获取包含 16 个以上磁盘（最多 32 个磁盘）的个人预览版 VM，请向我们发送电子邮件：AskAzureBackupTeam@microsoft.com <br><br> 容量高达 32 TB 的数据磁盘
+Azure VM | 请参阅[AZURE VM 备份的支持矩阵](https://docs.microsoft.com/azure/backup/backup-support-matrix-iaas#vm-storage-support)
 
 ### <a name="how-is-the-data-source-size-determined"></a>如何确定数据源大小？
 
@@ -135,7 +135,7 @@ BMR/系统状态 |正在备份计算机的 BMR 或系统状态的每个副本。
 
 ### <a name="if-i-cancel-a-backup-job-after-it-starts-is-the-transferred-backup-data-deleted"></a>如果在备份作业开始后取消，是否会删除已传输的备份数据？
 
-不能。 在备份作业取消之前传输到保管库中的所有数据将保留在保管库中。
+不是。 在备份作业取消之前传输到保管库中的所有数据将保留在保管库中。
 
 - Azure 备份使用检查点机制，在备份过程中偶尔要对备份数据添加检查点。
 - 由于备份数据中有检查点，下次备份过程可以验证文件的完整性。
@@ -155,13 +155,13 @@ BMR/系统状态 |正在备份计算机的 BMR 或系统状态的每个副本。
 
 ### <a name="can-i-use-different-times-for-backup-scheduling-and-retention-policies"></a>是否可以对备份计划和保留策略使用不同时间？
 
-不能。 只能在备份时间点应用保留策略。 例如，此图显示了午夜 12 点和下午 6 点创建的备份的保留策略。
+不是。 只能在备份时间点应用保留策略。 例如，此图显示了午夜 12 点和下午 6 点创建的备份的保留策略。
 
 ![计划备份和保持](./media/backup-azure-backup-faq/Schedule.png)
 
 ### <a name="if-a-backup-is-kept-for-a-long-time-does-it-take-more-time-to-recover-an-older-data-point"></a>如果备份保留了很长一段时间，是否需要更多时间才能恢复较旧的数据点？
 
-不能。 恢复最旧或最新时间点所需的时间相同。 每个恢复点的行为类似一个完整的点。
+不是。 恢复最旧或最新时间点所需的时间相同。 每个恢复点的行为类似一个完整的点。
 
 ### <a name="if-each-recovery-point-is-like-a-full-point-does-it-impact-the-total-billable-backup-storage"></a>如果每个恢复点相当于完整的点，它会影响总体可计费备份存储吗？
 
@@ -184,7 +184,7 @@ Azure 备份存储体系结构提供这两个领域的最佳产品，它以最�
 
 ### <a name="when-restoring-data-do-i-pay-for-the-egress-traffic-from-azure"></a>还原数据时，Azure 的出口流量是否需要付费？
 
-不能。 恢复是免费的，不收取传出流量费。
+不是。 恢复是免费的，不收取传出流量费。
 
 ### <a name="what-happens-when-i-change-my-backup-policy"></a>如果更改备份策略，会发生什么情况？
 

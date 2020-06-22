@@ -8,14 +8,14 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
 ms.topic: reference
-ms.date: 04/24/2019
+ms.date: 05/26/2020
 ms.author: swmachan
-ms.openlocfilehash: 3c5c74fc853b5a2425a58e1704aad43350cba212
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: ea2761712e4bbb7a3abd1483766f4eae47b7c350
+ms.sourcegitcommit: fc718cc1078594819e8ed640b6ee4bef39e91f7f
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "73837448"
+ms.lasthandoff: 05/27/2020
+ms.locfileid: "83996357"
 ---
 # <a name="unsupported-language-deployments"></a>不支持的语言部署
 
@@ -45,7 +45,7 @@ ms.locfileid: "73837448"
 
 ![如何从 Hub 迁移](media/unsupported-language-deployments/request-unsupported-trainings.jpg) 
 
-## <a name="whats-next"></a>后续步骤
+## <a name="whats-next"></a>下一步是什么？
 
 在停止集线器并取消部署所有模型后，将保存选择用于部署的模型。  在5月24日前提交请求以部署不受支持的模型。  我们将于6月15日部署这些模型，此时可通过转换器 V3 API 访问这些模型。  此外，在7月1日前，它们将通过 V2 API 提供。  
 
@@ -57,4 +57,4 @@ ms.locfileid: "73837448"
 ## <a name="next-steps"></a>后续步骤
 
 - [为模型定型](how-to-train-model.md)。
-- 通过 [Microsoft 文本翻译 API V3](https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-translate?tabs=curl) 开始使用已部署的自定义翻译模型。
+- 开始通过[转换器 V3](https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-translate?tabs=curl)使用已部署的自定义翻译模型。

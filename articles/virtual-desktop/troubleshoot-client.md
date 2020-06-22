@@ -8,12 +8,12 @@ ms.topic: troubleshooting
 ms.date: 03/31/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: 595762e6e8f22dddff30f1cff8c4bb79e89624b1
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 76348a0aee48cc6d768e8233e376f266eca31917
+ms.sourcegitcommit: ac4a365a6c6ffa6b6a5fbca1b8f17fde87b4c05e
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80473851"
+ms.lasthandoff: 05/10/2020
+ms.locfileid: "83006001"
 ---
 # <a name="troubleshoot-the-remote-desktop-client"></a>远程桌面客户端疑难解答
 
@@ -60,6 +60,12 @@ nslookup rdweb.wvd.microsoft.com
 3. 清除浏览器缓存。 请参阅[清除浏览器缓存](https://binged.it/2RKyfdU)。
 4. 以专用模式打开浏览器。
 
+## <a name="web-client-does-not-show-my-resources"></a>Web 客户端未显示我的资源
+
+首先，请检查正在使用的 Azure Active Directory 帐户。 如果你已使用与 Winodws 虚拟桌面所要使用的帐户 Azure Active Directory 不同的帐户登录，则应使用专用浏览器窗口进行签名。
+
+如果你使用的是 Windows 虚拟桌面秋季2019版，请使用[本文](./virtual-desktop-fall-2019/connect-web-2019.md)中的 web 客户端链接连接到你的资源。
+
 ## <a name="web-client-stops-responding-or-disconnects"></a>Web 客户端停止响应或断开连接
 
 尝试使用其他浏览器或客户端进行连接。
@@ -81,7 +87,7 @@ nslookup rdweb.wvd.microsoft.com
 ## <a name="next-steps"></a>后续步骤
 
 - 有关 Windows 虚拟桌面故障排除和升级跟踪的概述，请参阅[故障排除概述、反馈和支持](troubleshoot-set-up-overview.md)。
-- 若要在 Windows 虚拟桌面环境中创建租户和主机池时排查问题，请参阅[租户和主机池创建](troubleshoot-set-up-issues.md)。
+- 若要解决在 Windows 虚拟桌面环境中创建 Windows 虚拟桌面环境和主机池时遇到的问题，请参阅[环境和主机池创建](troubleshoot-set-up-issues.md)。
 - 若要解决在 Windows 虚拟桌面中配置虚拟机（VM）时遇到的问题，请参阅[会话主机虚拟机配置](troubleshoot-vm-configuration.md)。
 - 若要解决将 PowerShell 与 Windows 虚拟桌面结合使用时遇到的问题，请参阅[Windows 虚拟桌面 PowerShell](troubleshoot-powershell.md)。
 - 若要浏览疑难解答教程，请参阅[教程：排查资源管理器模板部署问题](../azure-resource-manager/templates/template-tutorial-troubleshoot.md)。

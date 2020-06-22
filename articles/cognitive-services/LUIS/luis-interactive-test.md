@@ -2,19 +2,17 @@
 title: 在 LUIS 门户中测试应用
 description: 使用语言理解 (LUIS) 持续优化应用程序并改进其语言理解能力。
 ms.topic: conceptual
-ms.date: 11/19/2019
-ms.openlocfilehash: ba7e23a72cd308dd4393bf9a581571e2bc9f5fa0
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.date: 05/20/2020
+ms.openlocfilehash: 91994418b50eb112582bbed1853dd85e9db3599d
+ms.sourcegitcommit: 958f086136f10903c44c92463845b9f3a6a5275f
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "79219815"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83714374"
 ---
 # <a name="test-your-luis-app-in-the-luis-portal"></a>在 LUIS 门户中测试 LUIS 应用
 
 对应用进行[测试](luis-concept-test.md)是一个迭代过程。 训练 LUIS 应用后，采用示例陈述来对应用进行测试，查看应用是否能准确地识别意向和实体。 如果未能准确识别，请对 LUIS 应用进行更新和训练，然后再次测试。
-
-[!INCLUDE [Uses preview portal](includes/uses-portal-preview.md)]
 
 <!-- anchors for H2 name changes -->
 <a name="train-your-app"></a>
@@ -24,13 +22,16 @@ ms.locfileid: "79219815"
 
 ## <a name="train-before-testing"></a>测试前训练
 
-若要针对活动应用的最新版本进行测试，请在测试前从顶部菜单中选择 "**训练**"。
+1. 登录到[LUIS 门户](https://www.luis.ai)，选择**订阅**和**创作资源**，查看分配给该创作资源的应用。
+1. 通过在 **"我的应用**" 页上选择应用程序的名称来打开应用。
+1. 若要针对活动应用的最新版本进行测试，请在测试前从顶部菜单中选择 "**训练**"。
 
 ## <a name="test-an-utterance"></a>测试陈述
 
 测试查询文本不应与应用中的任何示例最谈话完全相同。 测试查询文本应包括用户预期的 word 选择、短语长度和实体使用情况。
 
-1. 在“我的应用”页面上选择应用名称以访问应用****。
+1. 登录到[LUIS 门户](https://www.luis.ai)，选择**订阅**和**创作资源**，查看分配给该创作资源的应用。
+1. 通过在 **"我的应用**" 页上选择应用程序的名称来打开应用。
 
 1. 若要访问**测试**滑出面板，请在应用程序的顶部面板中选择 "**测试**"。
 
@@ -41,33 +42,36 @@ ms.locfileid: "79219815"
 
 1. 陈述的最高意向和分数会添加至文本框下方的陈述列表。
 
-    ![交互式测试识别错误意向](./media/luis-how-to-interactive-test/test-weather-1.png)
+    > [!div class="mx-imgBorder"]
+    > ![交互式测试识别错误意向](./media/luis-how-to-interactive-test/test-weather-1.png)
 
-## <a name="inspect-score"></a>检查分数
+## <a name="inspect-the-prediction"></a>检查预测
 
 在 "**检查**" 面板中检查测试结果的详细信息。
 
 1. 打开“测试”滑出面板后，对想要比对的陈述选择“检查”********。
 
-    ![选择“检查”按钮可查看有关测试结果的更多详细信息](./media/luis-how-to-interactive-test/inspect.png)
+    > [!div class="mx-imgBorder"]
+    > ![选择“检查”按钮可查看有关测试结果的更多详细信息](./media/luis-how-to-interactive-test/inspect.png)
 
-1. 此时将显示 "**检查**" 面板。 此面板包括评分最高的意向以及任何已识别的实体。 此面板显示所选陈述的结果。
+1. 此时将显示 "**检查**" 面板。 此面板包括评分最高的意向以及任何已识别的实体。 该面板显示所选查询文本的预测。
 
-    ![此面板包括评分最高的意向以及任何已识别的实体。 此面板显示所选陈述的结果。](./media/luis-how-to-interactive-test/inspect-panel.png)
+    > [!div class="mx-imgBorder"]
+    > ![测试检查面板的部分屏幕截图](./media/luis-how-to-interactive-test/inspect-panel.png)
 
-## <a name="correct-top-scoring-intent"></a>更正评分最高的意向
+## <a name="add-to-example-utterances"></a>添加到示例最谈话
 
-1. 如果评分最高的意向不正确，请选择“编辑”按钮****。
+从检查面板中，可以通过选择 "**添加到示例最谈话**" 将测试查询文本添加到目的。
 
-1.  在下拉列表中选择该陈述的正确意向。
+## <a name="disable-required-features"></a>禁用所需的功能
 
-    ![选择正确的意向](./media/luis-how-to-interactive-test/intent-select.png)
+如果实体的功能不是必需的，则选择此开关可以查看预测的含义。
+
+此切换可帮助你确定经过训练的应用是否根据所需功能正确预测你的实体。 经过训练的应用可能会根据示例最谈话的错误标签或所需功能与文本不匹配，误预测机器学习的实体。
 
 ## <a name="view-sentiment-results"></a>查看情绪结果
 
 如果在[发布](luis-how-to-publish-app.md#enable-sentiment-analysis)页面上配置了“情绪分析”，则测试结果会包括在该陈述中发现的情绪********。
-
-![包含情绪分析的“测试”窗格的图像](./media/luis-how-to-interactive-test/sentiment.png)
 
 ## <a name="correct-matched-patterns-intent"></a>更正匹配的模式的意向
 
@@ -77,12 +81,14 @@ ms.locfileid: "79219815"
 
 可以使用已发布的[终结点](luis-glossary.md#endpoint)版本测试应用的活动版本。 在“检查”面板中选择“与已发布版本进行比较”********。 针对该发布模型的任何测试都会从 Azure 订阅配额余量中扣除。
 
-![与已发布版本进行比较](./media/luis-how-to-interactive-test/inspect-panel-compare.png)
+> [!div class="mx-imgBorder"]
+> ![与已发布版本进行比较](./media/luis-how-to-interactive-test/inspect-panel-compare.png)
 
 ## <a name="view-endpoint-json-in-test-panel"></a>在测试面板中查看终结点 JSON
 选择“显示 JSON 视图”，可以查看该比较返回的终结点 JSON****。
 
-![已发布的 JSON 响应](./media/luis-how-to-interactive-test/inspect-panel-compare-json.png)
+> [!div class="mx-imgBorder"]
+> ![已发布的 JSON 响应](./media/luis-how-to-interactive-test/inspect-panel-compare-json.png)
 
 ## <a name="additional-settings-in-test-panel"></a>测试面板中的其他设置
 

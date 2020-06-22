@@ -12,12 +12,12 @@ metadata:
   author: j-martens
   ms.author: jmartens
   ms.date: 04/30/2020
-  ms.openlocfilehash: b1df2d4420e25027a545b8a708cda31cf0ff152f
-  ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+  ms.openlocfilehash: 57a16ca35699f11c55e12c494a4cbb93bac8a334
+  ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
   ms.translationtype: HT
   ms.contentlocale: zh-CN
-  ms.lasthandoff: 05/01/2020
-  ms.locfileid: "82690950"
+  ms.lasthandoff: 05/19/2020
+  ms.locfileid: "83592995"
 landingContent:
 - title: 机器学习入门
   linkLists:
@@ -67,6 +67,8 @@ landingContent:
     links:
     - text: 设置你的环境
       url: how-to-configure-environment.md
+    - text: 解释和说明模型
+      url: how-to-machine-learning-interpretability.md
     - text: 深度学习与 ML
       url: concept-deep-learning-vs-machine-learning.md
     - text: 使用 Scikit-learn 进行训练
@@ -77,9 +79,11 @@ landingContent:
       url: how-to-train-pytorch.md
     - text: 使用 Keras 进行训练
       url: how-to-train-keras.md
+    - text: 强化学习
+      url: how-to-use-reinforcement-learning.md
     - text: 什么是 ML 管道？
       url: concept-ml-pipelines.md
-- title: 部署和管理模型
+- title: 部署和管理模型 (MLOps)
   linkLists:
   - linkListType: how-to-guide
     links:

@@ -9,12 +9,12 @@ metadata:
   author: dcurwin
   ms.author: dacurwin
   ms.date: 12/01/2019
-  ms.openlocfilehash: 06c7f26fcbe0e57d2d535f4050280b993a51ed70
-  ms.sourcegitcommit: 441db70765ff9042db87c60f4aa3c51df2afae2d
+  ms.openlocfilehash: 0060cc16378ca006e975f4f55da5099179778753
+  ms.sourcegitcommit: 0b80a5802343ea769a91f91a8cdbdf1b67a932d3
   ms.translationtype: HT
   ms.contentlocale: zh-CN
-  ms.lasthandoff: 04/06/2020
-  ms.locfileid: "80755904"
+  ms.lasthandoff: 05/25/2020
+  ms.locfileid: "83835670"
 landingContent:
 - title: 了解 Azure 备份
   linkLists:
@@ -56,7 +56,7 @@ landingContent:
   linkLists:
   - linkListType: whats-new
     links:
-    - text: Azure VM 备份数据的软删除
+    - text: Azure 备份的软删除
       url: backup-azure-security-feature-cloud.md
     - text: 将 Azure VM 上的 SQL Server 还原为文件
       url: restore-sql-database-azure-vm.md#restore-as-files
@@ -148,5 +148,5 @@ landingContent:
       url: https://azure.microsoft.com/pricing/details/backup/
     - text: Azure 备份服务更新
       url: https://azure.microsoft.com/updates/?product=backup
-    - text: Azure 备份 MSDN 论坛
-      url: https://social.msdn.microsoft.com/Forums/home?forum=windowsazureonlinebackup
+    - text: 有关 Azure 备份的 Microsoft Q&A 问题页面
+      url: https://docs.microsoft.com/answers/topics/azure-backup.html

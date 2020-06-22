@@ -5,12 +5,12 @@ author: sideeksh
 manager: rochakm
 ms.date: 04/29/2019
 ms.topic: conceptual
-ms.openlocfilehash: 7d3bcc32dc8f1412a5adbc175a5f8618628bce83
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: bc2acc4303a270a2bf71f0c9ff249b60a0328a09
+ms.sourcegitcommit: 999ccaf74347605e32505cbcfd6121163560a4ae
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80547890"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82983272"
 ---
 # <a name="common-questions-azure-to-azure-disaster-recovery"></a>常见问题：Azure 到 Azure 的灾难恢复
 
@@ -100,6 +100,10 @@ Site Recovery 不支持将磁盘从复制的 VM 中“热删除”。 如果删�
 是的，您可以复制应用程序并将灾难恢复配置保留在单独的资源组中。
 
 例如，如果应用程序在单独的资源组中有每个层的应用程序、数据库和 web，则必须选择[复制向导](https://docs.microsoft.com/azure/site-recovery/azure-to-azure-how-to-enable-replication#enable-replication)三次来保护所有层。 Site Recovery 会将这三个层复制到三个不同的资源组中。
+
+### <a name="can-i-move-storage-accounts-across-resource-groups"></a>能否跨资源组移动存储帐户？
+
+否，此方案不受支持。 但是，如果你意外地将存储帐户移到不同的资源组并删除了原始资源组，则可以创建一个与旧资源组同名的新资源组，然后将该存储帐户移到此资源组。
 
 ## <a name="replication-policy"></a>复制策略
 
@@ -194,10 +198,10 @@ Site Recovery 提供了**多 VM 一致性**选项，该选项将创建所有计�
 因为多 VM 一致性是 CPU 密集型，所以启用此一致性可能会影响工作负荷性能。 仅当计算机运行相同的工作负荷并且需要跨多台计算机的一致性时，才使用多 VM 一致性。 例如，如果应用程序中有两个 SQL Server 实例和两个 web 服务器，则只应为 SQL Server 实例提供多 VM 一致性。
 
 ### <a name="can-you-add-an-already-replicating-vm-to-a-replication-group"></a>是否可以将已复制的 VM 添加到复制组？
-
 可以将 VM 添加到新的复制组，同时启用复制。 还可以将 VM 添加到现有的复制组，同时启用复制。 但是，不能将已复制的 VM 添加到新的复制组或现有的复制组。
-
+ 
 ## <a name="failover"></a>故障转移
+
 
 ### <a name="how-is-capacity-ensured-in-the-target-region-for-azure-vms"></a>如何在 Azure Vm 的目标区域中确保容量？
 
@@ -234,7 +238,7 @@ Site Recovery 团队和 Azure 容量管理团队规划了足够的基础结构�
 
 ### <a name="what-does-the-latest-processed-option-in-recovery-points-mean"></a>恢复点中的“最新处理”选项指的是什么？****
 
-**最新处理**的选项会将计划中的所有 vm 故障转移到 Site Recovery 处理的最新恢复点。 若要查看特定 VM 的最新恢复点，请检查 VM 设置中的“最新恢复点”。**** 此选项提供低的 RTO，因为无需费时处理未经处理的数据。
+**最新处理**的选项会将计划中的所有 vm 故障转移到 Site Recovery 处理的最新恢复点。 若要查看特定 VM 的最新恢复点，请检查 VM 设置中的“最新恢复点”。  此选项提供低的 RTO，因为无需费时处理未经处理的数据。
 
 ### <a name="what-happens-if-my-primary-region-experiences-an-unexpected-outage"></a>如果主要区域的服务意外中断，会出现什么情况？
 
@@ -275,7 +279,7 @@ Site Recovery 中的恢复计划可以协调 VM 的故障转移恢复。 它有�
 
 ### <a name="i-failed-over-from-the-primary-region-to-a-disaster-recovery-region-are-vms-in-a-dr-region-protected-automatically"></a>我从主要区域故障转移到灾难恢复区域。 DR 区域中的 Vm 是否自动受到保护？
 
-不能。 将 Azure VM 从一个区域[故障转移](https://docs.microsoft.com/azure/site-recovery/azure-to-azure-tutorial-failover-failback)到另一个区域后，VM 将在灾难恢复区域中启动，但处于不受保护状态。 若要将 VM 故障回复到主要区域，需要[重新保护](https://docs.microsoft.com/azure/site-recovery/azure-to-azure-how-to-reprotect)次要区域中的 VM。
+不是。 将 Azure VM 从一个区域[故障转移](https://docs.microsoft.com/azure/site-recovery/azure-to-azure-tutorial-failover-failback)到另一个区域后，VM 将在灾难恢复区域中启动，但处于不受保护状态。 若要将 VM 故障回复到主要区域，需要[重新保护](https://docs.microsoft.com/azure/site-recovery/azure-to-azure-how-to-reprotect)次要区域中的 VM。
 
 ### <a name="at-the-time-of-reprotection-does-site-recovery-replicate-complete-data-from-the-secondary-region-to-the-primary-region"></a>重新保护时，Site Recovery 是否将完整的数据从次要区域复制到主要区域？
 

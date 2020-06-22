@@ -112,7 +112,7 @@ Update-AzVmss `
 Get-AzPublicIpAddress -ResourceGroupName myResourceGroup | Select IpAddress
 ```
 
-以“http: */publicIpAddress/MyApp”\/* 格式将负载均衡器的公共 IP 地址输入到 Web 浏览器中。 负载均衡器将流量分发到某个 VM 实例，如以下示例所示：
+以“http:\//publicIpAddress/MyApp”格式将负载均衡器的公共 IP 地址输入到 Web 浏览器中。 负载均衡器将流量分发到某个 VM 实例，如以下示例所示：
 
 ![运行 IIS 网站](./media/virtual-machine-scale-sets-create-powershell/running-iis-site.png)
 

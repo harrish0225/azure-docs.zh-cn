@@ -7,12 +7,12 @@ ms.date: 02/23/2020
 ms.author: rogarana
 ms.subservice: files
 ms.topic: conceptual
-ms.openlocfilehash: 01b5f87c2557e2195573b90766ee45e001798cca
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: b4d3be9fbacee82f36f1238c5d9b4598c95b5df2
+ms.sourcegitcommit: b396c674aa8f66597fa2dd6d6ed200dd7f409915
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81537689"
+ms.lasthandoff: 05/07/2020
+ms.locfileid: "82888823"
 ---
 # <a name="frequently-asked-questions-faq-about-azure-files"></a>有关 Azure 文件的常见问题解答 (FAQ)
 [Azure 文件](storage-files-introduction.md)在云端提供完全托管的文件共享，这些共享项可通过行业标准的[服务器消息块 (SMB) 协议](https://msdn.microsoft.com/library/windows/desktop/aa365233.aspx)进行访问。 你可以在云或 Windows、Linux 和 macOS 的本地部署同时装载 Azure 文件共享。 另外，你也可以使用 Azure 文件同步在 Windows Server 计算机上缓存 Azure 文件共享，以在靠近使用数据的位置实现快速访问。
@@ -68,7 +68,7 @@ ms.locfileid: "81537689"
 
 * <a id="redundancy-options"></a>
   **Azure 文件支持哪些存储冗余选项？**  
-    目前，Azure 文件支持本地冗余存储（LRS）、区域冗余存储（ZRS）、异地冗余存储（GRS）和异地冗余存储（GZRS）（预览版）。 将来我们计划支持读取访问权限异地冗余存储 (RA-GRS)，但目前还没有可分享的日程表。
+    目前，Azure 文件支持本地冗余存储（LRS）、区域冗余存储（ZRS）、异地冗余存储（GRS）和异地冗余存储（GZRS）。 将来我们计划支持读取访问权限异地冗余存储 (RA-GRS)，但目前还没有可分享的日程表。
 
 * <a id="tier-options"></a>
   **Azure 文件支持哪些存储层？**  
@@ -170,7 +170,7 @@ ms.locfileid: "81537689"
 
     - 你可以使用共享访问签名 (SAS) 生成在指定时间间隔内有效的具有特定权限的令牌。 例如，可以生成在 10 分钟后到期、对特定文件具有只读访问权限的令牌。 只要拥有此有效令牌，就可以在 10 分钟内拥有对给定文件的只读访问权限。 仅通过 REST API 或客户端库支持共享访问签名密钥。 你必须使用存储帐户密钥通过 SMB 装载 Azure 文件共享。
 
-    - Azure 文件同步会保留所有自定义 ACL 或 DACL（无论基于 Active Directory 或本地目录），并复制到其同步到的所有服务器终结点。 由于 Windows 服务器已经可以使用 Active Directory 进行身份验证，因此，在全面支持基于 Active Directory 的身份验证和实现对 ACL 的支持前，Azure 文件同步是一个有效的临时选择。
+    - Azure 文件同步会保留所有自定义 ACL 或 DACL（无论基于 Active Directory 或本地目录），并复制到其同步到的所有服务器终结点。 
     
     若要全面表示 Azure 存储服务支持的所有协议，可以参阅[授权访问 Azure 存储](https://docs.microsoft.com/azure/storage/common/storage-auth?toc=%2fazure%2fstorage%2fblobs%2ftoc.json)。 
 
@@ -275,7 +275,7 @@ ms.locfileid: "81537689"
 * <a id="expressroute-not-required"></a>
 **必须使用 Azure ExpressRoute 才能在本地连接到 Azure 文件或使用 Azure 文件同步吗？**  
 
-    不能。 ExpressRoute 不是访问 Azure 文件共享的必要条件。 如果要直接在本地装载 Azure 文件共享，则只需打开端口 445（TCP 出站）即可进行 Internet 访问（这是 SMB 用于进行通信的端口）。 如果正在使用 Azure 文件同步，则只需端口 443（TCP 出站）即可进行 HTTPS 访问（无需 SMB）。 但是，你可以** 将 ExpressRoute 与这些访问选项中任意一项一起使用。
+    否。 ExpressRoute 不是访问 Azure 文件共享的必要条件。 如果要直接在本地装载 Azure 文件共享，则只需打开端口 445（TCP 出站）即可进行 Internet 访问（这是 SMB 用于进行通信的端口）。 如果正在使用 Azure 文件同步，则只需端口 443（TCP 出站）即可进行 HTTPS 访问（无需 SMB）。 但是，你可以** 将 ExpressRoute 与这些访问选项中任意一项一起使用。
 
 * <a id="mount-locally"></a>
 **如何才能在本地计算机上装载 Azure 文件共享？**  
@@ -379,7 +379,7 @@ ms.locfileid: "81537689"
 * <a id="lfs-performance-impact"></a>
 **扩展文件共享配额是否会影响我的工作负荷或 Azure 文件同步？**
     
-    不能。 扩展配额不会影响工作负荷或 Azure 文件同步。
+    否。 扩展配额不会影响工作负荷或 Azure 文件同步。
 
 * <a id="open-handles-quota"></a>
 **多少个客户端可以同时访问同一文件？**   
@@ -404,11 +404,11 @@ ms.locfileid: "81537689"
 
 * <a id="rest-rename"></a>
 **REST API 中是否有重命名操作？**  
-    现在不行。
+    目前没有。
 
 * <a id="nested-shares"></a>
 **是否可以设置嵌套共享？换句话说，共享下的共享？**  
-    不能。 文件共享*是*可以装载的虚拟驱动程序，因此不支持嵌套共享。
+    否。 文件共享*是*可以装载的虚拟驱动程序，因此不支持嵌套共享。
 
 * <a id="ibm-mq"></a>
 **如何将 Azure 文件与 IBM MQ 配合使用？**  

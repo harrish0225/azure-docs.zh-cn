@@ -9,17 +9,16 @@ ms.subservice: ''
 ms.date: 04/15/2020
 ms.author: v-stazar
 ms.reviewer: jrasnick
-ms.openlocfilehash: 8ff9034e6c31c8d95e862570e3962990dfec8442
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 260c88142d93b8b79782b219f902c63a16b9218b
+ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81419651"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83197008"
 ---
 # <a name="connect-to-synapse-sql-with-sqlcmd"></a>使用 sqlcmd 连接到 Synapse SQL
 
 > [!div class="op_single_selector"]
->
 > * [Azure Data Studio（预览版）](get-started-azure-data-studio.md)
 > * [Power BI](get-started-power-bi-professional.md)
 > * [Visual Studio](../sql-data-warehouse/sql-data-warehouse-query-visual-studio.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json)
@@ -79,7 +78,7 @@ C:\>sqlcmd -S MySqlDw.database.windows.net -d Adventure_Works -G -I
 
 ### <a name="use-sql-pool"></a>使用 SQL 池
 
-连接后，可以对实例发出任何支持的 Transact-SQL 语句。  在此示例中，查询是以交互模式提交的：
+连接后，可以对实例发出任何支持的 [Transact-SQL](/sql/t-sql/language-reference?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest) (T-SQL) 语句。 在此示例中，查询是以交互模式提交的：
 
 ```sql
 C:\>sqlcmd -S MySqlDw.database.windows.net -d Adventure_Works -U myuser -P myP@ssword -I

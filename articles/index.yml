@@ -13,12 +13,12 @@ metadata:
   ms.date: 02/27/2020
   featureFlags:
   - clicktale
-  ms.openlocfilehash: b52a66e23e7f1f0324655146d62a56873cfc5eef
-  ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+  ms.openlocfilehash: 8dd70bbe8b3e495473523a662e0501613703354f
+  ms.sourcegitcommit: 053e5e7103ab666454faf26ed51b0dfcd7661996
   ms.translationtype: HT
   ms.contentlocale: zh-CN
-  ms.lasthandoff: 04/28/2020
-  ms.locfileid: "82182406"
+  ms.lasthandoff: 05/27/2020
+  ms.locfileid: "84021766"
 highlightedContent:
   items:
   - title: Azure 开发人员入门指南
@@ -75,6 +75,12 @@ productDirectory:
     azureCategories:
     - ai-machine-learning
     url: open-datasets/index.yml
+  - title: Azure RTOS
+    summary: 简化嵌入 IoT 的开发和连接
+    imageSrc: https://static.docs.com/ui/media/product/azure/rtos.svg
+    azureCategories:
+    - iot
+    url: https://docs.microsoft.com/azure/rtos/
   - title: 必应自动建议
     summary: 为应用提供用于搜索的智能自动建议选项
     imageSrc: ./media/index/API_Bing_AutoSuggest.svg
@@ -198,13 +204,6 @@ productDirectory:
     azureCategories:
     - ai-machine-learning
     url: cognitive-services/luis/index.yml
-  - title: 机器学习工作室（经典版）
-    summary: 轻松生成、部署和管理预测分析解决方案
-    imageSrc: https://static.docs.com/ui/media/product/azure/machine-learning-studio-service.svg
-    azureCategories:
-    - ai-machine-learning
-    - iot
-    url: machine-learning/studio/index.yml
   - title: Microsoft 基因组学
     summary: 为基因组测序和研究提供支持
     imageSrc: https://static.docs.com/ui/media/product/azure/genomics.svg
@@ -443,12 +442,12 @@ productDirectory:
     - compute
     - web
     url: spring-cloud/index.yml
-  - title: Azure VMware Solution by CloudSimple
+  - title: Azure VMware 解决方案
     summary: 在 Azure 上以原生方式运行 VMware 工作负载
-    imageSrc: ./media/index/cs_dedicatedcloudnode.svg
+    imageSrc: ./media/index/azure-vmware.svg
     azureCategories:
     - compute
-    url: vmware-cloudsimple/index.md
+    url: azure-vmware/index.yml
   - title: Batch
     summary: 云规模的作业计划和计算管理
     imageSrc: https://static.docs.com/ui/media/product/azure/batch-accounts.svg
@@ -495,6 +494,13 @@ productDirectory:
     - compute
     - databases
     url: https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-server-iaas-overview?toc=%2Fazure%2Fvirtual-machines%2Fwindows%2Ftoc.json
+  - title: 静态 Web 应用
+    summary: 从 GitHub 存储库生成完整堆栈 Web 应用并将其部署到 Azure
+    imageSrc: ./media/index/static-apps.svg
+    azureCategories:
+    - compute
+    - web
+    url: static-web-apps/index.yml
   - title: 虚拟机规模集
     summary: 管理和缩放数千台 Linux 和 Windows 虚拟机
     imageSrc: https://static.docs.com/ui/media/product/azure/vm-scale-sets.svg
@@ -591,21 +597,33 @@ productDirectory:
     - databases
     - migration
     url: dms/index.yml
+  - title: Azure SQL
+    summary: 用于迁移和应用现代化的新式 SQL 系列
+    imageSrc: https://static.docs.com/ui/media/product/azure/sql-database.svg
+    azureCategories:
+    - featured
+    - hybrid
+    - databases
+    url: azure-sql/index.yml
   - title: Azure SQL Database
     summary: 云中托管的智能 SQL
     imageSrc: https://static.docs.com/ui/media/product/azure/sql-database.svg
     azureCategories:
-    - featured
     - databases
-    - hybrid
-    url: sql-database/index.yml
-  - title: Azure SQL Database Edge（预览版）
+    url: azure-sql/database/index.yml
+  - title: Azure SQL 托管实例
+    summary: 云中托管的始终保持最新状态的 SQL 实例
+    imageSrc: https://static.docs.com/ui/media/product/azure/sql-managed-instance.svg
+    azureCategories:
+    - databases
+    url: azure-sql/managed-instance/index.yml
+  - title: Azure SQL Edge（预览版）
     summary: 已经过边缘优化的小型数据引擎，带有内置 AI
     imageSrc: https://static.docs.com/ui/media/product/azure/sql-database-edge.svg
     azureCategories:
     - databases
     - iot
-    url: sql-database-edge/index.yml
+    url: azure-sql-edge/index.yml
   - title: 表存储
     summary: 使用半结构化数据集的 NoSQL 键-值存储
     imageSrc: https://static.docs.com/ui/media/product/azure/storage-accounts.svg

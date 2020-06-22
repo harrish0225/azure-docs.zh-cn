@@ -1,19 +1,20 @@
 ---
 title: Azure PowerShell 示例 - 创建基本的虚拟机规模集
 description: 此脚本创建一个运行 Windows Server 2016 的 Azure 虚拟机规模集，可通过 RDP 访问该规模集。
-author: ju-shim
-tags: azure-resource-manager
-ms.service: virtual-machine-scale-sets
+author: mimckitt
+ms.author: mimckitt
 ms.topic: sample
+ms.service: virtual-machine-scale-sets
+ms.subservice: powershell
 ms.date: 03/27/2018
-ms.author: jushiman
-ms.custom: mvc
-ms.openlocfilehash: 380b3d25bdcd5df5f095b2d87e832bf73422759e
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.reviewer: jushiman
+ms.custom: mimckitt
+ms.openlocfilehash: 3d49212e6d35e2a348a7e31ff7d2f0ad49eabfc2
+ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81011474"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83699498"
 ---
 # <a name="create-a-basic-virtual-machine-scale-set-with-powershell"></a>使用 PowerShell 创建基本的虚拟机规模集
 此脚本创建运行 Windows Server 2016 的虚拟机规模集。 运行脚本后，可通过 RDP 访问 VM 实例。
@@ -44,5 +45,3 @@ Remove-AzResourceGroup -Name myResourceGroup
 
 ## <a name="next-steps"></a>后续步骤
 有关 Azure PowerShell 模块的详细信息，请参阅 [Azure PowerShell 文档](/powershell/azure/overview)。
-
-可以在 [Azure 虚拟机规模集文档](../powershell-samples.md)中找到其他虚拟机规模集 PowerShell 脚本示例。

@@ -6,12 +6,12 @@ ms.devlang: dotnet
 ms.topic: article
 ms.date: 08/29/2016
 ms.custom: seodec18
-ms.openlocfilehash: 3305cfb81980984574961b2a84a056f5d1879ead
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 516c7f50f7ff9fe947475b12120a527fc69353bc
+ms.sourcegitcommit: a6d477eb3cb9faebb15ed1bf7334ed0611c72053
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "79280048"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82926844"
 ---
 # <a name="troubleshoot-an-app-in-azure-app-service-using-visual-studio"></a>使用 Visual Studio 对 Azure 应用服务中的应用进行故障排除
 ## <a name="overview"></a>概述
@@ -614,7 +614,7 @@ Storage accounts offer more storage and longer-lasting retention for logs compar
 有关对 Azure 应用服务中的应用进行故障排除的详细信息，请参阅以下资源：
 
 * [如何监视应用](web-sites-monitor.md)
-* [使用 Visual Studio 2013 在 Azure 应用服务中调查内存泄漏](https://blogs.msdn.com/b/visualstudioalm/archive/2013/12/20/investigating-memory-leaks-in-azure-web-sites-with-visual-studio-2013.aspx)。 有关用于分析托管内存问题的 Visual Studio 功能的 Microsoft ALM 博客文章。
+* [使用 Visual Studio 2013 在 Azure 应用服务中调查内存泄漏](https://devblogs.microsoft.com/devops/investigating-memory-leaks-in-azure-web-sites-with-visual-studio-2013/)。 有关用于分析托管内存问题的 Visual Studio 功能的 Microsoft ALM 博客文章。
 * [应该了解的 Azure 应用服务联机工具](https://azure.microsoft.com/blog/2014/03/28/windows-azure-websites-online-tools-you-should-know-about-2/)。 Amit Apple 发表的博客文章。
 
 若要针对特定故障排除问题寻求帮助，可在以下论坛之一开启话题讨论：
@@ -634,7 +634,7 @@ Storage accounts offer more storage and longer-lasting retention for logs compar
 * [Azure 应用服务远程调试简介第 3 部分 - 多实例环境和 GIT](https://azure.microsoft.com/blog/2014/05/08/introduction-to-remote-debugging-on-azure-web-sites-part-3-multi-instance-environment-and-git/)
 * [WebJobs 调试（视频）](https://www.youtube.com/watch?v=ncQm9q5ZFZs&list=UU_SjTh-ZltPmTYzAybypB-g&index=1)
 
-如果应用使用 Azure Web API 或移动服务后端且需要进行调试，请参阅[在 Visual Studio 中调试 .NET 后端](https://blogs.msdn.com/b/azuremobile/archive/2014/03/14/debugging-net-backend-in-visual-studio.aspx)。
+如果应用使用 Azure Web API 或移动服务后端且需要进行调试，请参阅[在 Visual Studio 中调试 .NET 后端](/archive/blogs/azuremobile/debugging-net-backend-in-visual-studio)。
 
 ### <a name="tracing-in-aspnet-applications"></a>在 ASP.NET 应用程序中进行跟踪
 Internet 上对于 ASP.NET 跟踪没有全面且最新的介绍。 最佳做法是以针对 Web 窗体编写的老旧介绍性材料为主（因为 MVC 彼时并不存在），以专注于特定问题的新兴博客文章为辅。 以下资源可作为比较好的入门资源：
@@ -647,7 +647,7 @@ Internet 上对于 ASP.NET 跟踪没有全面且最新的介绍。 最佳做法�
   有关跟踪侦听器的信息，但未提及 [WebPageTraceListener](/dotnet/api/system.web.webpagetracelistener)。
 * [演练：集成 ASP.NET 跟踪与 System.Diagnostics 跟踪](/previous-versions/b0ectfxd(v=vs.140))<br/>
   此文章已过时，但包括一些介绍性文章未涵盖的额外信息。
-* [在 ASP.NET MVC Razor 视图中进行跟踪](https://blogs.msdn.com/b/webdev/archive/2013/07/16/tracing-in-asp-net-mvc-razor-views.aspx)<br/>
+* [在 ASP.NET MVC Razor 视图中进行跟踪](https://devblogs.microsoft.com/aspnet/tracing-in-asp-net-mvc-razor-views/)<br/>
   除了在 Razor 视图中进行跟踪，文章还介绍了如何创建错误筛选器以便在 MVC 应用程序中记录所有未经处理的异常。 有关如何在 Web 窗体应用程序中记录所有未经处理的异常，请参阅 MSDN 上的[错误处理程序的完整示例](/previous-versions/bb397417(v=vs.140))中的 Global.asax 示例。 在 MVC 或 Web 窗体中，如果希望记录特定异常但想让默认框架对其进行处理，可捕获并重新引发异常，如下例所示：
 
     ```csharp
@@ -678,7 +678,7 @@ Internet 上对于 ASP.NET 跟踪没有全面且最新的介绍。 最佳做法�
   用于查看 Web 服务器日志（*.log* 文件）中的数据的工具。
 * [排查使用 LogParser 的 IIS 性能问题或应用程序错误](https://www.iis.net/learn/troubleshoot/performance-issues/troubleshooting-iis-performance-issues-or-application-errors-using-logparser)<br/>
   可用于分析 Web 服务器日志的 Log Parser 工具介绍。
-* [Robert McMurray 有关 LogParser 使用的博客文章](https://blogs.msdn.com/b/robert_mcmurray/archive/tags/logparser/)<br/>
+* [Robert McMurray 有关 LogParser 使用的博客文章](https://docs.microsoft.com/archive/blogs/robert_mcmurray/using-logparser-with-ftp-7-x-sessions)<br/>
 * [IIS 7.0、IIS 7.5 以及 IIS 8.0 中的 HTTP 状态代码](https://support.microsoft.com/kb/943891)
 
 ### <a name="analyzing-failed-request-tracing-logs"></a>分析失败请求跟踪日志

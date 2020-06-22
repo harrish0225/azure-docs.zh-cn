@@ -125,6 +125,13 @@
           href: functions-reference-python.md
         - name: TypeScript
           href: 'functions-reference-node.md#typescript'
+    - name: 安全性
+      items:
+        - name: 安全概述
+          href: security-concepts.md
+          displayName: 'secure, ssl'
+        - name: 安全基线
+          href: security-baseline.md
     - name: 诊断
       href: functions-diagnostics.md
     - name: 消耗计划成本
@@ -328,6 +335,8 @@
       items:
         - name: 排查存储问题
           href: functions-recover-storage-account.md
+        - name: Python 依赖项疑难解答
+          href: recover-module-not-found.md
 - name: 参考
   items:
     - name: API 参考
@@ -343,12 +352,16 @@
         - name: Blob 存储
           items:
             - name: 概述
+              displayName: Blob storage
               href: functions-bindings-storage-blob.md
             - name: 触发器
+              displayName: Blob storage
               href: functions-bindings-storage-blob-trigger.md
             - name: 输入
+              displayName: Blob storage
               href: functions-bindings-storage-blob-input.md
             - name: 输出
+              displayName: Blob storage
               href: functions-bindings-storage-blob-output.md
         - name: Azure Cosmos DB
           items:
@@ -374,10 +387,13 @@
           items:
             - name: 概述
               href: functions-bindings-event-grid.md
+              displayName: Event Grid
             - name: 触发器
               href: functions-bindings-event-grid-trigger.md
+              displayName: Event Grid
             - name: 输出
               href: functions-bindings-event-grid-output.md
+              displayName: Event Grid
         - name: 事件中心
           items:
             - name: 概述
@@ -404,10 +420,13 @@
           items:
             - name: 概述
               href: functions-bindings-http-webhook.md
+              displayName: HTTP
             - name: 触发器
               href: functions-bindings-http-webhook-trigger.md
+              displayName: HTTP
             - name: 输出
               href: functions-bindings-http-webhook-output.md
+              displayName: HTTP
         - name: Microsoft Graph
           href: functions-bindings-microsoft-graph.md
         - name: 移动应用
@@ -418,20 +437,26 @@
           items:
             - name: 概述
               href: functions-bindings-storage-queue.md
+              displayName: Queue storage
             - name: 触发器
               href: functions-bindings-storage-queue-trigger.md
+              displayName: Queue storage
             - name: 输出
               href: functions-bindings-storage-queue-output.md
+              displayName: Queue storage
         - name: SendGrid
           href: functions-bindings-sendgrid.md
         - name: 服务总线
           items:
             - name: 概述
               href: functions-bindings-service-bus.md
+              displayName: Service Bus
             - name: 触发器
               href: functions-bindings-service-bus-trigger.md
+              displayName: Service Bus
             - name: 输出
               href: functions-bindings-service-bus-output.md
+              displayName: Service Bus
         - name: SignalR 服务
           items:
             - name: 概述
@@ -475,9 +500,9 @@
       href: 'https://azure.microsoft.com/regions/services/'
     - name: 视频
       href: 'https://www.youtube.com/c/AzureFunctions'
-    - name: MSDN 论坛
-      href: 'https://social.msdn.microsoft.com/Forums/en-US/home?forum=AzureFunctions'
-    - name: 堆栈溢出
+    - name: Microsoft Q&A 问题页面
+      href: 'https://docs.microsoft.com/answers/topics/azure-functions.html'
+    - name: Stack Overflow
       href: 'https://stackoverflow.com/questions/tagged/azure-functions'
     - name: Twitter
       href: 'https://twitter.com/azurefunctions'

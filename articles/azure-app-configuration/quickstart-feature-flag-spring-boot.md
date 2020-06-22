@@ -6,12 +6,12 @@ ms.service: azure-app-configuration
 ms.topic: quickstart
 ms.date: 04/18/2020
 ms.author: lcozzens
-ms.openlocfilehash: e6dc51250987e0282530209ffa13e52d6e75aa9c
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.openlocfilehash: a0d3c23f8f53b8ddfbd3fbd1cb1744a47664ce08
+ms.sourcegitcommit: 318d1bafa70510ea6cdcfa1c3d698b843385c0f6
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81687367"
+ms.lasthandoff: 05/21/2020
+ms.locfileid: "83774026"
 ---
 # <a name="quickstart-add-feature-flags-to-a-spring-boot-app"></a>快速入门：将功能标志添加到 Spring Boot 应用
 
@@ -62,7 +62,7 @@ Spring Boot 功能管理库使用全面的功能标志支持扩展了该框架�
     ```xml
     <dependency>
         <groupId>com.microsoft.azure</groupId>
-        <artifactId>spring-cloud-azure-appconfiguration-config</artifactId>
+        <artifactId>spring-cloud-azure-appconfiguration-config-web</artifactId>
         <version>1.1.2</version>
     </dependency>
     <dependency>
@@ -81,7 +81,7 @@ Spring Boot 功能管理库使用全面的功能标志支持扩展了该框架�
     ```xml
     <dependency>
         <groupId>com.microsoft.azure</groupId>
-        <artifactId>spring-cloud-azure-appconfiguration-config</artifactId>
+        <artifactId>spring-cloud-azure-appconfiguration-config-web</artifactId>
         <version>1.2.2</version>
     </dependency>
     <dependency>
@@ -178,7 +178,7 @@ Spring Boot 功能管理库使用全面的功能标志支持扩展了该框架�
 
         @GetMapping("/welcome")
         public String mainWithParam(Model model) {
-            model.addAttribute("Beta", featureManager.isEnabledAsync("Beta").block());
+            model.addAttribute("Beta", featureManager.isEnabledAsync("featureManagement.Beta").block());
             return "welcome";
         }
     }

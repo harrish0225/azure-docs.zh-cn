@@ -9,12 +9,12 @@ metadata:
   author: florianborn71
   ms.author: flborn
   ms.date: 03/26/2020
-  ms.openlocfilehash: a257b294c105ca153a57afe90db95a1bd1b753e8
-  ms.sourcegitcommit: 642a297b1c279454df792ca21fdaa9513b5c2f8b
+  ms.openlocfilehash: 9f27118bfe3e01ce8d1cfc8c60c46c416b39c846
+  ms.sourcegitcommit: f0b206a6c6d51af096a4dc6887553d3de908abf3
   ms.translationtype: HT
   ms.contentlocale: zh-CN
-  ms.lasthandoff: 04/06/2020
-  ms.locfileid: "80678308"
+  ms.lasthandoff: 05/28/2020
+  ms.locfileid: "84142123"
 landingContent:
 - title: 关于 Azure 远程渲染
   linkLists:
@@ -54,13 +54,15 @@ landingContent:
       url: quickstarts/deploy-to-desktop.md
     - text: 转换用于渲染的模型
       url: quickstarts/convert-model.md
-- title: 了解如何在 Unity 中构建自己的应用
+- title: 了解如何构建自己的应用
   linkLists:
   - linkListType: tutorial
     links:
-    - text: 从头开始设置 Unity 项目
+    - text: Unity：从头开始设置项目
       url: tutorials/unity/project-setup.md
-    - text: 在 Unity 中使用远程实体
+    - text: Unity：使用远程实体
       url: tutorials/unity/working-with-remote-entities.md
-    - text: 更改环境和材料
+    - text: Unity：更改环境和材料
       url: tutorials/unity/changing-environment-and-materials.md
+    - text: 本机 C++：将远程渲染集成到 HoloLens Holographic 应用
+      url: tutorials/native-cpp/hololens/integrate-remote-rendering-into-holographic-app.md

@@ -1,20 +1,20 @@
 ---
 title: Azure CLI 示例 - 创建虚拟机规模集
 description: 此脚本使用 Ubuntu 操作系统和相关网络资源（包括负载均衡器）创建 Azure 虚拟机规模集。
-author: ju-shim
-tags: azure-resource-manager
-ms.service: virtual-machine-scale-sets
-ms.devlang: azurecli
+author: mimckitt
+ms.author: mimckitt
 ms.topic: sample
+ms.service: virtual-machine-scale-sets
+ms.subservice: cli
 ms.date: 03/27/2018
-ms.author: jushiman
-ms.custom: mvc
-ms.openlocfilehash: c7f03d0f6dd31d85de8c3f917895e965585eb6ed
-ms.sourcegitcommit: ae3d707f1fe68ba5d7d206be1ca82958f12751e8
+ms.reviewer: jushiman
+ms.custom: mimckitt
+ms.openlocfilehash: 7f80515a0a441f910a2133a36d62a09062c3840f
+ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/10/2020
-ms.locfileid: "81010379"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83699787"
 ---
 # <a name="create-a-virtual-machine-scale-set-with-the-azure-cli"></a>使用 Azure CLI 创建虚拟机规模集
 此脚本使用 Ubuntu 操作系统和相关网络资源（包括负载均衡器）创建 Azure 虚拟机规模集。 运行脚本后，可通过 SSH 访问 VM 实例。
@@ -44,5 +44,3 @@ az group delete --name myResourceGroup
 
 ## <a name="next-steps"></a>后续步骤
 有关 Azure CLI 的详细信息，请参阅 [Azure CLI 文档](https://docs.microsoft.com/cli/azure/overview)。
-
-可以在 [Azure 虚拟机规模集文档](../cli-samples.md)中找到其他虚拟机规模集 Azure CLI 脚本示例。

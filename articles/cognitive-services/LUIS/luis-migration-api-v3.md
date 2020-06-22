@@ -2,14 +2,14 @@
 title: V3 API 中的预测终结点更改
 description: 查询预测终结点 V3 API 已更改。 请使用本指南了解如何迁移到终结点 API 版本 3。
 ms.topic: conceptual
-ms.date: 04/14/2020
+ms.date: 05/15/2020
 ms.author: diberry
-ms.openlocfilehash: 4b6d28b24ffc6c0a848d1c7a34e863da0606d936
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 84afcbcd348c3fd91014096877de2315722b53a0
+ms.sourcegitcommit: 1f25aa993c38b37472cf8a0359bc6f0bf97b6784
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81530379"
+ms.lasthandoff: 05/26/2020
+ms.locfileid: "83849325"
 ---
 # <a name="prediction-endpoint-changes-for-v3"></a>V3 的预测终结点更改
 
@@ -73,16 +73,9 @@ V3 预测终结点不支持此 API-继续使用 V2 API 预测终结点进行拼�
 
 ### <a name="changes-by-slot-name-and-version-name"></a>按槽名称和版本名称进行的更改
 
-V3 终结点 HTTP 调用的格式已更改。
+[V3 终结点 HTTP](developer-reference-resource.md#rest-endpoints)调用的格式已更改。
 
 如果希望按版本查询，首先需要使用 `"directVersionPublish":true`[通过 API 进行发布](https://westus.dev.cognitive.microsoft.com/docs/services/5890b47c39e2bb17b84a55ff/operations/5890b47c39e2bb052c5b9c3b)。 查询引用版本 ID 而不是槽名称的终结点。
-
-|预测 API 版本|METHOD|代码|
-|--|--|--|
-|V3|GET|https://<b>{REGION}</b>.api.cognitive.microsoft.com/luis/<b>prediction</b>/<b>v3.0</b>/apps/<b>{APP-ID}</b>/slots/<b>{SLOT-NAME}</b>/predict?query=<b>{QUERY}</b>|
-|V3|POST|https://<b>{REGION}</b>.api.cognitive.microsoft.com/luis/<b>prediction</b>/<b>v3.0</b>/apps/<b>{APP-ID}</b>/slots/<b>{SLOT-NAME}</b>/predict|
-|V2|GET|https://<b>{REGION}</b>.api.cognitive.microsoft.com/luis/<b>prediction</b>/<b>v3.0</b>/apps/<b>{APP-ID}</b>/versions/<b>{VERSION-ID}</b>/predict?query=<b>{QUERY}</b>|
-|V2|POST|https://<b>{REGION}</b>. api.cognitive.microsoft.com/luis/<b>预测</b>/<b>v2.0/apps/</b><b>{应用 ID}</b>/versions/<b>{版本 ID}</b>/predict|
 
 |`SLOT-NAME` 的有效值|
 |--|
@@ -290,4 +283,4 @@ const associatedMetadata = entities.$instance.my_list_entity[item];
 
 ## <a name="next-steps"></a>后续步骤
 
-使用 V3 API 文档更新对 LUIS [终结点](https://aka.ms/luis-api-v3) API 的现有 REST 调用。
+使用 V3 API 文档更新对 LUIS [终结点](https://westcentralus.dev.cognitive.microsoft.com/docs/services/luis-endpoint-api-v3-0/operations/5cb0a9459a1fe8fa44c28dd8) API 的现有 REST 调用。

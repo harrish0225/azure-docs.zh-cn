@@ -72,6 +72,9 @@
   items:
     - name: 服务总线示例
       href: service-bus-samples.md
+    - name: Azure Policy 内置策略定义
+      displayName: 'samples, policies, definitions'
+      href: ./policy-samples.md
 - name: 概念
   items:
     - name: 高级消息传送
@@ -181,6 +184,8 @@
           href: service-bus-nodejs-how-to-use-topics-subscriptions.md
     - name: 管理
       items:
+        - name: 自动更新消息传送单元
+          href: automate-update-messaging-units.md
         - name: 使用 Azure PowerShell 预配实体
           href: service-bus-manage-with-ps.md
         - name: 使用 Azure Monitor 监视服务总线
@@ -191,6 +196,8 @@
           href: service-bus-diagnostic-logs.md
         - name: 暂停和重新激活消息传递实体
           href: entity-suspend.md
+        - name: 使用服务总线资源管理器在服务总线上执行数据操作
+          href: explorer.md
         - name: 使用 ARM 模板
           href: service-bus-resource-manager-overview.md
           items:
@@ -206,7 +213,7 @@
           href: service-bus-ip-filtering.md
         - name: 配置虚拟网络服务终结点
           href: service-bus-service-endpoints.md
-        - name: 配置专用终结点（预览版）
+        - name: 配置专用终结点
           href: private-link-service.md
         - name: 配置客户管理的密钥
           href: configure-customer-managed-key.md
@@ -260,8 +267,8 @@
       href: 'https://azure.microsoft.com/roadmap/?category=enterprise-integration'
     - name: 博客
       href: 'https://blogs.msdn.microsoft.com/servicebus/'
-    - name: MSDN 论坛
-      href: 'https://social.msdn.microsoft.com/forums/home?forum=servbus'
+    - name: Microsoft Q&A 问题页面
+      href: 'https://docs.microsoft.com/answers/topics/azure-service-bus.html'
     - name: 定价
       href: 'https://azure.microsoft.com/pricing/details/service-bus/'
     - name: 定价计算器

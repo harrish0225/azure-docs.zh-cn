@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 02/04/2020
-ms.openlocfilehash: 08c80b0a37e21d53fc974bd878501b9326c9449b
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: 0a29ee1536c7c808fe7d15c0abe26f27042bc962
+ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82207218"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83196248"
 ---
 # <a name="log-analytics-agent-overview"></a>Log Analytics 代理概述
 之所以开发 Azure Log Analytics 代理，是为了跨任意云中的虚拟机、本地计算机以及通过 [System Center Operations Manager](https://docs.microsoft.com/system-center/scom/) 监视的计算机进行全面的管理。 Windows 和 Linux 代理将从不同源收集的数据发送到 Azure Monitor 中的 Log Analytics 工作区，并发送在监视解决方案中定义的任何特有日志或指标。 Log Analytics 代理还支持[用于 VM 的 Azure Monitor](../insights/vminsights-enable-overview.md)、 [azure 安全中心](/azure/security-center/)和[azure 自动化](../../automation/automation-intro.md)等 Azure Monitor 中的见解和其他服务。
@@ -70,7 +70,7 @@ Log Analytics 代理将数据发送到 Azure Monitor 中的 Log Analytics 工作
 
 有多种方法可安装 Log Analytics 代理，并将计算机连接到 Azure Monitor，具体取决于你的要求。 下表详细介绍了每种方法，以便用户确定组织中最适用的方法。
 
-|源 | 方法 | 说明|
+|Source | 方法 | 说明|
 |-------|-------------|-------------|
 |Azure VM| [手动从 Azure 门户](../../azure-monitor/learn/quick-collect-azurevm.md?toc=/azure/azure-monitor/toc.json) | 指定要从 Log Analytics 工作区部署的 Vm。 |
 | | 使用 Azure CLI 或 Azure 资源管理器模板 Log Analytics 适用于[Windows](../../virtual-machines/extensions/oms-windows.md)或[Linux](../../virtual-machines/extensions/oms-linux.md)的 VM 扩展 | 该扩展在 Azure 虚拟机上安装 Log Analytics 代理，并将虚拟机注册到现有的 Azure Monitor 工作区中。 |
@@ -87,7 +87,7 @@ Log Analytics 代理将数据发送到 Azure Monitor 中的 Log Analytics 工作
 
 Windows 代理官方支持以下版本的 Windows 操作系统：
 
-* Windows Server Standard 2012 R2
+* Windows Server 2019
 * Windows Server 2016，版本1709和1803
 * Windows Server 2012，2012 R2
 * Windows Server 2008 SP2 （x64）、2008 R2
@@ -115,11 +115,11 @@ Windows 代理官方支持以下版本的 Windows 操作系统：
 >如果使用的是当前不受支持且与我们的支持模型不一致的发行版或版本，我们建议对此存储库创建分支，并接受 Microsoft 支持不会为已分支的代理版本提供帮助。
 
 * Amazon Linux 2017.09 (x64)
-* CentOS Linux 6 (x86/x64) 和 7 (x64)  
-* Oracle Linux 6 和 7 (x86/x64) 
-* Red Hat Enterprise Linux Server 6 (x86/x64) 和 7 (x64)
-* Debian GNU/Linux 8 和 9 (x86/x64)
-* Ubuntu 14.04 LTS (x86/x64)、16.04 LTS (x86/x64) 和 18.04 LTS (x64)
+* CentOS Linux 6 （x64）和7（x64）  
+* Oracle Linux 6 和7（x64） 
+* Red Hat Enterprise Linux Server 6 （x64）、7（x64）和8（x64）
+* Debian GNU/Linux 8 和9（x64）
+* Ubuntu 14.04 LTS （x86/x64）、16.04 LTS （x64）和 18.04 LTS （x64）
 * SUSE Linux Enterprise Server 12 (x64) 和 15 (x64)
 
 >[!NOTE]
@@ -147,7 +147,7 @@ Windows 代理官方支持以下版本的 Windows 操作系统：
 
 
 ## <a name="sha-2-code-signing-support-requirement-for-windows"></a>适用于 Windows 的 SHA-2 代码签名支持要求
-在5月18日2020，Windows 代理将开始独占使用 SHA-2 签名。 此更改会影响客户使用旧操作系统上的 Log Analytics 代理作为任何 Azure 服务（Azure Monitor、Azure 自动化、Azure 更新管理、Azure 更改跟踪、Azure 安全中心、Azure Sentinel、Windows Defender ATP）的一部分。 除非您在旧操作系统版本（Windows 7、Windows Server 2008 R2 和 Windows Server 2008）上运行代理，否则更改不需要任何客户操作。 在旧操作系统版本上运行的客户需要在2020年5月18日之前，在其计算机上执行以下操作，否则，其代理将停止向其 Log Analytics 工作区发送数据：
+Windows 代理将在2020年8月17日开始独占使用 SHA-2 签名。 此更改会影响客户使用旧操作系统上的 Log Analytics 代理作为任何 Azure 服务（Azure Monitor、Azure 自动化、Azure 更新管理、Azure 更改跟踪、Azure 安全中心、Azure Sentinel、Windows Defender ATP）的一部分。 除非您在旧操作系统版本（Windows 7、Windows Server 2008 R2 和 Windows Server 2008）上运行代理，否则更改不需要任何客户操作。 在旧操作系统版本上运行的客户需要在2020年8月17日之前在其计算机上执行以下操作，否则，其代理将停止向其 Log Analytics 工作区发送数据：
 
 1. 为操作系统安装最新的 Service Pack。 所需的 Service Pack 版本如下：
     - Windows 7 SP1
@@ -174,7 +174,6 @@ Windows 代理官方支持以下版本的 Windows 操作系统：
 |*.oms.opinsights.azure.com |端口 443 |入站和出站|是 |  
 |\* .blob.core.windows.net |端口 443 |入站和出站|是 |
 |* .azure-automation.net |端口 443 |入站和出站|是 |
-|*.azure.com |端口 443|入站和出站|是 |
 
 有关 Azure 政府版所需的防火墙信息，请参阅[Azure 政府版管理](../../azure-government/documentation-government-services-monitoringandmanagement.md#azure-monitor-logs)。 
 
@@ -191,7 +190,7 @@ Windows 和 Linux 代理支持使用 HTTPS 协议通过代理服务器或 Log An
 > [!NOTE]
 > 如果代理服务器无需进行身份验证，Linux 代理仍要求提供伪用户名/密码。 这可以是任何用户名或密码。
 
-|properties| 说明 |
+|属性| 说明 |
 |--------|-------------|
 |协议 | https |
 |user | 用于代理身份验证的可选用户名 |
@@ -199,10 +198,10 @@ Windows 和 Linux 代理支持使用 HTTPS 协议通过代理服务器或 Log An
 |proxyhost | 代理服务器/Log Analytics 网关的地址或 FQDN |
 |port | 代理服务器/Log Analytics 网关的可选端口号 |
 
-例如：`https://user01:password@proxy01.contoso.com:30443`
+例如： `https://user01:password@proxy01.contoso.com:30443`
 
 > [!NOTE]
-> 如果你在密码中使用特殊字符\@（如 ""），则会收到代理连接错误，因为未正确分析值。  若要解决此问题，请使用 [URLDecode](https://www.urldecoder.org/) 等工具在 URL 中对密码进行编码。  
+> 如果你在密码中使用特殊字符（如 " \@ "），则会收到代理连接错误，因为未正确分析值。  若要解决此问题，请使用 [URLDecode](https://www.urldecoder.org/) 等工具在 URL 中对密码进行编码。  
 
 
 

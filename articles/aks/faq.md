@@ -2,13 +2,13 @@
 title: 有关 Azure Kubernetes 服务 (AKS) 的常见问题解答
 description: 查找有关 Azure Kubernetes 服务 (AKS) 的某些常见问题的解答。
 ms.topic: conceptual
-ms.date: 10/02/2019
-ms.openlocfilehash: a58c3510d8937b209bf6c73d33237785ecab161d
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.date: 05/04/2020
+ms.openlocfilehash: 5ba776424462b3a8b586b1f90e83f409770e5597
+ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206594"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83123813"
 ---
 # <a name="frequently-asked-questions-about-azure-kubernetes-service-aks"></a>有关 Azure Kubernetes 服务 (AKS) 的常见问题解答
 
@@ -18,21 +18,20 @@ ms.locfileid: "82206594"
 
 有关可用区域的完整列表，请参阅[AKS 区域和可用性][aks-regions]。
 
-## <a name="does-aks-support-node-autoscaling"></a>AKS 是否支持节点自动缩放？
+## <a name="can-i-spread-an-aks-cluster-across-regions"></a>能否跨区域分散 AKS 群集？
 
-是的，当前在预览版中提供自动缩放 AKS 中的代理节点的功能。 有关说明，请参阅[自动缩放群集以满足 AKS 中的应用程序需求][aks-cluster-autoscaler]。 AKS 自动缩放基于[Kubernetes 自动缩放程序][auto-scaler]。
+不是。 AKS 群集是区域资源，不能跨区域。 请参阅[业务连续性和灾难恢复的最佳实践][bcdr-bestpractices]，了解有关如何创建包含多个区域的体系结构的指南。
 
-## <a name="can-i-deploy-aks-into-my-existing-virtual-network"></a>是否可以将 AKS 部署到现有虚拟网络？
+## <a name="can-i-spread-an-aks-cluster-across-availability-zones"></a>是否可以将 AKS 群集分散到不同的可用性区域？
 
-可以，可使用[高级网络功能][aks-advanced-networking]将 AKS 群集部署到现有虚拟网络中。
+是的。 可以在[支持其的区域][az-regions]中的一个或多个[可用性区域][availability-zones]中部署 AKS 群集。
 
 ## <a name="can-i-limit-who-has-access-to-the-kubernetes-api-server"></a>能否限制谁有权访问 Kubernetes API 服务器？
 
-是的，你可以使用[API 服务器授权的 IP 范围][api-server-authorized-ip-ranges]限制对 Kubernetes API 服务器的访问。
+是的。 有两个选项可用于限制对 API 服务器的访问：
 
-## <a name="can-i-make-the-kubernetes-api-server-accessible-only-within-my-virtual-network"></a>是否可以限制为只能在我的虚拟网络中访问 Kubernetes API 服务器？
-
-目前不可以，但此功能正在规划中。 可以在 [AKS GitHub 存储库][private-clusters-github-issue]中跟踪此项计划的进度。
+- 如果要为 API 服务器维护公用终结点但限制对一组受信任的 IP 范围的访问，请使用[Api 服务器授权的 Ip 范围][api-server-authorized-ip-ranges]。
+- 如果要将 API 服务器限制为*只能*从虚拟网络内部访问，请使用[专用群集][private-clusters]。
 
 ## <a name="can-i-have-different-vm-sizes-in-a-single-cluster"></a>单个群集中是否可以有不同的 VM 大小？
 
@@ -114,11 +113,11 @@ namespaceSelector:
 
 如果你有一个用于在 kube （不推荐）上部署某些内容的关键用例，而你需要将其包含在你的自定义许可 webhook 中，则可以添加以下标签或批注，以便招生 Enforcer 将其忽略。
 
-标签： ```"admissions.enforcer/disabled": "true"```或批注：```"admissions.enforcer/disabled": true```
+标签： ```"admissions.enforcer/disabled": "true"``` 或批注：```"admissions.enforcer/disabled": true```
 
 ## <a name="is-azure-key-vault-integrated-with-aks"></a>不是，它没有与 Azure Key Vault 集成。
 
-AKS 目前尚未与 Azure Key Vault 本机集成。 但是，[Kubernetes 项目的 Azure Key Vault FlexVolume][keyvault-flexvolume] 实现了从 Kubernetes pod 到 Key Vault 机密的直接集成。
+AKS 目前尚未与 Azure Key Vault 本机集成。 不过，[适用于 CSI 密钥存储的 Azure Key Vault 提供程序][csi-driver]允许从 Kubernetes pod 直接集成到 Key Vault 机密。
 
 ## <a name="can-i-run-windows-server-containers-on-aks"></a>是否可以在 AKS 上运行 Windows Server 容器？
 
@@ -128,22 +127,11 @@ Windows Server 对节点池的支持在 Kubernetes 项目中包含属于上游 W
 
 ## <a name="does-aks-offer-a-service-level-agreement"></a>AKS 是否提供服务级别协议？
 
+AKS 提供了通过 [运行时间 SLA] [正常运行时间-sla.md] 实现 API 服务器的99.95% 可用性的功能。
+
 在服务级别协议 (SLA) 中，如果未满足已发布的服务级别，提供商同意向客户偿还服务费用。 由于 AKS 是免费的，不存在偿还费用，因此也就没有正式的 SLA。 不过，AKS 会设法将 Kubernetes API 服务器的可用性维持在不小于 99.5% 的水平上。
 
 重要的是要认识到 AKS 服务可用性（指 Kubernetes 控制平面的正常运行时间）和在 Azure 虚拟机上运行的特定工作负荷的可用性之间的区别。 尽管控制平面在控制平面未就绪时可能不可用，但在 Azure VM 上运行的群集工作负荷仍可正常工作。 鉴于 Azure VM 是付费资源，它们由财务 SLA 提供支持。 请在此处阅读有关 Azure VM SLA 的[更多详细信息](https://azure.microsoft.com/support/legal/sla/virtual-machines/v1_8/)，以及如何通过[可用性区域][availability-zones]等功能提高该可用性。
-
-## <a name="why-cant-i-set-maxpods-below-30"></a>为何无法将 maxPods 设置为 30 以下？
-
-在 AKS 中，使用 Azure CLI 和 Azure 资源管理器模板创建群集时可以设置 `maxPods` 值。 但是，Kubenet 和 Azure CNI 都需要一个最小值（创建时会验证该值）：**
-
-| 网络 | 最小值 | 最大值 |
-| -- | :--: | :--: |
-| Azure CNI | 30 | 250 |
-| Kubenet | 30 | 110 |
-
-由于 AKS 是托管服务，我们会将加载项和 pod 部署为群集的一部分并对其进行管理。 过去，用户定义的 `maxPods` 值可以小于运行托管 pod 所需的值（例如 30）。 AKS 现在使用以下公式计算最小 pod 数：((maxPods or (maxPods * vm_count)) > 托管的加载项 pod 最小数目。
-
-用户无法覆盖最小 `maxPods` 验证值。
 
 ## <a name="can-i-apply-azure-reservation-discounts-to-my-aks-agent-nodes"></a>是否可将 Azure 预订折扣应用于 AKS 代理节点？
 
@@ -157,7 +145,7 @@ AKS 代理节点按标准 Azure 虚拟机计费，因此，如果你已为在 AK
 
 目前不支持在订阅之间移动群集。
 
-## <a name="can-i-move-my-aks-clusters-from-the-current-azure-subscription-to-another"></a>是否可以将 AKS 群集从当前的 Azure 订阅移到另一个订阅？ 
+## <a name="can-i-move-my-aks-clusters-from-the-current-azure-subscription-to-another"></a>是否可以将我的 AKS 群集从当前的 Azure 订阅移到另一个？ 
 
 不支持在 Azure 订阅之间移动 AKS 群集及其关联的资源。
 
@@ -181,7 +169,7 @@ AKS 代理节点按标准 Azure 虚拟机计费，因此，如果你已为在 AK
 
 请确认你的服务主体尚未过期。  请参阅： [AKS 服务主体](https://docs.microsoft.com/azure/aks/kubernetes-service-principal)和[AKS 更新凭据](https://docs.microsoft.com/azure/aks/update-credentials)。
 
-## <a name="my-cluster-was-working-but-suddenly-can-not-provision-loadbalancers-mount-pvcs-etc"></a>我的群集在运行，但突然不能预配 LoadBalancers，不能装载 PVC，等等。 
+## <a name="my-cluster-was-working-but-suddenly-cannot-provision-loadbalancers-mount-pvcs-etc"></a>我的群集运行正常，但突然无法预配 LoadBalancers、装载 Pvc 等。 
 
 请确认你的服务主体尚未过期。  请参阅： [AKS 服务主体](https://docs.microsoft.com/azure/aks/kubernetes-service-principal)和[AKS 更新凭据](https://docs.microsoft.com/azure/aks/update-credentials)。
 
@@ -219,12 +207,16 @@ AKS 代理节点按标准 Azure 虚拟机计费，因此，如果你已为在 AK
 [api-server-authorized-ip-ranges]: ./api-server-authorized-ip-ranges.md
 [multi-node-pools]: ./use-multiple-node-pools.md
 [availability-zones]: ./availability-zones.md
+[private-clusters]: ./private-clusters.md
+[bcdr-bestpractices]: ./operator-best-practices-multi-region.md#plan-for-multiregion-deployment
+[availability-zones]: ./availability-zones.md
+[az-regions]: ../availability-zones/az-region.md
+[运行时间-sla]./uptime-sla.mdd
 
 <!-- LINKS - external -->
 [aks-regions]: https://azure.microsoft.com/global-infrastructure/services/?products=kubernetes-service
 [auto-scaler]: https://github.com/kubernetes/autoscaler
 [cordon-drain]: https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/
-[hexadite]: https://github.com/Hexadite/acs-keyvault-agent
 [admission-controllers]: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/
-[keyvault-flexvolume]: https://github.com/Azure/kubernetes-keyvault-flexvol
 [private-clusters-github-issue]: https://github.com/Azure/AKS/issues/948
+[csi-driver]: https://github.com/Azure/secrets-store-csi-driver-provider-azure

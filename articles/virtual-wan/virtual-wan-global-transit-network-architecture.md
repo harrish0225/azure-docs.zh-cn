@@ -6,14 +6,14 @@ services: virtual-wan
 author: cherylmc
 ms.service: virtual-wan
 ms.topic: article
-ms.date: 02/06/2020
+ms.date: 05/07/2020
 ms.author: cherylmc
-ms.openlocfilehash: 9515058bc78a2d56dc1734c046dac5d5b04f68d9
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 72a96e04d308dbb2774d5b8f8aa909ab81bebee3
+ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81113163"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83195676"
 ---
 # <a name="global-transit-network-architecture-and-virtual-wan"></a>全局传输网络体系结构和虚拟 WAN
 
@@ -99,6 +99,9 @@ ExpressRoute Global Reach 是适用于 ExpressRoute 的附加功能。 使用 Gl
 
 企业可以通过此选项来利用 Azure 主干网连接分支。 但是，尽管可以此功能，应该权衡通过 Azure 虚拟 WAN 与通过专用 WAN 连接分支的利弊。  
 
+> [!NOTE]
+> 禁用虚拟 WAN 中的分支到分支连接-虚拟 WAN 可配置为禁用分支到分支连接。 此配置将阻止 VPN （S2S 和 P2S）和快速路由连接的站点之间的路由传播。 此配置不会影响分支到 Vnet 和 Vnet 到 Vnet 路由传播和连接。 使用 Azure 门户配置此设置：在 "虚拟 WAN 配置" 菜单下，选择 "设置：分支到分支-已禁用"。 
+
 ### <a name="remote-user-to-vnet-c"></a>远程用户到 VNet (c)
 
 你可以使用从远程用户客户端到虚拟 WAN 的点到站点连接来启用对 Azure 的直接、安全远程访问。 企业远程用户不再需要使用企业 VPN 来始终与云保持连接。
@@ -110,6 +113,15 @@ ExpressRoute Global Reach 是适用于 ExpressRoute 的附加功能。 使用 Gl
 ### <a name="vnet-to-vnet-transit-e-and-vnet-to-vnet-cross-region-h"></a>VNet 到 VNet 传输（e）和 VNet 到 VNet 跨区域（h）
 
 VNet 到 VNet 传输使 Vnet 可以相互连接，以便互连跨多个 Vnet 实现的多层应用程序。 还可以通过 VNet 对等互连将 Vnet 彼此连接，这可能适用于不需要通过 VWAN 集线器传输的某些方案。
+
+
+## <a name="force-tunneling-and-default-route-in-azure-virtual-wan"></a><a name="DefaultRoute"></a>Azure 虚拟 WAN 中的强制隧道和默认路由
+
+可以通过在虚拟 WAN 中的 VPN、ExpressRoute 或虚拟网络连接上配置 "启用默认路由" 来启用强制隧道。
+
+如果连接上的启用默认标志为 "已启用"，则虚拟中心会将已获知的默认路由传播到虚拟网络/站点到站点 VPN/ExpressRoute 连接。 
+
+当用户编辑虚拟网络连接、VPN 连接或 ExpressRoute 连接时，将显示此标志。 默认情况下，当站点或 ExpressRoute 线路连接到中心时，将禁用此标志。 如果添加虚拟网络连接以将 VNet 连接到虚拟中心，则默认情况下启用此功能。 默认路由不是源自虚拟 WAN 中心；只有当虚拟 WAN 中心由于在中心部署防火墙而获知默认路由或另一个连接的站点已启用强制隧道时，此标志才会将默认路由传播到连接。
 
 ## <a name="security-and-policy-control"></a><a name="security"></a>安全和策略控制
 
@@ -133,10 +145,28 @@ Azure Firewall 到虚拟 WAN 支持以下全球安全的传输连接路径。 �
 
 ### <a name="vnet-to-internet-or-third-party-security-service-i"></a>VNet 到 Internet 或第三方安全服务（i）
 
-通过 VNet 到 Internet 或第三方的安全传输，Vnet 可通过虚拟 WAN 集线器中的 Azure 防火墙连接到 internet 或受支持的第三方安全服务。
+通过 VNet 到 Internet，Vnet 可通过虚拟 WAN 集线器中的 Azure 防火墙连接到 internet。 通过受支持的第三方安全服务发往 internet 的流量不会流过 Azure 防火墙。 可以使用 Azure 防火墙管理器通过支持的第三方安全服务配置 Vnet 到 Internet 的路径。  
 
 ### <a name="branch-to-internet-or-third-party-security-service-j"></a>分支到 Internet 或第三方安全服务（j）
-分支到 Internet 或第三方安全传输允许分支通过虚拟 WAN 集线器中的 Azure 防火墙连接到 Internet 或受支持的第三方安全服务。
+分支到 Internet 使分支可以通过虚拟 WAN 集线器中的 Azure 防火墙连接到 internet。 通过受支持的第三方安全服务发往 internet 的流量不会流过 Azure 防火墙。 可以使用 Azure 防火墙管理器通过支持的第三方安全服务配置分支到 Internet 路径。 
+
+### <a name="how-do-i-enable-default-route-00000-in-a-secured-virtual-hub"></a>如何实现在受保护的虚拟中心内启用默认路由（0.0.0.0/0）
+
+可以将部署在虚拟 WAN 中心（安全虚拟中心）中的 Azure 防火墙配置为 Internet 的默认路由器，或配置为适用于所有分支（通过 VPN 或 Express Route 连接）、辐射 Vnet 和用户（通过 P2S VPN 连接）的受信任安全提供程序。 此配置必须使用 Azure 防火墙管理器完成。  请参阅将流量路由到中心，以通过 Azure 防火墙配置从分支（包括用户）和 Vnet 到 Internet 的所有流量。 
+
+这是一个两步配置：
+
+1. 使用 "安全虚拟中心路由" 设置菜单配置 Internet 流量路由。 配置可通过防火墙将流量发送到 internet 的 Vnet 和分支。
+
+2. 配置哪些连接（Vnet 和分支）可以通过集线器或受信任的安全提供程序中的 Azure FW 将流量路由到 internet （0.0.0.0/0）。 此步骤可确保将默认路由传播到通过连接连接到虚拟 WAN 集线器的选定分支和 Vnet。 
+
+### <a name="force-tunneling-traffic-to-on-premises-firewall-in-a-secured-virtual-hub"></a>强制将流量传输到受保护虚拟中心中的本地防火墙
+
+如果虚拟中心已从一个分支（VPN 或 ER 站点）中获知了默认路由（通过 BGP），则此默认路由会被从 Azure 防火墙管理器设置中获知的默认路由重写。 在这种情况下，从 Vnet 进入集线器的所有流量将路由到 Azure 防火墙或受信任的安全提供程序。
+
+> [!NOTE]
+> 当前，没有为来自 Vnet、分支或用户的 internet 绑定流量选择本地防火墙或 Azure 防火墙（和受信任的安全提供程序）的选项。 从 Azure 防火墙管理器设置获知的默认路由始终优先于从一个分支中获知的默认路由。
+
 
 ## <a name="next-steps"></a>后续步骤
 
